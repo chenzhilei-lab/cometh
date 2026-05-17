@@ -135,13 +135,12 @@ class MomentumConservation(nn.Module):
 
     def _ode_rhs(self, r, v_d, v_g, mdot_g, rho_d, a_m, r_n_m):
         """Right-hand side of the dust-gas drag ODE (Eq. 15)."""
-        # Gas density at radius r
-        rho_g = mdot_g.unsqueeze(-1) / (4 * torch.pi * r ** 2 *
-                                         v_g.unsqueeze(-1) + 1e-30)
+        # Gas density at radius r (all inputs (B,) during ODE stepping)
+        rho_g = mdot_g / (4 * torch.pi * r ** 2 * v_g + 1e-30)
 
         # Drag term
-        drag = (3 * self.C_D * rho_g * (v_g.unsqueeze(-1) - v_d) ** 2) / \
-               (4 * rho_d.unsqueeze(-1) * a_m.unsqueeze(-1) + 1e-30)
+        drag = (3 * self.C_D * rho_g * (v_g - v_d) ** 2) / \
+               (4 * rho_d * a_m + 1e-30)
 
         # Solar gravity deceleration
         gravity = G_Msun / (r ** 2 + 1e-30)

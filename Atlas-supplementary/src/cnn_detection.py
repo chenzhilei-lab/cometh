@@ -93,17 +93,18 @@ class DetectionCNN(nn.Module):
         self.bottleneck = ConvBlock(base_channels * 16, base_channels * 16)
 
         # Decoder (5 scales, with skip connections)
+        # Input channels = upsampled channels + skip connection channels
         self.up5 = nn.ConvTranspose2d(base_channels * 16, base_channels * 8, 2, stride=2)
-        self.dec5 = ConvBlock(base_channels * 16, base_channels * 8)
+        self.dec5 = ConvBlock(base_channels * 24, base_channels * 8)
 
         self.up4 = nn.ConvTranspose2d(base_channels * 8, base_channels * 4, 2, stride=2)
-        self.dec4 = ConvBlock(base_channels * 8, base_channels * 4)
+        self.dec4 = ConvBlock(base_channels * 12, base_channels * 4)
 
         self.up3 = nn.ConvTranspose2d(base_channels * 4, base_channels * 2, 2, stride=2)
-        self.dec3 = ConvBlock(base_channels * 4, base_channels * 2)
+        self.dec3 = ConvBlock(base_channels * 6, base_channels * 2)
 
         self.up2 = nn.ConvTranspose2d(base_channels * 2, base_channels, 2, stride=2)
-        self.dec2 = ConvBlock(base_channels * 2, base_channels)
+        self.dec2 = ConvBlock(base_channels * 3, base_channels)
 
         self.up1 = nn.ConvTranspose2d(base_channels, base_channels, 2, stride=2)
         self.dec1 = ConvBlock(base_channels * 2, base_channels)
