@@ -1,0 +1,13 @@
+﻿python : Traceback (most recent call last):
+At line:1 char:51
++ cd "D:\Users\37639\Desktop\3I-Atlas\Final-Atlas"; python -c "
++                                                   ~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "<string>", line 7, in <module>
+    print(t)
+    ~~~~~^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\xa0' in position 3: illegal multibyte sequence
+����ͬһ�ϸ��׼������������һ����
+���󱨸� (Draft Version)

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git init *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(Test-Path *)",
+      "PowerShell(git *)",
+      "PowerShell(git status *)",
+      "PowerShell($env:Path = \"D:\\\\Program Files\\\\Git\\\\bin;$env:Path\"; Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 5MB } | Sort-Object Length -Descending | Select-Object @{N='SizeMB';E={[math]::Round\\($_.Length/1MB,1\\)}}, Name, FullName)",
+      "PowerShell(git add *)"
+    ]
+  }
+}

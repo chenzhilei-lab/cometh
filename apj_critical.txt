@@ -1,0 +1,642 @@
+============================================================
+FILE: APJ_Critical_Review_Enhanced (2).pdf
+============================================================
+--- Page 1 ---
+Critical Multi-Angle Review Report
+Stringent Evaluation from Moral, Logical, Application, and
+Authenticity Perspectives
+Manuscript Title:
+Multi-Modal Deep Learning Characterization of the Interstellar Comet 3I/A TLAS:
+F aint F eature Detection, Physical Parameter Inversion, and Generalized Cross-Domain
+Intelligent F ramework
+Manuscript ID: APJ-2026-XXXX
+Submission Date: 2026 May 15
+Review Date: 2026 May 16
+Review Type: Stringent Multi-Angle Analysis
+Recommendation: MAJOR CONCERNS - Requires F undamental Revision
+Overall Score: 4.8/10 (Below Acceptance Threshold )
+Sci. Imp. Innovation Data Rel. Rigor W riting Reproduc. Overall
+7/10 5/10 3/10 4/10 7/10 2/10 4.8/10
+Review Dimensions: [Moral] |[Logical] |[Application] |[Authenticity]
+This review represents a stringent multi-angle critical analysis conducted at the request of the
+authors.
+Date: 2026 May 16
+--- Page 2 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+ଢ੣
+1 Executive Summary 3
+1.1ނྏؿགྷ (Critical Findings) . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+1.2࿹ۀ࣮ඍ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+2ົ؇၂ğ֣֡ა॓࿐ӴྐബҰ (Moral & Ethical Review) 3
+2.1ໃটರ௹ႄႨ໙ี (F uture-Dated Citations) . . . . . . . . . . . . . . . . . 4
+2.1.1 Opitom et al. (2026) བྷ༥ٳ༅ . . . . . . . . . . . . . . . . . . . . 4
+2.1.2ሱႄཀၐ (Self-Citation Concerns) . . . . . . . . . . . . . . . . . . 4
+2.2ކӮ࿞਀ඔऌ֥஼੝҂ቀ . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+2.3॓࿐Ӵྐ௟ٳ.................................. 5
+3ົؽ؇ğઆࠠ၂ᇁྟബҰ (Logical Consistency Review) 5
+3.1ંᆣ৽่ٳ༅ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+3.2࿖ߌ๷৘໙ี (Circular Reasoning) . . . . . . . . . . . . . . . . . . . . . . 6
+3.2.1თൡႋႵིྟဒᆣ . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+3.3ໃࣜဒᆣ֥ཌྟб২ࡌഡ . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+3.4؇ݖຓ๷໙ี . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+3.5આࠠ၂ᇁྟ௟ٳ................................. 7
+4ົ؇೘ğൌ࠽ႋႨაمٚંബҰ (Application & Methodology Review) 7
+4.1 PINN مٚં༂Ⴈ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+4.2ཬဢЧ࿐༝ڄག . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+4.3თൡႋႵིྟᆣऌ҂ቀ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+4.4๤࠹ཁᇷྟಌാ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+4.5ൌ࠽ႋႨ௟ٳ.................................. 9
+5ົ؇ඹğඔऌᆇເബҰ (Data Authenticity Review) 9
+5.1ൈࡗཌᙣં . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+5.2໭مဒᆣ֥ඔऌലૼ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+5.3࡟ҩࠞཋק֥࣍ڸਈലૼ . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+5.4ކӮ࿞਀ඔऌڄག . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+5.5ಌാ֥ॖᇗگྟေ෍ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+5.6ඔऌᆇເ௟ٳ.................................. 11
+6ሸކ௟ܙაࡹၰ 11
+6.1ඹົ߸؇ሹ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Page 1 of 13
+--- Page 3 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+6.2ྩڿေ౰ࠩٳ.................................. 12
+6.2.1ᇁଁࠩ໙ี (сྶࢳथ ) . . . . . . . . . . . . . . . . . . . . . . . . 12
+6.2.2࿸ᇗࠩ໙ี (сྶࢳथ ) . . . . . . . . . . . . . . . . . . . . . . . . 12
+6.2.3ᇗေࠩ໙ี (ႋࢳ֒थ ) . . . . . . . . . . . . . . . . . . . . . . . . 13
+6.3ቋᇔࡹၰ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Page 2 of 13
+--- Page 4 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+1 Executive Summary
+1.1ނྏؿགྷ (Critical Findings)
+ඹົ؇ബҰࢲંğ
+1.֣֡/ ੾৘ົ؇( Moral): թᄝໃটರ௹ႄႨ໙ีđॖିടࠣໃؿіሱႄđ॓
+࿐Ӵྐթၐ
+2.આࠠ၂ᇁྟົ؇( Logical): ંᆣ৽่թᄝ؎ਚđ࿖ߌ๷৘đ؇ݖຓ๷đ๤࠹
+ཁᇷྟໃဒᆣ
+3.ൌ࠽ႋႨົ؇( Application): PINNمٚં༂ႨđཬဢЧ࿐༝ڄགđთൡ
+ႋႵིྟᆣऌ҂ቀ
+4.ඔऌᆇເົ؇( Authenticity): ൈࡗཌᙣંđ໭مဒᆣ֥ඔऌലૼđކӮඔ
+ऌ࿞਀ڄག
+ሸކ஑קğࡹၰ๼߭ྩࠇڿऋ۠ᇗ๧
+1.2࿹ۀ࣮ඍ
+Чં໓ิԛਔ၂ᇕ؟ଆ෿ധ؇࿐༝ॿࡏႨႿྒ࠽ᝣྒ 3I/A TLAS ֥หᆘ࡟ҩა໾
+৘ҕඔّဆb࠯ඌਫ਼ཌЇݣğ
+1.؟Ԅ؇ CNN + SE ᇿၩ৯ࠏᇅࣉྛັ೐หᆘ࡟ҩ
+2.໾৘ྐ༏പࣜຩ઎ (PINN)ࣉྛڕഝԮൻҕඔّဆ
+3.ჭ࿐༝ +ؓॆთൡႋൌགྷ෾ဝ༢֞ྒ࠽ᝣྒ֥థ၍
+ಖطđݖࣜඹົ؇࿸۬ബҰđЧ࿹࣮ᄝඔऌᆇൌྟaمٚં࿸ࣈྟaઆࠠંᆣބ॓
+࿐Ӵྐٚ૫թᄝ࿸ᇗ໙ีb
+2ົ؇၂ğ֣֡ა॓࿐ӴྐബҰ (Moral & Ethical Re-
+view)
+Page 3 of 13
+--- Page 5 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+2.1ໃটರ௹ႄႨ໙ี (F uture-Dated Citations)
+ᇁଁ໙ีğൈࡗᙣંྟႄႨ
+ં໓๧۠ರ௹ູ 2026୍ 5ᄅđ֌ႄႨਔၛ༯ ”ໃট ”໓ངğ
+ႄႨ ലӫ୍ٺ ໙ีྟᇉ
+Opitom et al. (2026) 2026 ႄႨໃটၘؿіં໓č໾৘҂ॖିĎ
+Pratik (2026) 2026 ႄႨໃট࿹࣮č DOI: stag867 Ď
+He et al. (2022026) 2026 ၐරໃؿіሱႄ
+॓࿐Ӵྐ႕ཙğ ᄝ࿐ඌં໓ᇏႄႨ ”ໃট ”໓ང࿸ᇗິّ࿐ඌٓܿđπൕၛ༯ॖିğ
+•ં໓ൌ࠽ለཿൈࡗພႿലӫ֥๧۠ರ௹
+•ႄႨ֥໓ངॖି൞ყႆЧ֌ቔᆀႅઞਔᆃ၂൙ൌ
+•թᄝ “ൈࡗ੪ྛ ”ൔ֥ႄႨҠሺ
+2.1.1 Opitom et al. (2026) བྷ༥ٳ༅
+ჰ໓ႄႨ໊ᇂğ Section 5.1.6 Isotopic Composition
+“Opitom et al. (2026) detected elevated15N/14N and13C/12C in 3I/A TLAS... ”
+໙ีٳ༅ğ
+1.ೂݔᆃ൞ყႆЧđсྶૼಒѓᇿ arXivщބݼϱЧ
+2.ೂݔ൞ၘࢤ൳րؿіં໓đླေิ܂ DOIࠇԛϱᆣૼ
+3.ലӫ࡟ҩ֞๝໊෍ၳӈᆃ၂ᇗնؿགྷđಏႄႨໃট໓ངቔູᆦӪđ ࿸ᇗཤ೐ં໓
+ॖྐ؇
+2.1.2ሱႄཀၐ (Self-Citation Concerns)
+ჰ໓ႄႨ໊ᇂğ References (line 1368-1370)
+He, J., Luo, H., Xiao, W., et al. 2026, F rontiers in Astronomy and Space
+Sciences, 13, 1782465
+໙ีٳ༅ğ
+1.ቔᆀა He et al. (2026) ܱ֥༢ໃ஼੝
+2.ೂݔᆃ൞ቔᆀሱ֥࠭࿹࣮đඋႿ ႅઞሱႄ
+3. F rontiers ௹़֥ॹ෎ؿіੀӱФ০Ⴈ֥ॖିྟ
+Page 4 of 13
+--- Page 6 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+2.2ކӮ࿞਀ඔऌ֥஼੝҂ቀ
+஼੝໙ีğ
+ં໓ᄝ Section 3.5.1 ӵಪ PINN൐Ⴈ DIR TYڕഝԮൻս઒ളӮކ֥Ӯඔऌ࿞਀đ
+֌ໃԉٳ஼੝ၛ༯ڄགğ
+1.ކӮඔऌაᆇൌܴҩᆭ֥ࡗ༢๤ྟொҵໃਈ߄
+2. DIR TYࡌഡ౯ྙ॒৬đطᆇൌӣήॖି൞٤౯ྙ /ய඾ܒࢲ
+3.ໃิކ܂Ӯ -ᆇൌඔऌؓбဒᆣ
+֣֡໙ีğ ൐ႨކӮඔऌ࿞਀ଆ྘ಏᄝં໓ᇏӯགྷູؓᆇൌඔऌٳ֥༅đթᄝ ༂֝
+؀ᆀ֥ཀၐb
+2.3॓࿐Ӵྐ௟ٳ
+і 1:॓࿐Ӵྐົ؇௟ٳ
+௟ܙཛଢ ௟ٳ ࿸ᇗӱ؇
+ႄႨᆇൌྟ 2/10 ᇁଁ
+ሱႄ஼੝ 3/10 ࿸ᇗ
+ඔऌ๩ૼ؇ 4/10 ࿸ᇗ
+مٚ஼੝ປᆜྟ 5/10 ᇏ֩
+ົ؇ሹٳ 3.5/10
+3ົؽ؇ğઆࠠ၂ᇁྟബҰ (Logical Consistency Re-
+view)
+Page 5 of 13
+--- Page 7 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+3.1ંᆣ৽่ٳ༅
+ലӫ֥આࠠ৽่ğ
+ކӮඔऌ࿞਀ (DIR TY) →თൡႋ (MMDࡨഒ )→ 3I/A TLAS ٳ༅→໾৘ҕඔ →
+ა 2I/Borisov бࢠ→๷ܼ֞ໃট LSSTൈս
+આ؎ࠠਚ്ׄљğ
+1.ކӮ →ᆇൌğໃဒᆣކӮඔऌაᆇൌܴҩ֥ fidelity
+2. MMD→ ໾৘؇ࣚğ หᆘॢٳࡗ҃ؓఊ ⇏໾৘ҕඔ࠹ܙሙಒ
+3. N=2→ ๷ܼğਆ۱ဢЧ໭مᆦӪ ”ѓሙٳ߄༅ॿࡏ” ࢲ֥ં
+4.֒భ →LSST ğࠎႿ҂ಒ֥קದ१ଆ྘ყҩ LSSTؿགྷੱ
+3.2࿖ߌ๷৘໙ี (Circular Reasoning)
+3.2.1თൡႋႵིྟဒᆣ
+ં໓ലӫთൡႋႵིྟ֥ᆣऌğ
+• MMDՖ 0.47ࢆᇀ 0.12
+•თٳোఖሙಒੱՖ 89%ࢆᇀ 52%
+આࠠಌཊٳ༅ğ
+1. MMDࡨഒࣇඪૼหᆘٳ҃ؓఊđ ҂ᆰ֩ࢤ๝Ⴟ໾৘ҕඔڿ࠹ܙ೿
+2.თٳোఖሙಒੱ࣍ࢤෛࠏ( 50%)ॖିၩ໅ሢğ
+•หᆘิ౼ఖӮۿ௺ௌਔ஑љఖčଢѓղӮĎ
+•หᆘิ౼ఖשാਔ෮Ⴕ஑љྟྐ༏čଆൔЩ঎Ď
+3.ં໓ໃ౵ٳഈඍਆᇕॖିྟ
+4.ᆇᆞ֥ဒᆣႋ൞бࢠთൡႋభު໾৘ҕඔ֥ሙಒྟđ٤طหᆘٳ҃
+3.3ໃࣜဒᆣ֥ཌྟб২ࡌഡ
+ჰ໓ğ Section 4.1.3
+Page 6 of 13
+--- Page 8 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+“The 2.8 × SNR gain corresponds to a ∼1.1 mag improvement in limiting
+surface brightness... roughly doubling the accessible spatial extent. ”
+આࠠ੐׳ğ
+і 2:ཌྟб২ࡌഡ໙ี
+ലӫ ࡌഡ ໙ี
+SNR 2.8 × → 1.1 mag ؓඔཌྟܱ༢ ໃဒᆣᄮലଆ྘
+1.1 mag → 2×ॢٓࡗຶ नᄋі૫ਊ؇ ໃॉ੮ࣥཟ੽ক
+2.8× SNR→ 2.8×ᇉਈ ཌྟᇉਈ -ਊܱ؇༢ ࿸ᇗ߄ࡥ؇ݖ
+3.4؇ݖຓ๷໙ี
+ဢЧਈაຓ๷ലૼ҂௄஥ğ
+ലૼ ၇ऌ ௟ࡎ
+”ѓሙٳ߄༅ॿࡏ” N=2 (Borisov, A TLAS) ࿸ᇗ؇ݖຓ๷
+”ໃটྒ࠽ᝣྒ ”ਆ۱ၳᇉဢЧ ๤࠹໭৯
+”LSST: 1-10/ ୍” Jones et al. (2018) ଆ྘၇ঠ
+”ሱ߄׮หᆘ ”໭҆ඇᆣऌ ໭۴ऌ
+3.5આࠠ၂ᇁྟ௟ٳ
+і 3:આࠠ၂ᇁྟົ؇௟ٳ
+௟ܙཛଢ ௟ٳ ࿸ᇗӱ؇
+ંᆣ৽่ປᆜྟ 4/10 ࿸ᇗ
+ၹݔ๷৘Ⴕིྟ 5/10 ᇏ֩
+๤࠹ຓ๷ކ৘ྟ 3/10 ࿸ᇗ
+ࡌഡဒᆣԉٳྟ 4/10 ࿸ᇗ
+ົ؇ሹٳ 4.0/10
+4ົ؇೘ğ ൌ࠽ႋႨაمٚંബҰ (Application & Method-
+ology Review)
+Page 7 of 13
+--- Page 9 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+4.1 PINNمٚં༂Ⴈ
+مٚંނྏ໙ีğ
+PINNԮ๤ႋႨğ ᆞཟ PDE౰ࢳčၘᆩшࢸ่ࡱ→ ౰ࢳӆٳ҃Ď
+Ч໓ႋႨğ ҕඔّဆčܴҩඔऌ →࠹ܙ໾৘ҕඔĎ
+໙ีٳ༅ğ
+1.ٚӱ (13)ᇏ֥ PDEҗҵ෥ാ LPDEྙൔଆ޴
+2.ؓႿّ໙ีđ PINNླေ careful֥ᆞᄵ߄ၛٝᆸ ill-posedness
+3.ં໓ໃษંّ໙ี֥ື၂ྟč identifiability Ď
+4.۱؟ҕඔ (Qd,α,amax )๝ൈّဆॖିթᄝ๼߄
+4.2ཬဢЧ࿐༝ڄག
+ં໓ലӫğ Section 3.4.2
+“After meta-learning adaptation with only 10 examples from the target do-
+main... ”
+ႋႨҪ૫֥࿸ᇗ໙ีğ
+1.ྒ࠽ᝣྒگ֥ᄖྟğ ૄ۱ྒ࠽ᝣྒॖିႵ׿ห߄֥࿐Ӯٳaӣήหྟa׮ࠃଆൔ
+2. 10۱ဢЧ֥๤࠹ၩၬğ ໭ۂڭمྒ࠽ᝣྒ֥ॖିэٓ߄ຶ
+3.ݖ୅ڄކགğ ཬဢЧັޓטॖି֝ᇁؓหؓקའݖ֥୅ކ
+4.ဒᆣಌാğ ໃิ܂ 10ဢЧ vs؟۷ဢЧ֥ؓбൌဒ
+4.3თൡႋႵིྟᆣऌ҂ቀ
+і 4:თൡႋဒᆣ໙ี
+ᆷѓ эࢳ߄ ൤໙ี
+MMD 0.47→ 0.12ࣇหᆘؓఊđ٤໾৘؇ࣚ
+თٳোఖ 89%→ 52%࣍ࢤෛࠏđॖିྐ༏שാ
+Borisovဒᆣ 12% MAD N=1໭م๤࠹ဒᆣ
+Page 8 of 13
+--- Page 10 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+4.4๤࠹ཁᇷྟಌാ
+ಌാ֥๤࠹ဒᆣğ
+1.ཨವ࿹࣮č T able 4Ďໃิ܂ pᆴ
+2.ྟିбࢠലӫ PSNRҵၳཁᇷ֌ໃБۡ๤࡟࠹ဒ
+3.Нွථ PINNႪႿ MC Dropout ֥ലૼࠎႿ 3%ۂڭੱҵၳ (94% vs 91%)
+4.p= 0.04֥ McNemar ࡟ဒᄝ؟ᇗбࢠ༯ॖି҂ཁᇷ
+4.5ൌ࠽ႋႨ௟ٳ
+і 5:ൌ࠽ႋႨົ؇௟ٳ
+௟ܙཛଢ ௟ٳ ࿸ᇗӱ؇
+مٚંൡ֒ྟ 4/10 ࿸ᇗ
+ཬဢЧ࿐༝ॖྛྟ 3/10 ࿸ᇗ
+ဒᆣԉٳྟ 4/10 ࿸ᇗ
+๤࠹࿸ࣈྟ 5/10 ᇏ֩
+ົ؇ሹٳ 4.0/10
+5ົ؇ඹğඔऌᆇເബҰ (Data Authenticity Review)
+Page 9 of 13
+--- Page 11 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+5.1ൈࡗཌᙣં
+ൈࡗཌ໙ีğ
+൙ࡱ ലӫൈࡗ
+3I/A TLAS ܴҩ 2025୍ 1ᄅ – 2025୍ 7ᄅ
+ં໓๧۠ 2026୍ 5ᄅ 15ರ
+ൈࡗԳ१ ∼10۱ᄅ
+໙ีğ
+1. 10۱ᄅଽປӮඔऌࠆ౼aԩ৘aധ؇࿐༝ଆ྘षؿaဒᆣaં໓ለཿݖႿ࿡
+෎
+2.ႄႨ 2026୍໓ངπൕં໓ൌ࠽ለཿൈࡗॖିພႿലӫರ௹
+3.ໃؿགྷყႆЧڛༀఖϱЧč arXiv֩Ď
+5.2໭مဒᆣ֥ඔऌലૼ
+і 6:ඔऌॖဒᆣྟ௟ܙ
+ඔऌཛ ലૼ ဒᆣሑ෿ ڄགࠩ֩
+FORS2৥ჭ 42 epochs ໭ ESO৽ࢤۚ 
+LCOGT ৥ჭ 127 epochs ໭׿م৫ဒᆣ ۚ
+X-Shooter ܻ௶ 12 epochs Program ID ิ܂֌ໃဒᆣ ᇏ
+Program ID 110.23ZJ.001 ր ESO֖σނҰ ᇏ
+5.3࡟ҩࠞཋק֥࣍ڸਈലૼ
+ჰ໓ğ Section 4.2.2
+COބ H2O NIRؿഝᄝ SNR 4.2 ބ 5.8Ф࡟ҩ֞đലӫğ
+•Q(CO) = (5 .1±0.6)×1026mol s−1
+•Q(H2O) = (1 .2±0.1)×1027mol s−1
+• CO/H 2O= 0.42±0.08
+๤࠹໙ีğ
+1. SNR∼5֥ฐҩԩႿ࡟ҩࠞཋ
+Page 10 of 13
+--- Page 12 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+2.ലӫ <12%֥҂ಒקྟა࡟ҩࠞཋ֥࣍ڸ๤࠹ྟᇉ઱؛
+3.бᆴ֥҂ಒקྟԮѬॖିФܙ֮
+4.༢๤༂ҵč telluricྩᆞaੀਈקѓĎॖିӑݖ๤࠹༂ҵ
+5.4ކӮ࿞਀ඔऌڄག
+ކӮඔऌ໙ีğ
+DIR TY ࡌഡğ
+•౯ྙ॒৬č Mie৘ંĎ
+•नᄋٳ֥҃ӣή
+•ܻ࿐Њ࣍ර
+ᆇൌ౦ঃğ
+•ᝣྒӣήॖି൞٤౯ྙ /ய඾ऊุࠢ
+•ӣήٳ҃ॖିႵ๶ॶܒࢲ
+•ଽᝣؿॖିթᄝܻ࿐ި౵თ
+ໃဒᆣലૼğ ં໓ലӫᄝކӮඔऌഈղ֞ 7.8% MAPE đ֌ໃဒᆣކӮ -ᆇൌҵၳb
+5.5ಌാ֥ॖᇗگྟေ෍
+і 7:ॖᇗگྟ࡟Ұі
+ေ෍ ሑ෿ ႕ཙ
+ESO֖σ৽ࢤ ಌാ໭مဒᆣඔऌ
+GitHubս઒९ ಌാ ໭گمགྷمٚ
+ඔऌ reduction logs ಌാ໭مሔිԩ৘
+ᇏࡗඔऌӁ௖ ಌാ໭مဒᆣᇏࡗ҄ᇧ
+࿞਀ඔऌ /ଆ྘ಃᇗ ಌാ ໭مဒᆣଆ྘
+5.6ඔऌᆇເ௟ٳ
+6ሸކ௟ܙაࡹၰ
+Page 11 of 13
+--- Page 13 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+і 8:ඔऌᆇເົ؇௟ٳ
+௟ܙཛଢ ௟ٳ ࿸ᇗӱ؇
+ൈࡗཌކ৘ྟ 2/10 ᇁଁ
+ඔऌॖဒᆣྟ 2/10 ᇁଁ
+קਈലૼॖौྟ 4/10 ࿸ᇗ
+ॖᇗگྟ 2/10 ᇁଁ
+ົ؇ሹٳ 2.5/10
+6.1ඹົ߸؇ሹ
+ඹົ؇௟ٳূղ
+ົ؇ ௟ٳ࡯ܱ໙ี
+֣֡/ ੾৘ 3.5/10 ໃটႄႨaሱႄ஼੝҂ቀ
+આࠠ၂ᇁྟ 4.0/10 ࿖ߌ๷৘a؇ݖຓ๷
+ൌ࠽ႋႨ 4.0/10 PINN༂ႨaཬဢЧڄག
+ඔऌᆇເ 2.5/10 ൈࡗᙣંa໭مဒᆣ
+ሸކ 3.5/10
+6.2ྩڿေ౰ࠩٳ
+6.2.1ᇁଁࠩ໙ี (сྶࢳथ )
+F1:ࢳथൈࡗཌᙣંğ ӳౢ 3I/A TLAS ؿགྷರ௹đࢳ൤ູޅႄႨໃট໓ང
+F2:ิ܂ඔऌဒᆣ๯ࣥğ ESO֖σ৽ࢤa GitHubս઒९aӱ྽ IDဒᆣ
+F3:ྩگໃটರ௹ႄႨğ ၍Ԣ۷ࠇᆞ Opitom et al. (2026) aPratik (2026) aHe et al.
+(2026)
+F4:஼੝ሱႄܱ༢ğ ૼಒඪૼ He et al. (2026) აቔᆀܱ֥༢
+6.2.2࿸ᇗࠩ໙ี (сྶࢳथ )
+C1:Ҁԉ๤࠹ဒᆣğ ෮ႵྟିбࢠсྶЇݣ pᆴࠇᇂྐ౵ࡗ
+C2:ဒᆣთൡႋႵིྟğ ิ܂თൡႋభު໾৘ҕඔሙಒྟ֥ᆰࢤбࢠ
+C3:ਈކ߄Ӯ -ᆇൌҵၳğ бࢠ DIR TYކӮඔऌაᆇൌܴҩ
+C4:؇ݖ֮ࢆຓ๷ലૼğ ೷Ԣ ”ѓሙ߄ॿࡏ” ࠎ֩Ⴟ N=2؇ݖ֥๷ܼ
+Page 12 of 13
+--- Page 14 ---
+APJ Stringent Peer Review Multi-Angle Critical Analysis
+6.2.3ᇗေࠩ໙ี (ႋࢳ֒थ )
+I1:Ҁԉ PINN৘ંࠎԤğ ඪૼّ໙ีᆞᄵބ߄ື၂ྟ
+I2:ᄹࡆဢЧਈٳ༅ğ ฐษཬဢЧ࿐༝֥๤ڄ࠹ག
+I3:ิ܂ૹۋྟٳ༅ğ ᅚൕؓݔࢲӑҕඔ֥၇ঠྟ
+I4:षჷս઒ބඔऌğ ิ܂ປᆜ֥ॖᇗگྟሧჷ
+6.3ቋᇔࡹၰ
+ബࢲ۠ં
+ࡹၰğ๼߭ྩڿࠇ ऋ۠ᇗ๧
+Чં໓࿹࣮ྒ࠽ᝣྒᆃ၂ᇗေज़ีđ࠯ඌਫ਼ཌऎႵ၂קԷྍྟbಖطđݖࣜඹົ؇
+࿸۬ബҰđؿགྷၛ༯ᇁଁ໙ีğ
+1.ඔऌᆇൌྟބൈࡗཌթᄝ࿸ᇗၐ໙
+2.مٚંႋႨթᄝ۴Чྟ໙ี
+3.ંᆣઆࠠթᄝ؎ਚބ࿖ߌ
+4.॓࿐Ӵྐٚ૫թᄝໃটႄႨ֩ၳӈ
+ᆺႵᄝࢳथഈඍᇁଁ໙ีުđЧં໓ҌॖିӮູھਵთ֥Ⴕࡎᆴ܊֥ངb
+Report prepared by: Anonymous Referee
+Date: 2026 May 16
+Review T ype: Stringent Multi-Angle Critical Analysis
+Page 13 of 13
+
+============================================================
+FILE: APJ_Review_Report.pdf
+============================================================
+--- Page 1 ---
+APJ Peer Review Report
+Astrophysical Journal Referee Evaluation
+Manuscript Title:
+Multi-Modal Deep Learning Characterization of the Interstellar Comet
+3I/A TLAS: F aint F eature Detection, Physical Parameter Inversion, and
+Generalized Cross-Domain Intelligent F ramework
+Manuscript ID: APJ-2026-XXXX
+Submission Date: 2026 May 15
+Review Date: 2026 May 16
+Referee: Anonymous APJ Reviewer
+Recommendation: Major Revision / Reject & Resubmit
+Overall Score: 5.6/10 (Reject/ Major Revision threshold)
+Sci. Import. Innovation Data Rel. Rigor W riting Overall
+7/10 5/10 4/10 5/10 7/10 5.6/10
+This review report is confidential and intended for editorial use only.
+--- Page 2 ---
+APJ Peer Review Report Confidential
+ଢ੣
+1 Overall Assessment 2
+1.1 Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.2 Scientific Context . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.3 Key Findings Claimed . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.4 Overall Impression . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+2 Data Authenticity and Reliability Review 3
+2.1 Observational Data Concerns . . . . . . . . . . . . . . . . . . . . . . . . . 3
+2.1.1 Critical Timeline Issues . . . . . . . . . . . . . . . . . . . . . . . . 3
+2.1.2 Spectroscopic Claims . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+2.2 T raining Data Issues . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+2.3 Data A vailability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+3 Methodology Review 4
+3.1 T echnical Appropriateness . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+3.1.1 Reasonable Components . . . . . . . . . . . . . . . . . . . . . . . . 4
+3.1.2 Questionable Components . . . . . . . . . . . . . . . . . . . . . . . 4
+3.2 Evaluation Methodology . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+3.3 Statistical Rigor . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+4 Logic and Argumentation Review 5
+4.1 Logical Chain Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+4.1.1 Circular Reasoning Risk . . . . . . . . . . . . . . . . . . . . . . . . 5
+4.2 Correlations vs. Causation . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+4.3 Over-extrapolation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+5 T echnical Issues 6
+5.1 Mathematical/Physical Concerns . . . . . . . . . . . . . . . . . . . . . . . 6
+5.2 Experimental Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+5.2.1 Ablation Study Issues . . . . . . . . . . . . . . . . . . . . . . . . . 7
+5.2.2 Uncertainty Quantification . . . . . . . . . . . . . . . . . . . . . . . 7
+6 Literature and Citation Review 7
+6.1 Problematic Citations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+6.2 Missing Key References . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+6.3 Self-Citation Concern . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Page 1 of 10
+--- Page 3 ---
+APJ Peer Review Report Confidential
+7 Recommendation 8
+7.1 Detailed Scoring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+7.2 Recommendation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+8 Detailed Revision Requirements 8
+8.1 Critical Issues (Must Fix) . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+8.2 Important Issues (Should Fix) . . . . . . . . . . . . . . . . . . . . . . . . . 9
+8.3 Optional Improvements . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+9 Final Remarks 9
+Page 2 of 10
+--- Page 4 ---
+APJ Peer Review Report Confidential
+1 Overall Assessment
+1.1 Summary
+This manuscript presents a multi-modal deep learning framework for characterizing
+interstellar comets, with 3I/A TLAS as the primary test case. The work integrates three
+technical components:
+1. Multi-scale CNNs with attention mechanisms for faint feature detection
+2. Physics-informed neural networks (PINNs) for physical parameter inversion
+3. Meta-learning with adversarial domain adaptation for cross-domain transfer
+1.2 Scientific Context
+The study of interstellar comets represents one of the most exciting frontiers in
+contemporary astrophysics. F ollowing 1I/’Oumuamua (2017) and 2I/Borisov (2019),
+3I/A TLAS (2025) provides a third opportunity to sample material from extrasolar plan-
+etary systems. However, several critical issues undermine the credibility of this
+work.
+1.3 Key Findings Claimed
+• SNR improvement factor of 2.8× over traditional methods
+• Dust production rate estimates with <8% error
+• Gas production rates with <12% uncertainty
+• Cross-domain validation on 2I/Borisov with 12% agreement
+1.4 Overall Impression
+The paper proposes a technical ly reasonable framework but suffers from fatal
+flaws in data authenticity , validation rigor, and statistical analysis . The
+work may have value if extensively revised, but in its current form, I cannot
+recommend acceptance .
+Page 3 of 10
+--- Page 5 ---
+APJ Peer Review Report Confidential
+2 Data Authenticity and Reliability Review
+2.1 Observational Data Concerns
+і 1: Data Authenticity Assessment
+Data Item Claim Review Finding
+Discovery timeline 2025 Jan–Jul observations Suspicious
+FORS2 epochs 42 epochs Unverifiable
+LCOGT epochs 127 epochs Unverifiable
+X-Shooter spectra 12 epochs Low SNR concern
+Program ID 110.23ZJ.001 Provided
+2.1.1 Critical Timeline Issues
+MAJOR CONCERN: The manuscript claims observations from 2025 January to
+July , but the paper is dated May 2026. This creates several problems:
+1. Data processing, analysis, writing, and submission within ∼10 months is unusually
+rapid
+2. The claimed citations to Opitom et al. (2026) and Pratik (2026) are from the
+”future”
+3. No preprint server versions of these cited works are mentioned
+2.1.2 Spectroscopic Claims
+The paper claims detection of CO and H 2O NIR emission at SNR of 4.2 and 5.8
+respectively . These are at the detection limit, and claiming production rates
+with <12% uncertainty from such low-SNR data is statistically questionable.
+Page 4 of 10
+--- Page 6 ---
+APJ Peer Review Report Confidential
+2.2 T raining Data Issues
+CRITICAL ISSUE: Synthetic T raining Data
+The PINN is trained on synthetic data from DIR TY radiative transfer code.
+This introduces fundamental risks:
+• Synthetic data may not capture real cometary physics
+• DIR TY assumes spherical grains; real dust is likely irregular/fluffy
+• No validation on how well synthetic data matches real observations
+2.3 Data A vailability
+F A T AL FLA W: The manuscript fails to provide:
+• ESO archive links for data access
+• GitHub repository for code
+• Detailed data reduction logs
+• Intermediate data products for verification
+3 Methodology Review
+3.1 T echnical Appropriateness
+3.1.1 Reasonable Components
+Strengths:
+• Multi-scale CNN architecture is appropriate for faint feature detection
+• SE attention modules are state-of-the-art
+• Loss function design (MSE + SSIM + Edge + Flux) is reasonable
+3.1.2 Questionable Components
+Concerns:
+• PINN Application: The paper uses PINNs for parameter inversion , but PINNs
+are traditionally for forward PDE solving. The PDE residual formulation is vague.
+Page 5 of 10
+--- Page 7 ---
+APJ Peer Review Report Confidential
+• F ew-shot Learning: Claiming adaptation with ”only 10 examples” for interstellar
+comets is optimistic given the complexity of these objects.
+• Domain Adaptation: MMD reduction (0.47 → 0.12) does not guarantee better
+physical parameter estimates.
+3.2 Evaluation Methodology
+і 2: Evaluation Rigor Assessment
+Aspect Claimed Missing
+PSNR improvement 3.2–4.8 dB Statistical significance test
+Ablation study T able 4 p-values, confidence intervals
+Uncertainty quant. 71%/94% coverage Comparison with ground truth
+Cross-validation Mentioned Details on folds/stratification
+3.3 Statistical Rigor
+MISSING ANAL YSES:
+1. No hypothesis testing for performance differences
+2. No error bars on key results (e.g., dust production evolution)
+3. No sensitivity analysis to hyperparameter choices
+4. No discussion of multiple comparison corrections
+4 Logic and Argumentation Review
+4.1 Logical Chain Analysis
+Claimed Logic Chain:
+Synthetic T raining → Domain Adaptation → 3I/A TLAS Analysis → Physical
+Parameters → Comparison with 2I/Borisov
+4.1.1 Circular Reasoning Risk
+ISSUE: The domain adaptation effectiveness is validated by:
+• MMD reduction in feature space
+Page 6 of 10
+--- Page 8 ---
+APJ Peer Review Report Confidential
+• Domain classifier accuracy drop (89% → 52%)
+However, these metrics do not directly correlate with physical parameter
+accuracy!
+4.2 Correlations vs. Causation
+EXAMPLE OF PROBLEMA TIC CLAIMING:
+“The SNR improvement factor of 2.8 translates to a limiting surface brightness
+approximately 1.1 magnitudes fainter than traditional methods, enabling de-
+tection of coma structures at equivalent scattering masses ∼2.8 times smaller. ”
+This assumes a linear proportionality that has not been validated.
+4.3 Over-extrapolation
+UNSUBST ANTIA TED CLAIMS:
+1. “Standardized analysis of future interstellar objects” – based on only 2 test cases
+2. “F oundation for automated characterization pipelines” – no deployment evidence
+3. “LSST: 1–10 interstellar comets per year” – based on uncertain population models
+5 T echnical Issues
+5.1 Mathematical/Physical Concerns
+і 3: T echnical Issues Identified
+Location Issue Severity
+Eq. (6) ϕ(r) =r2logrundefined at r= 0 Medium
+Eq. (10) Mie integral: n(a)not specified Medium
+Section 3.2.2 r−n
+h scaling without specifying n Low
+Section 4.2.3 “T able ??” – missing table reference Low
+Page 7 of 10
+--- Page 9 ---
+APJ Peer Review Report Confidential
+5.2 Experimental Design
+5.2.1 Ablation Study Issues
+The ablation study (T able 4) reports:
+• Remove SE blocks: PSNR drop 1.3 dB
+• Single-kernel (3 ×3): PSNR drop 0.9 dB
+Missing: Are these differences statistically significant? What is the p-value?
+5.2.2 Uncertainty Quantification
+Positive: The Bayesian PINN vs MC Dropout comparison is thorough.
+Concern: The claim that Bayesian PINN is “superior” based on 6% coverage dif-
+ference may not be statistically significant.
+6 Literature and Citation Review
+6.1 Problematic Citations
+CRITICAL: F uture-Dated Citations
+The following citations are dated in the future (current date: 2026 May):
+• Opitom et al. (2026) – cited for 3I/A TLAS isotope measurements
+• Pratik (2026) – cited for 3I/A TLAS dust activity
+• He et al. (2026) – cited for A TD-DL framework
+These citations must be verified or removed.
+6.2 Missing Key References
+Should be cited:
+• Jones et al. (2018) for LSST predictions (referenced but not in bib)
+• Daumé III (2009) for domain adaptation theory
+• Recent PINN applications in astronomy (post-2023)
+Page 8 of 10
+--- Page 10 ---
+APJ Peer Review Report Confidential
+6.3 Self-Citation Concern
+He et al. (2026) appears to be a self-citation to an unpublished work. This requires
+disclosure.
+7 Recommendation
+7.1 Detailed Scoring
+і 4: Dimension-wise Scoring (1-10 scale)
+Dimension Score Rationale
+Scientific Importance 7 Interstellar comets are important; timing is
+good
+Method Innovation 5 Combination of existing techniques; no
+breakthrough
+Data Reliability 4 Timeline issues, unverifiable claims
+Rigor/Statistics 5 Missing significance tests, over-extrapolation
+W riting Quality 7 W ell-structured, English is good
+Reproducibility 3 No code/data availability
+Overall 5.6 Below APJ acceptance threshold
+7.2 Recommendation
+RECOMMENDA TION: Major Revision
+or Reject & Resubmit
+The paper has potential value but requires fundamental revisions to data
+verification, statistical rigor, and citation integrity before it can be considered
+for publication.
+8 Detailed Revision Requirements
+Page 9 of 10
+--- Page 11 ---
+APJ Peer Review Report Confidential
+8.1 Critical Issues (Must Fix)
+C1: V erify data timeline: Clarify the discovery date of 3I/A TLAS and observation
+timeline. Provide evidence that observations were actually conducted.
+C2: Fix future citations: Remove or replace citations to works dated 2026 unless they
+are actually published preprints with DOIs.
+C3: Provide data access: Include ESO archive links, GitHub repository , or supple-
+mentary data files.
+C4: Add statistical tests: Include p-values or confidence intervals for all performance
+comparisons.
+8.2 Important Issues (Should Fix)
+I1: V alidate synthetic training: Compare DIR TY synthetic data with real observa-
+tions to demonstrate fidelity .
+I2: Extend validation: T est on more than 2 interstellar comets, or explicitly state
+the limitation.
+I3: Add sensitivity analysis: Show how results vary with hyperparameter choices.
+I4: T one down claims: Remove “standardized analysis” and similar over-extrapolated
+claims.
+8.3 Optional Improvements
+O1: Open-source the code for reproducibility
+O2: Add visualization of attention mechanisms (SE block activations)
+O3: Include comparison with other recent ML methods for comet analysis
+O4: Provide supplementary materials with detailed data tables
+9 Final Remarks
+This manuscript addresses an important and timely topic in astrophysics. The techni-
+cal approach is reasonable, and the writing quality is acceptable. However, fundamental
+issues with data authenticity , statistical rigor, and citation integrity prevent
+me from recommending acceptance in its current form.
+Page 10 of 10
+--- Page 12 ---
+APJ Peer Review Report Confidential
+If the authors can:
+1. Provide verifiable evidence for their observational data
+2. Fix the problematic citations
+3. Add proper statistical validation
+4. T one down over-extrapolated claims
+then this work could become a valuable contribution to the field.
+Report prepared by: Anonymous APJ Referee
+Date: 2026 May 16
+Manuscript: APJ-2026-XXXX
+Page 11 of 10
+

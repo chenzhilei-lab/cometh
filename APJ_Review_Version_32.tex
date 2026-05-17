@@ -1,0 +1,382 @@
+\documentclass[12pt,a4paper]{article}
+
+% 中文支持
+\usepackage{ctex}
+\usepackage{fontspec}
+
+% 页面设置
+\usepackage[margin=2.5cm]{geometry}
+\setlength{\headheight}{14pt}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% 数学与符号
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+
+% 表格
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{colortbl}
+
+% 列表
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+% 颜色定义
+\definecolor{CriticalRed}{RGB}{180,30,30}
+\definecolor{FatalRed}{RGB}{139,0,0}
+\definecolor{WarningOrange}{RGB}{210,100,20}
+\definecolor{GoodGreen}{RGB}{30,130,30}
+\definecolor{ExcellentGreen}{RGB}{20,100,20}
+\definecolor{HeaderBlue}{RGB}{30,60,100}
+\definecolor{LightGray}{RGB}{245,245,245}
+
+% 页眉页脚
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{HeaderBlue}{APJ Stringent Peer Review}}
+\fancyhead[R]{\small\textcolor{HeaderBlue}{Version 32 Assessment}}
+\fancyfoot[C]{\small Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% 章节标题样式
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{HeaderBlue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{HeaderBlue!80}}{\thesubsection}{1em}{}
+
+% 自定义命令
+\newcommand{\critical}[1]{\textcolor{CriticalRed}{\textbf{#1}}}
+\newcommand{\fatal}[1]{\textcolor{FatalRed}{\textbf{#1}}}
+\newcommand{\warning}[1]{\textcolor{WarningOrange}{\textbf{#1}}}
+\newcommand{\good}[1]{\textcolor{GoodGreen}{\textbf{#1}}}
+\newcommand{\excellent}[1]{\textcolor{ExcellentGreen}{\textbf{#1}}}
+
+\begin{document}
+
+% ============ 标题页 ============
+\begin{titlepage}
+\centering
+\vspace*{1.5cm}
+
+{\Huge\bfseries\textcolor{HeaderBlue}{Critical Multi-Angle Review Report}}
+
+\vspace{0.5cm}
+
+{\Large\textit{Version 32 - Polished Benchmarking Study}}
+
+\vspace{1.5cm}
+
+\rule{\textwidth}{1.5pt}
+
+\vspace{0.5cm}
+
+{\Large\textbf{Manuscript Title:}}
+
+\vspace{0.3cm}
+
+{\normalsize A Benchmarking Study of Deep Learning Methods for Faint Comet Characterization: Where Traditional Methods Fail and Physics-Informed Neural Networks Excel}
+
+\vspace{0.3cm}
+
+\rule{\textwidth}{1.5pt}
+
+\vspace{1.5cm}
+
+\begin{tabular}{ll}
+\textbf{Manuscript ID:} & APJ-2026-XXXX \\[0.2cm]
+\textbf{Review Date:} & 2026 May 17 \\[0.2cm]
+\textbf{Review Type:} & \excellent{FINAL POLISH ASSESSMENT} \\[0.2cm]
+\textbf{Recommendation:} & \excellent{ACCEPT with Minor Revisions}
+\end{tabular}
+
+\vspace{1.5cm}
+
+\begin{center}
+\fbox{\parbox{0.95\textwidth}{
+\centering
+\textbf{Overall Score: 7.8/10} (\excellent{Exceeds Acceptance Threshold})
+
+\vspace{0.3cm}
+
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Dimension} & \textbf{V31 Score} & \textbf{V32 Score} & \textbf{Change} \\
+\hline
+Moral Integrity & 9.5/10 & 9.5/10 & $\rightarrow$ \\
+Logical Consistency & 7.0/10 & 7.5/10 & $\uparrow$ \\
+Practical Utility & 7.0/10 & 7.5/10 & $\uparrow$ \\
+Data Authenticity & 8.0/10 & 8.5/10 & $\uparrow$ \\
+\hline
+\textbf{Composite} & \textbf{7.5/10} & \textbf{7.8/10} & \excellent{Improved} \\
+\hline
+\end{tabular}
+}}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\centering
+\textbf{Key Verdict}
+
+\vspace{0.3cm}
+
+Version 32 represents the \excellent{culmination of iterative improvement}. The GitHub repository link is now actual (not placeholder), computational costs are fully disclosed, and the manuscript maintains complete transparency about its scope and limitations. Only the Zenodo DOI placeholder remains to be resolved before publication.
+}}
+\end{center}
+
+\end{titlepage}
+
+% ============ 目录 ============
+\tableofcontents
+\newpage
+
+% ============ 版本演进轨迹 ============
+\section{Version Trajectory: A Story of Iterative Refinement}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|l|}
+\hline
+\textbf{Version} & \textbf{Score} & \textbf{Recommendation} & \textbf{Trend} & \textbf{Key Characteristics} \\
+\hline
+V1 (ddd006a) & 4.8/10 & Reject & -- & Future citations, claimed real observations \\
+V2 (f531082) & 5.8/10 & Major Revision & $\uparrow$ & Added ``Simulation-Based'' to title \\
+V3 (16f6d3f) & 6.5/10 & Accept & $\uparrow$ & Removed future citations \\
+V4 (1420fe3) & 5.0/10 & Major Revision & $\downarrow$ & \fatal{REGRESSION: Reverted to observation claims} \\
+V31 (dff9aa5) & 7.5/10 & Accept/Very Minor & $\uparrow\uparrow$ & ``Benchmarking Study'', transparency \\
+\rowcolor{LightGray}
+V32 (1c85a8b) & \textbf{7.8/10} & \textbf{Accept/Minor} & $\uparrow$ & \excellent{Actual GitHub link, GPU specs} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\noindent\fbox{\parbox{\textwidth}{
+\textbf{Version 32 Achievement:} This version has crossed from ``acceptable'' to ``polished.'' The manuscript now meets the standards expected of high-impact astronomical methodology papers.
+}}
+
+% ============ 执行摘要 ============
+\section{Executive Summary}
+
+\subsection{Critical Assessment Summary}
+
+Version 32 maintains all the strengths of Version 31 while addressing several practical concerns:
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item \excellent{GitHub Repository Link Actualized:} Changed from placeholder \texttt{[repository]} to actual URL: \texttt{https://github.com/comet-dl/faint-comet-benchmark}
+\item \excellent{Computational Cost Transparency:} Added detailed A100 GPU specifications and 105$\times$ speedup quantification
+\item \excellent{Complete Stress Test Suite:} All 5 stress tests now have proper titles, including Test 3: ``Ultra-Low SNR ('Whisper in a Hurricane')''
+\item \excellent{Uncertainty Budget Rigor:} Detailed decomposition into $\sigma_{\text{stat}}$, $\sigma_{\text{sys}}$, and $\delta_{\text{domain}}$
+\item \warning{Zenodo DOI Still Placeholder:} Remains as \texttt{[DOI]} --- the only remaining issue
+\end{enumerate}
+
+\subsection{Honesty and Scope Integrity: EXCELLENT}
+
+The manuscript continues to demonstrate exemplary scientific integrity:
+
+\begin{itemize}
+\item \good{Explicit ``Not a Measurement Paper'' Statement:} ``We emphasize what this paper is not: it is not a measurement paper''
+\item \good{No Real 3I/ATLAS Claims:} Properly acknowledges 3I/ATLAS ``lacks published multimodal observations''
+\item \good{N=1 Contextualization:} 2I/Borisov comparison explicitly labeled ``feasibility demonstration, not statistical validation''
+\item \good{Synthetic Ground Truth:} All performance metrics against known synthetic data
+\end{itemize}
+
+% ============ 四维度审核 ============
+\section{Four-Dimension Critical Review}
+
+\subsection{Dimension 1: Moral Integrity (9.5/10)}
+
+\textbf{Assessment:} \excellent{EXEMPLARY}
+
+\begin{center}
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Criterion} & \textbf{Evaluation} \\
+\hline
+Honesty & Full disclosure of synthetic-only validation; no inflated claims \\
+Transparency & Complete failure boundary documentation; ``Fail Gallery'' included \\
+Scope Clarity & Explicit statement of what the paper is AND is not \\
+Attribution & Proper archival data acknowledgments (ESO, STScI) \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Evidence:}
+\begin{quote}
+``We emphasize what this paper is not: it is not a measurement paper. All performance metrics are evaluated against known synthetic ground truth... No physical parameters of any real comet are measured or claimed.''
+\end{quote}
+
+\textbf{Minor Note:} Zenodo DOI placeholder needs actual DOI before publication.
+
+\subsection{Dimension 2: Logical Consistency (7.5/10)}
+
+\textbf{Assessment:} \good{STRONG}
+
+\textbf{Strengths:}
+\begin{itemize}
+\item Stress test suite logically probes failure boundaries
+\item Uncertainty budget properly decomposed into three additive components
+\item If-Then guide directly derives from benchmark results
+\item PINN architecture specification complete (Table 1)
+\end{itemize}
+
+\textbf{Improvement Over V31:} Computational efficiency claims now backed by specific hardware (A100 GPU) and timing comparisons.
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Task} & \textbf{Traditional} & \textbf{Proposed (A100)} \\
+\hline
+Image reduction & 38 min & 1.5 min \\
+Coma detection \& masking & 45 min manual & 12 sec \\
+Dust parameter inversion & 6+ hr per epoch & 2.1 min \\
+\hline
+\textbf{Total per epoch} & \textbf{$\sim$7 hr} & \textbf{4 min} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Dimension 3: Practical Utility (7.5/10)}
+
+\textbf{Assessment:} \good{STRONG}
+
+The If-Then observational guide (Section 5.2) provides actionable decision rules:
+
+\begin{enumerate}
+\item \textbf{SNR $>$ 5, $|b| > 10°$:} Both methods reliable; advantage is computational
+\item \textbf{SNR 2-5, $|b| < 10°$:} Traditional methods biased; PINN preferred
+\item \textbf{SNR $<$ 2:} No automated method reliable; recommend stacking + limits
+\item \textbf{No spectroscopy:} Gas parameters unconstrained (2.7$\times$ uncertainty)
+\item \textbf{Extreme composition:} Retrain PINN before attempting inversion
+\end{enumerate}
+
+\textbf{Improvement:} Guide now grounded in quantified uncertainty budget.
+
+\subsection{Dimension 4: Data Authenticity (8.5/10)}
+
+\textbf{Assessment:} \excellent{VERY GOOD}
+
+\textbf{Verification Checklist:}
+\begin{itemize}
+\item[$\checkmark$] All synthetic data generation parameters disclosed
+\item[$\checkmark$] Random seeds specified: [42, 123, 456, 789, 1024]
+\item[$\checkmark$] DIRTY code version/architecture documented
+\item[$\checkmark$] Docker environment configuration available
+\item[$\checkmark$] GitHub repository link actual and accessible
+\item[$\circ$] Zenodo DOI needs to be actual (not placeholder)
+\end{itemize}
+
+\textbf{Uncertainty Budget Quantification:}
+\begin{align*}
+\sigma_{\text{total}}^2 &= \sigma_{\text{stat}}^2 + \sigma_{\text{sys}}^2 + \delta_{\text{domain}}^2 \\
+\text{Dust:} &\quad \sigma_{\text{total}} \sim 8\% \\
+\text{Gas:} &\quad \sigma_{\text{total}} \sim 12\%
+\end{align*}
+
+% ============ V31 vs V32 对比 ============
+\section{V31 vs V32: Detailed Comparison}
+
+\begin{center}
+\begin{longtable}{|p{3cm}|p{5.5cm}|p{5.5cm}|}
+\hline
+\textbf{Aspect} & \textbf{Version 31} & \textbf{Version 32} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Aspect} & \textbf{Version 31} & \textbf{Version 32} \\
+\hline
+\endhead
+\hline
+\endfoot
+
+GitHub Link & Placeholder: \texttt{[repository]} & \excellent{Actual:} \texttt{github.com/comet-dl/faint-comet-benchmark} \\
+\hline
+Zenodo DOI & Placeholder: \texttt{[DOI]} & Placeholder: \texttt{[DOI]} (still needed) \\
+\hline
+Stress Test 3 & Mentioned but title incomplete & \excellent{Complete:} ``Ultra-Low SNR ('Whisper in a Hurricane')'' \\
+\hline
+GPU Specs & Generic ``GPU'' mention & \excellent{A100 detailed specs, 105$\times$ speedup} \\
+\hline
+Processing Time & ``4 min vs 7 hr'' (no hardware) & Detailed breakdown with hardware context \\
+\hline
+Uncertainty & Qualitative discussion & \excellent{Quantified:} $\sigma_{\text{stat}}$, $\sigma_{\text{sys}}$, $\delta_{\text{domain}}$ \\
+\hline
+Domain Error & Mentioned as ``5-7\%'' & \excellent{Derived from 2I/Borisov MAD decomposition} \\
+\hline
+\end{longtable}
+\end{center}
+
+% ============ 修改要求 ============
+\section{Required Revisions}
+
+\subsection{Minor Revision (Must Fix)}
+
+\begin{center}
+\fbox{\parbox{0.95\textwidth}{
+\textbf{Issue: Zenodo DOI Placeholder}
+
+\vspace{0.3cm}
+
+\textbf{Location:} Acknowledgments and Data Availability sections
+
+\textbf{Current:} \texttt{https://zenodo.org/record/[DOI]}
+
+\textbf{Required:} Replace with actual DOI before publication, e.g., \texttt{https://zenodo.org/record/1234567}
+
+\vspace{0.3cm}
+
+\textbf{Note:} This can be done at the proof stage if repository is not yet archived. Include note to production editor.
+}}
+\end{center}
+
+\subsection{Optional Polish (Recommended)}
+
+\begin{enumerate}
+\item \textbf{Training Cost Disclosure:} Consider adding total GPU-hours for full training (e.g., ``48 V100-hours'') to aid reproducibility assessment
+\item \textbf{DOI Placeholder Note:} Add parenthetical note: ``(DOI to be assigned upon acceptance)''
+\end{enumerate}
+
+% ============ 最终建议 ============
+\section{Final Recommendation}
+
+\begin{center}
+\fbox{\parbox{0.95\textwidth}{
+\centering
+\Large\textbf{ACCEPT with Minor Revisions}
+
+\vspace{0.5cm}
+
+\normalsize
+Version 32 is a \excellent{polished, honest, and scientifically rigorous} benchmarking study. The manuscript:
+
+\begin{itemize}
+\item[$\checkmark$] Explicitly defines its scope and limitations
+\item[$\checkmark$] Documents failure boundaries as carefully as successes
+\item[$\checkmark$] Provides complete reproducibility information (seeds, code, environment)
+\item[$\checkmark$] Quantifies uncertainties through proper error decomposition
+\item[$\checkmark$] Offers practical guidance for observers
+\end{itemize}
+
+\vspace{0.3cm}
+
+The only required change is replacing the Zenodo DOI placeholder with an actual DOI (or adding a note that it will be assigned post-acceptance).
+
+\vspace{0.3cm}
+
+\textbf{Expected Final Score After Revision: 8.0--8.2/10}
+}}
+\end{center}
+
+\vspace{1cm}
+
+\noindent\textbf{Reviewer Signature:} APJ Stringent Standards Review Panel
+
+\noindent\textbf{Date:} 2026 May 17
+
+\end{document}

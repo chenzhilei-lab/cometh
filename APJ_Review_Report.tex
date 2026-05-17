@@ -1,0 +1,489 @@
+\documentclass[12pt,a4paper]{article}
+
+% 中文支持
+\usepackage{ctex}
+\usepackage{fontspec}
+
+% 页面设置
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% 数学与符号
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+
+% 表格
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+
+% 列表
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+% 颜色定义
+\definecolor{CriticalRed}{RGB}{200,50,50}
+\definecolor{WarningOrange}{RGB}{230,140,30}
+\definecolor{GoodGreen}{RGB}{50,150,50}
+\definecolor{HeaderBlue}{RGB}{40,80,120}
+\definecolor{LightGray}{RGB}{245,245,245}
+
+% 页眉页脚
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{HeaderBlue}{APJ Peer Review Report}}
+\fancyhead[R]{\small\textcolor{HeaderBlue}{Confidential}}
+\fancyfoot[C]{\small Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% 章节标题样式
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{HeaderBlue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{HeaderBlue!80}}{\thesubsection}{1em}{}
+
+% 自定义命令
+\newcommand{\critical}[1]{\textcolor{CriticalRed}{\textbf{#1}}}
+\newcommand{\warning}[1]{\textcolor{WarningOrange}{\textbf{#1}}}
+\newcommand{\good}[1]{\textcolor{GoodGreen}{\textbf{#1}}}
+\newcommand{\rating}[2]{\textcolor{#1}{\textbf{#2}}}
+
+\begin{document}
+
+% ============ 标题页 ============
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+
+{\Huge\bfseries\textcolor{HeaderBlue}{APJ Peer Review Report}}
+
+\vspace{1cm}
+
+{\Large\textit{Astrophysical Journal Referee Evaluation}}
+
+\vspace{2cm}
+
+\rule{\textwidth}{1pt}
+
+\vspace{0.5cm}
+
+{\Large\textbf{Manuscript Title:}}
+
+\vspace{0.3cm}
+
+{\large Multi-Modal Deep Learning Characterization of the Interstellar Comet 3I/ATLAS:
+Faint Feature Detection, Physical Parameter Inversion, and Generalized Cross-Domain Intelligent Framework}
+
+\vspace{0.5cm}
+
+\rule{\textwidth}{1pt}
+
+\vspace{2cm}
+
+\begin{tabular}{ll}
+\textbf{Manuscript ID:} & APJ-2026-XXXX \\[0.3cm]
+\textbf{Submission Date:} & 2026 May 15 \\[0.3cm]
+\textbf{Review Date:} & 2026 May 16 \\[0.3cm]
+\textbf{Referee:} & Anonymous APJ Reviewer \\[0.3cm]
+\textbf{Recommendation:} & \critical{Major Revision / Reject \& Resubmit}
+\end{tabular}
+
+\vspace{2cm}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\centering
+\textbf{Overall Score: 5.6/10} (Reject/ Major Revision threshold)
+
+\vspace{0.3cm}
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Sci. Import.} & \textbf{Innovation} & \textbf{Data Rel.} & \textbf{Rigor} & \textbf{Writing} & \textbf{Overall} \\
+\hline
+7/10 & 5/10 & 4/10 & 5/10 & 7/10 & \textbf{5.6/10} \\
+\hline
+\end{tabular}
+}}
+\end{center}
+
+\vfill
+
+{\small\textit{This review report is confidential and intended for editorial use only.}}
+
+\end{titlepage}
+
+% ============ 目录 ============
+\tableofcontents
+\newpage
+
+% ============ 总体评价 ============
+\section{Overall Assessment}
+
+\subsection{Summary}
+
+This manuscript presents a multi-modal deep learning framework for characterizing interstellar comets, with 3I/ATLAS as the primary test case. The work integrates three technical components:
+
+\begin{enumerate}
+    \item Multi-scale CNNs with attention mechanisms for faint feature detection
+    \item Physics-informed neural networks (PINNs) for physical parameter inversion
+    \item Meta-learning with adversarial domain adaptation for cross-domain transfer
+\end{enumerate}
+
+\subsection{Scientific Context}
+
+The study of interstellar comets represents one of the most exciting frontiers in contemporary astrophysics. Following 1I/'Oumuamua (2017) and 2I/Borisov (2019), 3I/ATLAS (2025) provides a third opportunity to sample material from extrasolar planetary systems. \warning{However, several critical issues undermine the credibility of this work.}
+
+\subsection{Key Findings Claimed}
+
+\begin{itemize}
+    \item SNR improvement factor of $2.8\times$ over traditional methods
+    \item Dust production rate estimates with $<8\%$ error
+    \item Gas production rates with $<12\%$ uncertainty
+    \item Cross-domain validation on 2I/Borisov with $12\%$ agreement
+\end{itemize}
+
+\subsection{Overall Impression}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+The paper proposes a \textit{technically reasonable} framework but suffers from \critical{fatal flaws in data authenticity, validation rigor, and statistical analysis}. The work may have value if extensively revised, but in its current form, \textbf{I cannot recommend acceptance}.
+}}
+\end{center}
+
+% ============ 数据真伪审查 ============
+\section{Data Authenticity and Reliability Review}
+
+\subsection{Observational Data Concerns}
+
+\begin{table}[h]
+\centering
+\caption{Data Authenticity Assessment}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Data Item} & \textbf{Claim} & \textbf{Review Finding} \\
+\midrule
+Discovery timeline & 2025 Jan--Jul observations & \critical{Suspicious} \\
+FORS2 epochs & 42 epochs & \warning{Unverifiable} \\
+LCOGT epochs & 127 epochs & \warning{Unverifiable} \\
+X-Shooter spectra & 12 epochs & \warning{Low SNR concern} \\
+Program ID & 110.23ZJ.001 & \good{Provided} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Critical Timeline Issues}
+
+\critical{MAJOR CONCERN:} The manuscript claims observations from 2025 January to July, but the paper is dated May 2026. This creates several problems:
+
+\begin{enumerate}
+    \item Data processing, analysis, writing, and submission within $\sim$10 months is \warning{unusually rapid}
+    \item The claimed citations to \textit{Opitom et al. (2026)} and \textit{Pratik (2026)} are from the "future"
+    \item No preprint server versions of these cited works are mentioned
+\end{enumerate}
+
+\subsubsection{Spectroscopic Claims}
+
+The paper claims detection of CO and H$_2$O NIR emission at SNR of 4.2 and 5.8 respectively. \warning{These are at the detection limit, and claiming production rates with $<12\%$ uncertainty from such low-SNR data is statistically questionable.}
+
+\subsection{Training Data Issues}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\textbf{CRITICAL ISSUE: Synthetic Training Data}
+
+The PINN is trained on synthetic data from DIRTY radiative transfer code. \critical{This introduces fundamental risks:}
+
+\begin{itemize}
+    \item Synthetic data may not capture real cometary physics
+    \item DIRTY assumes spherical grains; real dust is likely irregular/fluffy
+    \item No validation on how well synthetic data matches real observations
+\end{itemize}
+}}
+\end{center}
+
+\subsection{Data Availability}
+
+\critical{FATAL FLAW:} The manuscript fails to provide:
+\begin{itemize}
+    \item ESO archive links for data access
+    \item GitHub repository for code
+    \item Detailed data reduction logs
+    \item Intermediate data products for verification
+\end{itemize}
+
+% ============ 方法论审查 ============
+\section{Methodology Review}
+
+\subsection{Technical Appropriateness}
+
+\subsubsection{Reasonable Components}
+
+\good{Strengths:}
+\begin{itemize}
+    \item Multi-scale CNN architecture is appropriate for faint feature detection
+    \item SE attention modules are state-of-the-art
+    \item Loss function design (MSE + SSIM + Edge + Flux) is reasonable
+\end{itemize}
+
+\subsubsection{Questionable Components}
+
+\warning{Concerns:}
+\begin{itemize}
+    \item \textbf{PINN Application:} The paper uses PINNs for \textit{parameter inversion}, but PINNs are traditionally for forward PDE solving. The PDE residual formulation is vague.
+
+    \item \textbf{Few-shot Learning:} Claiming adaptation with "only 10 examples" for interstellar comets is optimistic given the complexity of these objects.
+
+    \item \textbf{Domain Adaptation:} MMD reduction (0.47 $\rightarrow$ 0.12) does not guarantee better physical parameter estimates.
+\end{itemize}
+
+\subsection{Evaluation Methodology}
+
+\begin{table}[h]
+\centering
+\caption{Evaluation Rigor Assessment}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Aspect} & \textbf{Claimed} & \textbf{Missing} \\
+\midrule
+PSNR improvement & 3.2--4.8 dB & Statistical significance test \\
+Ablation study & Table 4 & p-values, confidence intervals \\
+Uncertainty quant. & 71\%/94\% coverage & Comparison with ground truth \\
+Cross-validation & Mentioned & Details on folds/stratification \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Statistical Rigor}
+
+\critical{MISSING ANALYSES:}
+
+\begin{enumerate}
+    \item No hypothesis testing for performance differences
+    \item No error bars on key results (e.g., dust production evolution)
+    \item No sensitivity analysis to hyperparameter choices
+    \item No discussion of multiple comparison corrections
+\end{enumerate}
+
+% ============ 逻辑与论证审查 ============
+\section{Logic and Argumentation Review}
+
+\subsection{Logical Chain Analysis}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\textbf{Claimed Logic Chain:}
+
+Synthetic Training $\rightarrow$ Domain Adaptation $\rightarrow$ 3I/ATLAS Analysis $\rightarrow$ Physical Parameters $\rightarrow$ Comparison with 2I/Borisov
+}}
+\end{center}
+
+\subsubsection{Circular Reasoning Risk}
+
+\warning{ISSUE:} The domain adaptation effectiveness is validated by:
+\begin{itemize}
+    \item MMD reduction in feature space
+    \item Domain classifier accuracy drop (89\% $\rightarrow$ 52\%)
+\end{itemize}
+
+\critical{However, these metrics do not directly correlate with physical parameter accuracy!}
+
+\subsection{Correlations vs. Causation}
+
+\warning{EXAMPLE OF PROBLEMATIC CLAIMING:}
+
+\begin{quote}
+``The SNR improvement factor of 2.8 translates to a limiting surface brightness approximately 1.1 magnitudes fainter than traditional methods, enabling detection of coma structures at equivalent scattering masses $\sim$2.8 times smaller.''
+\end{quote}
+
+This assumes a \textbf{linear proportionality} that has not been validated.
+
+\subsection{Over-extrapolation}
+
+\critical{UNSUBSTANTIATED CLAIMS:}
+
+\begin{enumerate}
+    \item ``Standardized analysis of future interstellar objects'' -- based on only 2 test cases
+    \item ``Foundation for automated characterization pipelines'' -- no deployment evidence
+    \item ``LSST: 1--10 interstellar comets per year'' -- based on uncertain population models
+\end{enumerate}
+
+% ============ 技术问题 ============
+\section{Technical Issues}
+
+\subsection{Mathematical/Physical Concerns}
+
+\begin{table}[h]
+\centering
+\caption{Technical Issues Identified}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Location} & \textbf{Issue} & \textbf{Severity} \\
+\midrule
+Eq. (6) & $\phi(r) = r^2 \log r$ undefined at $r=0$ & \warning{Medium} \\
+Eq. (10) & Mie integral: $n(a)$ not specified & \warning{Medium} \\
+Section 3.2.2 & $r_h^{-n}$ scaling without specifying $n$ & \warning{Low} \\
+Section 4.2.3 & ``Table ??'' -- missing table reference & \warning{Low} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Experimental Design}
+
+\subsubsection{Ablation Study Issues}
+
+The ablation study (Table 4) reports:
+\begin{itemize}
+    \item Remove SE blocks: PSNR drop 1.3 dB
+    \item Single-kernel (3$\times$3): PSNR drop 0.9 dB
+\end{itemize}
+
+\warning{Missing:} Are these differences statistically significant? What is the p-value?
+
+\subsubsection{Uncertainty Quantification}
+
+\good{Positive:} The Bayesian PINN vs MC Dropout comparison is thorough.
+
+\warning{Concern:} The claim that Bayesian PINN is ``superior'' based on 6\% coverage difference may not be statistically significant.
+
+% ============ 文献审查 ============
+\section{Literature and Citation Review}
+
+\subsection{Problematic Citations}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\textbf{CRITICAL: Future-Dated Citations}
+
+The following citations are dated in the future (current date: 2026 May):
+
+\begin{itemize}
+    \item \textit{Opitom et al. (2026)} -- cited for 3I/ATLAS isotope measurements
+    \item \textit{Pratik (2026)} -- cited for 3I/ATLAS dust activity
+    \item \textit{He et al. (2026)} -- cited for ATD-DL framework
+\end{itemize}
+
+\critical{These citations must be verified or removed.}
+}}
+\end{center}
+
+\subsection{Missing Key References}
+
+\warning{Should be cited:}
+\begin{itemize}
+    \item Jones et al. (2018) for LSST predictions (referenced but not in bib)
+    \item Daumé III (2009) for domain adaptation theory
+    \item Recent PINN applications in astronomy (post-2023)
+\end{itemize}
+
+\subsection{Self-Citation Concern}
+
+\textit{He et al. (2026)} appears to be a self-citation to an unpublished work. This requires disclosure.
+
+% ============ 评分与建议 ============
+\section{Recommendation}
+
+\subsection{Detailed Scoring}
+
+\begin{table}[h]
+\centering
+\caption{Dimension-wise Scoring (1-10 scale)}
+\begin{tabular}{@{}lcp{8cm}@{}}
+\toprule
+\textbf{Dimension} & \textbf{Score} & \textbf{Rationale} \\
+\midrule
+Scientific Importance & 7 & Interstellar comets are important; timing is good \\
+Method Innovation & 5 & Combination of existing techniques; no breakthrough \\
+Data Reliability & 4 & Timeline issues, unverifiable claims \\
+Rigor/Statistics & 5 & Missing significance tests, over-extrapolation \\
+Writing Quality & 7 & Well-structured, English is good \\
+Reproducibility & 3 & No code/data availability \\
+\midrule
+\textbf{Overall} & \textbf{5.6} & Below APJ acceptance threshold \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Recommendation}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\centering
+{\Large\textbf{RECOMMENDATION: Major Revision}}
+
+\vspace{0.5cm}
+
+or \textbf{Reject \& Resubmit}
+
+\vspace{0.5cm}
+
+\textit{The paper has potential value but requires fundamental revisions to data verification, statistical rigor, and citation integrity before it can be considered for publication.}
+}}
+\end{center}
+
+% ============ 修改建议 ============
+\section{Detailed Revision Requirements}
+
+\subsection{Critical Issues (Must Fix)}
+
+\begin{enumerate}[label=\textbf{C\arabic*:}]
+    \item \critical{Verify data timeline:} Clarify the discovery date of 3I/ATLAS and observation timeline. Provide evidence that observations were actually conducted.
+
+    \item \critical{Fix future citations:} Remove or replace citations to works dated 2026 unless they are actually published preprints with DOIs.
+
+    \item \critical{Provide data access:} Include ESO archive links, GitHub repository, or supplementary data files.
+
+    \item \critical{Add statistical tests:} Include p-values or confidence intervals for all performance comparisons.
+\end{enumerate}
+
+\subsection{Important Issues (Should Fix)}
+
+\begin{enumerate}[label=\textbf{I\arabic*:}]
+    \item \warning{Validate synthetic training:} Compare DIRTY synthetic data with real observations to demonstrate fidelity.
+
+    \item \warning{Extend validation:} Test on more than 2 interstellar comets, or explicitly state the limitation.
+
+    \item \warning{Add sensitivity analysis:} Show how results vary with hyperparameter choices.
+
+    \item \warning{Tone down claims:} Remove ``standardized analysis'' and similar over-extrapolated claims.
+\end{enumerate}
+
+\subsection{Optional Improvements}
+
+\begin{enumerate}[label=\textbf{O\arabic*:}]
+    \item Open-source the code for reproducibility
+    \item Add visualization of attention mechanisms (SE block activations)
+    \item Include comparison with other recent ML methods for comet analysis
+    \item Provide supplementary materials with detailed data tables
+\end{enumerate}
+
+% ============ 结语 ============
+\section{Final Remarks}
+
+This manuscript addresses an important and timely topic in astrophysics. The technical approach is reasonable, and the writing quality is acceptable. However, \critical{fundamental issues with data authenticity, statistical rigor, and citation integrity} prevent me from recommending acceptance in its current form.
+
+If the authors can:
+\begin{enumerate}
+    \item Provide verifiable evidence for their observational data
+    \item Fix the problematic citations
+    \item Add proper statistical validation
+    \item Tone down over-extrapolated claims
+\end{enumerate}
+
+\good{then this work could become a valuable contribution to the field.}
+
+\vspace{1cm}
+
+\noindent\rule{\textwidth}{0.5pt}
+
+\vspace{0.5cm}
+
+{\small\textit{Report prepared by: Anonymous APJ Referee}}
+
+{\small\textit{Date: 2026 May 16}}
+
+{\small\textit{Manuscript: APJ-2026-XXXX}}
+
+\end{document}

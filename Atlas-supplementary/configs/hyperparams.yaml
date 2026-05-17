@@ -1,0 +1,71 @@
+# COMETH Hyperparameters
+# Corresponds to Table 1 in the paper.
+# All values determined by grid search (discrete) or Bayesian optimization (continuous).
+
+detection_cnn:
+  learning_rate: 2.1e-4
+  batch_size: 32
+  se_reduction_ratio: 16
+  lambda_ssim: 0.5
+  lambda_edge: 0.3
+  lambda_flux: 0.1
+  gamma_attn: 0.2       # Attention consistency loss weight
+  lambda_neg: 0.5        # Negative pixel penalty in attn loss
+  optimizer: adam
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  lr_schedule: cosine_annealing
+  early_stopping_patience: 50
+  max_epochs: 400
+
+pinn_inversion:
+  learning_rate: 5.6e-5
+  batch_size: 8
+  dropout_rate: 0.12      # Bayesian PINN MC dropout
+  gamma_pde: 1.0          # PDE residual weight
+  gamma_bc: 0.5           # Boundary condition weight
+  gamma_cons: 0.3         # Hard constraint weight (soft mode)
+  optimizer: adam
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  lr_schedule: cosine_annealing
+  early_stopping_patience: 50
+  max_epochs: 400
+  physics_network:
+    fourier_features: 128
+    hidden_layers: [256, 256, 256, 256, 256, 256]  # 6 hidden blocks
+    activation: swish
+    output_activation: softplus
+  inversion_network:
+    conv_channels: [64, 128, 256, 512]
+    fc_hidden: 256
+    residual_blocks: 4
+    cross_attention_heads: 4
+
+maml_domain_adapt:
+  outer_lr: 1.0e-3
+  inner_lr: 0.01
+  n_tasks: 10000
+  k_support: 10
+  q_query: 50
+  optimizer: adam
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+
+ood_detector:
+  gmm_components: 10       # Selected by BIC
+  latent_dim: 256          # From PINN encoder penultimate layer
+  pca_variance: 0.95       # PCA whitening retention
+  threshold_percentile: 5  # 5th percentile → 5% FPR
+  ci_inflation_factor: 3   # 3× CI expansion on OOD flag
+
+observation_optimizer:
+  n_synthetic_comets: 1000
+  budget_grid:
+    bands: ["R-only", "BVR", "BVRI"]
+    spectroscopy: [true, false]
+    epochs: [3, 5, 7, 10]
+    cadence: ["uniform", "perihelion-weighted"]
+
+# Random seeds for reproducibility
+random_seeds: [42, 123, 456, 789, 1024]

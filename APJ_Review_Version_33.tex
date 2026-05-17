@@ -1,0 +1,432 @@
+\documentclass[12pt,a4paper]{article}
+
+% Chinese support
+\usepackage{ctex}
+\usepackage{fontspec}
+
+% Page setup
+\usepackage[margin=2.5cm]{geometry}
+\setlength{\headheight}{14pt}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% Math and symbols
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{colortbl}
+
+% Lists
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+% Color definitions
+\definecolor{CriticalRed}{RGB}{180,30,30}
+\definecolor{FatalRed}{RGB}{139,0,0}
+\definecolor{WarningOrange}{RGB}{210,100,20}
+\definecolor{GoodGreen}{RGB}{30,130,30}
+\definecolor{ExcellentGreen}{RGB}{20,100,20}
+\definecolor{HeaderBlue}{RGB}{30,60,100}
+\definecolor{LightGray}{RGB}{245,245,245}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{HeaderBlue}{APJ Stringent Peer Review}}
+\fancyhead[R]{\small\textcolor{HeaderBlue}{Version 33 Assessment}}
+\fancyfoot[C]{\small Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Section styles
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{HeaderBlue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{HeaderBlue!80}}{\thesubsection}{1em}{}
+
+% Custom commands
+\newcommand{\critical}[1]{\textcolor{CriticalRed}{\textbf{#1}}}
+\newcommand{\fatal}[1]{\textcolor{FatalRed}{\textbf{#1}}}
+\newcommand{\warning}[1]{\textcolor{WarningOrange}{\textbf{#1}}}
+\newcommand{\good}[1]{\textcolor{GoodGreen}{\textbf{#1}}}
+\newcommand{\excellent}[1]{\textcolor{ExcellentGreen}{\textbf{#1}}}
+
+\begin{document}
+
+% ============ Title Page ============
+\begin{titlepage}
+\centering
+\vspace*{1.5cm}
+
+{\Huge\bfseries\textcolor{HeaderBlue}{Critical Multi-Angle Review Report}}
+
+\vspace{0.5cm}
+
+{\Large\textit{Version 33 - Major Expansion Assessment}}
+
+\vspace{1.5cm}
+
+\rule{\textwidth}{1.5pt}
+
+\vspace{0.5cm}
+
+{\Large\textbf{Manuscript Title:}}
+
+\vspace{0.3cm}
+
+{\normalsize A Benchmarking Study of Deep Learning Methods for Faint Comet Characterization: Where Traditional Methods Fail and Physics-Informed Neural Networks Excel}
+
+\vspace{0.3cm}
+
+\rule{\textwidth}{1.5pt}
+
+\vspace{1.5cm}
+
+\begin{tabular}{ll}
+\textbf{Manuscript ID:} & APJ-2026-XXXX \\[0.2cm]
+\textbf{Review Date:} & 2026 May 17 \\[0.2cm]
+\textbf{Review Type:} & \warning{MAJOR EXPANSION REVIEW} \\[0.2cm]
+\textbf{Recommendation:} & \good{ACCEPT with Minor Revisions}
+\end{tabular}
+
+\vspace{1.5cm}
+
+\begin{center}
+\fbox{\parbox{0.95\textwidth}{
+\centering
+\textbf{Overall Score: 7.6/10} (\good{Acceptance Threshold Exceeded})
+
+\vspace{0.3cm}
+
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Dimension} & \textbf{V32 Score} & \textbf{V33 Score} & \textbf{Change} \\
+\hline
+Moral Integrity & 9.5/10 & 9.5/10 & $\rightarrow$ \\
+Logical Consistency & 7.5/10 & 7.3/10 & $\downarrow$ (new claims) \\
+Practical Utility & 7.5/10 & 8.0/10 & $\uparrow$ (OOD + Optimizer) \\
+Data Authenticity & 8.5/10 & 7.5/10 & $\downarrow$ (Human test caveats) \\
+\hline
+\textbf{Composite} & \textbf{7.8/10} & \textbf{7.6/10} & \warning{Slight Drop} \\
+\hline
+\end{tabular}
+}}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\centering
+\textbf{Key Verdict}
+
+\vspace{0.3cm}
+
+Version 33 is a \warning{major expansion} adding 5 new components (OOD detector, Observing Strategy Optimizer, Human vs Machine test, Hale-Bopp proxy validation, Disaster Preview). While innovative, \critical{new claims require additional statistical caveats}. The manuscript remains honest about scope but new human subject research claims need careful scrutiny.
+}}
+\end{center}
+
+\end{titlepage}
+
+% ============ Table of Contents ============
+\tableofcontents
+\newpage
+
+% ============ Version Trajectory ============
+\section{Version Trajectory: Iterative Refinement with Expansion}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|l|}
+\hline
+\textbf{Version} & \textbf{Score} & \textbf{Recommendation} & \textbf{Trend} & \textbf{Key Characteristics} \\
+\hline
+V1 (ddd006a) & 4.8/10 & Reject & -- & Future citations, claimed real observations \\
+V2 (f531082) & 5.8/10 & Major Revision & $\uparrow$ & Added ``Simulation-Based'' to title \\
+V3 (16f6d3f) & 6.5/10 & Accept & $\uparrow$ & Removed future citations \\
+V4 (1420fe3) & 5.0/10 & Major Revision & $\downarrow$ & \fatal{REGRESSION: Reverted to observation claims} \\
+V31 (dff9aa5) & 7.5/10 & Accept/Very Minor & $\uparrow\uparrow$ & ``Benchmarking Study'', transparency \\
+V32 (1c85a8b) & 7.8/10 & Accept/Minor & $\uparrow$ & Actual GitHub link, GPU specs \\
+\rowcolor{LightGray}
+V33 (42dd26d) & \textbf{7.6/10} & \textbf{Accept/Minor} & $\downarrow$ & \warning{Major expansion, new claims} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\noindent\fbox{\parbox{\textwidth}{
+\textbf{Version 33 Assessment:} Score decreased slightly from 7.8 to 7.6 \textit{not} due to integrity issues, but because \warning{new claims (human test, OOD detector) require additional statistical scrutiny that is not fully addressed}. The paper remains scientifically honest.
+}}
+
+% ============ Executive Summary ============
+\section{Executive Summary: Major New Components}
+
+\subsection{Five New Innovations Added}
+
+\begin{center}
+\begin{tabular}{|l|p{8cm}|c|}
+\hline
+\textbf{Component} & \textbf{Description} & \textbf{Risk Level} \\
+\hline
+1. OOD Detector (\S3.6) & GMM-based detector in PINN latent space; 94\% detection rate for Stress Test 5 & \warning{Medium} \\
+\hline
+2. Observing Strategy Optimizer (\S3.7) & Adversarial optimization for telescope time allocation; 1000 synthetic comets & \good{Low} \\
+\hline
+3. Human vs Machine (\S4.3) & Blind test: 5 experts vs framework; 31\% vs 78\% TPR at SNR$<$2 & \critical{High} \\
+\hline
+4. Hale-Bopp Proxy (\S4.4) & Extreme solar system comet as bridge to interstellar domain & \warning{Medium} \\
+\hline
+5. Disaster Preview (\S4.2.6) & Demonstrates 3 erroneous conclusion categories from traditional methods & \good{Low} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Critical Changes from V32}
+
+\begin{itemize}
+\item \textbf{GitHub URL Changed:} \texttt{github.com/chenzhilei-lab/Atlas} (was \texttt{comet-dl/faint-comet-benchmark})
+\item \textbf{Zenodo Note:} ``DOI to be registered upon acceptance'' (appropriately handled)
+\item \textbf{Abstract:} Now mentions 7 contributions (was 5)
+\item \textbf{Paper Length:} Significantly expanded with \S3.6, \S3.7, \S4.3, \S4.4
+\end{itemize}
+
+% ============ Four-Dimension Review ============
+\section{Four-Dimension Critical Review}
+
+\subsection{Dimension 1: Moral Integrity (9.5/10)}
+
+\textbf{Assessment:} \excellent{EXEMPLARY}
+
+The manuscript maintains exemplary scientific integrity:
+
+\begin{itemize}
+\item \excellent{``Not a Measurement Paper'' Statement:} Prominently displayed at \S1.4: ``We emphasize what this paper is not: it is not a measurement paper. All performance metrics are evaluated against known synthetic ground truth... No physical parameters of any real comet are measured or claimed.''
+\item \good{3I/ATLAS Honesty:} Acknowledges ``3I/ATLAS lacks published multimodal observations''
+\item \good{2I/Borisov Caveats:} N=1 consistency check explicitly labeled ``feasibility demonstration, not statistical validation''
+\item \good{Hale-Bopp Context:} Properly labeled as ``proxy'' not ground truth; ``Hale-Bopp is not an interstellar comet''
+\item \good{OOD Limitations:} \S3.6.3 acknowledges OOD detector ``cannot detect systematic errors that affect the entire synthetic data distribution''
+\end{itemize}
+
+\subsection{Dimension 2: Logical Consistency (7.3/10)}
+
+\textbf{Assessment:} \good{GOOD with Concerns}
+
+\textbf{Strengths:}
+\begin{itemize}
+\item OOD detector logic is sound (GMM in latent space)
+\item Observing strategy optimization formulation is well-defined
+\item Disaster Preview conclusions follow logically from method assumptions
+\item Hale-Bopp validation appropriately scoped
+\end{itemize}
+
+\textbf{Concerns:}
+\begin{itemize}
+\item \warning{Human Test Statistical Power:} 5 participants $\times$ 50 images = 250 decisions. At SNR$<$2, only subset of images. Is this sufficient for 31\% vs 78\% claim?
+\item \warning{Inter-Rater Reliability:} Fleiss' $\kappa$ = 0.41 (``moderate'') at SNR$<$2 suggests high variability between experts. Is comparison fair?
+\item \warning{OOD 94\% Claim:} Tested on Stress Test 5, but how many samples? What is confidence interval?
+\end{itemize}
+
+\subsection{Dimension 3: Practical Utility (8.0/10)}
+
+\textbf{Assessment:} \excellent{EXCELLENT}
+
+The new components significantly enhance practical value:
+
+\begin{enumerate}
+\item \textbf{OOD Detector:} Prevents silent failures - critical for real observations
+\item \textbf{Observing Strategy Optimizer:} Directly actionable for ToO programs
+\item \textbf{If-Then Guide (Updated):} Now includes OOD flag guidance
+\item \textbf{Jupyter Notebook:} For observing strategy optimization (mentioned in abstract)
+\end{enumerate}
+
+\subsection{Dimension 4: Data Authenticity (7.5/10)}
+
+\textbf{Assessment:} \good{GOOD with Gaps}
+
+\textbf{Verification:}
+\begin{itemize}
+\item[$\checkmark$] All synthetic data parameters disclosed
+\item[$\checkmark$] Random seeds: [42, 123, 456, 789, 1024]
+\item[$\checkmark$] Docker environment specified
+\item[$\checkmark$] Zenodo note appropriately handles DOI
+\item[$\circ$] \warning{GitHub URL is new/untested:} \texttt{chenzhilei-lab/Atlas} changed from V32's \texttt{comet-dl/faint-comet-benchmark}
+\item[$\times$] \critical{Human test details incomplete:} Expert selection criteria, institutional review, compensation not specified
+\end{itemize}
+
+% ============ New Components Analysis ============
+\section{Detailed Analysis: New Components}
+
+\subsection{Component 1: OOD Detector (\S3.6)}
+
+\textbf{Method:} GMM with K=10 components (selected by BIC) in PINN latent space
+
+\textbf{Claims:}
+\begin{itemize}
+\item 94\% OOD detection for Stress Test 5
+\item 5\% false positive rate (threshold at 5th percentile)
+\item Correctly classifies Stress Tests 1-4 as in-distribution
+\end{itemize}
+
+\textbf{Assessment:} \good{Sound methodology} but \warning{missing details}:
+\begin{itemize}
+\item How many test samples for Stress Test 5?
+\item What is confidence interval on 94\%?
+\item Comparison with other OOD methods (e.g., Mahalanobis distance)?
+\end{itemize}
+
+\subsection{Component 2: Observing Strategy Optimizer (\S3.7)}
+
+\textbf{Method:} Forward simulation over 1000 synthetic comets, grid search over configuration space
+
+\textbf{Assessment:} \excellent{Well-designed} and practical
+
+\subsection{Component 3: Human vs Machine (\S4.3) - HIGH RISK}
+
+\textbf{Claims:}
+\begin{itemize}
+\item Human TPR: 31\% at SNR$<$2
+\item Framework TPR: 78\% at SNR=1
+\item Human false positive: 28\% on controls
+\end{itemize}
+
+\textbf{Protocol:}
+\begin{itemize}
+\item 5 participants (3 grad students, 2 postdocs)
+\item All with ``prior experience in cometary photometry''
+\item 50-image test set (25 with features, 25 controls)
+\item Unlimited time, SAOImage DS9 tools
+\end{itemize}
+
+\textbf{\critical{Major Concerns:}}
+\begin{enumerate}
+\item \critical{Sample Size:} Only 5 participants for ``human experts'' claim
+\item \critical{Selection Bias:} What is sampling frame? Convenience sample?
+\item \critical{Missing Ethics Info:} IRB approval? Informed consent? Compensation?
+\item \warning{Learning Effect:} Single session or multiple? Fatigue effects?
+\item \warning{DS9 Familiarity:} Are all participants equally proficient with DS9?
+\end{enumerate}
+
+\textbf{Recommended Addition:}
+\begin{quote}
+``This study was approved by [Institution] IRB (Protocol \#XXXX). Participants provided written informed consent and were compensated at \$XX/hour. Results represent this specific sample; generalizability to all cometary scientists is unknown.''
+\end{quote}
+
+\subsection{Component 4: Hale-Bopp Proxy (\S4.4)}
+
+\textbf{Assessment:} \good{Appropriately Contextualized}
+
+\begin{itemize}
+\item Explicitly labeled as ``proxy'' not validation
+\item Acknowledges Hale-Bopp ``formed in the solar nebula''
+\item CO/H$_2$O = 0.18$\pm$0.05 vs literature 0.10-0.25
+\item OOD detector classifies as in-distribution (good consistency check)
+\end{itemize}
+
+\subsection{Component 5: Disaster Preview (\S4.2.6)}
+
+\textbf{Assessment:} \good{Effective Communication}
+
+Three erroneous conclusion categories:
+\begin{enumerate}
+\item False CO depletion (CO/H$_2$O underestimated by 5$\times$)
+\item Phantom C$_2$/CN anomaly (falsely implies different formation temperature)
+\item False Af$\rho$ anomaly (reports variable activity when true Q$_d$ is constant)
+\end{enumerate}
+
+This is a \good{pedagogically valuable} section demonstrating real consequences of method misuse.
+
+% ============ Risk Assessment ============
+\section{Risk Assessment: New Claims}
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Claim} & \textbf{Evidence} & \textbf{Risk} & \textbf{Mitigation} \\
+\hline
+OOD 94\% detection & Stress Test 5 results & Medium & Add sample size, CI \\
+Human 31\% TPR & 5 experts, blind test & \critical{High} & Add IRB, selection criteria \\
+Hale-Bopp 15\% error & Archival comparison & Low & Well-contextualized \\
+Disaster Preview & Logical derivation & Low & Clearly hypothetical \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============ Required Revisions ============
+\section{Required Revisions}
+
+\subsection{Minor Revisions (Must Address)}
+
+\begin{enumerate}
+\item \textbf{Human Subject Research Details:}
+\begin{itemize}
+\item Add IRB approval statement or exempt status
+\item Describe participant selection criteria and sampling method
+\item Report compensation (if any)
+\item Add limitation: ``Results from 5 participants; generalizability limited''
+\end{itemize}
+
+\item \textbf{OOD Detector Statistics:}
+\begin{itemize}
+\item Report sample size for Stress Test 5 evaluation
+\item Add confidence interval for 94\% detection rate
+\item Consider comparison with baseline OOD methods
+\end{itemize}
+
+\item \textbf{GitHub Repository:}
+\begin{itemize}
+\item Verify \texttt{chenzhilei-lab/Atlas} exists and contains claimed materials
+\item Add note if repository is private during review
+\end{itemize}
+\end{enumerate}
+
+\subsection{Optional Improvements}
+
+\begin{itemize}
+\item Add discussion of human test inter-rater reliability implications
+\item Consider power analysis for human test sample size
+\item Add visual diagram of OOD detector integration with PINN
+\end{itemize}
+
+% ============ Final Recommendation ============
+\section{Final Recommendation}
+
+\begin{center}
+\fbox{\parbox{0.95\textwidth}{
+\centering
+\Large\textbf{ACCEPT with Minor Revisions}
+
+\vspace{0.5cm}
+
+\normalsize
+Version 33 is a \good{substantial expansion} that adds significant practical value through the OOD detector and observing strategy optimizer. The manuscript maintains \excellent{scientific integrity} with clear scope delineation.
+
+\vspace{0.3cm}
+
+However, the \critical{human vs machine test requires additional methodological details} (IRB, participant selection, statistical limitations) to meet ethical and reproducibility standards for human subject research.
+
+\vspace{0.3cm}
+
+\textbf{Action Items:}
+\begin{enumerate}
+\item Add human subjects research ethics statement
+\item Expand OOD detector statistical validation
+\item Verify GitHub repository accessibility
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\textbf{Expected Final Score After Revision: 7.8--8.0/10}
+}}
+\end{center}
+
+\vspace{1cm}
+
+\noindent\textbf{Reviewer Signature:} APJ Stringent Standards Review Panel
+
+\noindent\textbf{Date:} 2026 May 17
+
+\end{document}

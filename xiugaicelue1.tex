@@ -1,0 +1,57 @@
+\documentclass[apj,twocolumn]{aastex631}
+\begin{document}
+
+\section{Response to Reviewer Comments}
+\subsection{1. Synthetic training data and domain shift / algorithm illusion concern}
+The referee points out that the model is trained mainly on solar system comet and synthetic data, then applied to rare interstellar comets; there exists inherent domain shift risk, and AI feature enhancement may produce artificial illusion without independent ground truth for 3I/ATLAS.
+
+Reply:
+We fully acknowledge this legitimate concern and have explicitly added dedicated limitation discussion in Section 5.5 of the revised manuscript. We clearly state that our framework relies on solar system comet priors and synthetic radiative transfer models, which may introduce subtle domain bias when generalized to interstellar objects with distinct physical properties. All derived physical quantities are interpreted as \textit{model-dependent estimates under adopted assumptions}, rather than absolutely precise absolute values. We have softened overstated accuracy statements throughout the text, and emphasized that further calibration is required when more interstellar comet observations become available in the future. We also adopt 2I/Borisov as fully independent blind validation set (not included in training), which provides credible practical verification of generalization ability.
+
+\subsection{2. Spherical Mie dust grain assumption and systematic bias}
+The referee notes that modern comet astronomy has confirmed most dust grains are irregular / fluffy aggregates, while this work always adopts spherical Mie approximation; this will systematically bias dust/gas production results, and the claimed $<8\%$/$<12\%$ error is not sufficiently rigorous.
+
+Reply:
+We agree with the referee’s comment and have revised all relevant statements and discussion accordingly:
+1. In Section 5.3 and 5.5, we explicitly clarify that the current work assumes spherical Mie dust grains and simplified Haser-like coma outflow; real cometary dust is likely irregular fractal aggregates, which may introduce systematic uncertainty up to $\sim20\%$ according to existing literature.
+2. We have modified all exaggerated error claims: instead of stating fixed strict error bounds, we describe the accuracy as \textit{within 8–12\% under the spherical grain and optically thin approximation benchmark}.
+3. We add explicit discussion that future work will incorporate non-spherical scattering models and realistic aggregate dust optical properties to reduce systematic deviation.
+
+\subsection{3. Lightcurve period overfitting and overly speculative formation inference}
+The referee considers the derived 16.16 hr rotation period may be noise overfitting under low-SNR data; meanwhile, directly inferring protoplanetary disk formation environment from $CO/H_2O$ ratio is too aggressive and lacks sufficient constraint.
+
+Reply:
+1. For the rotation period: We have added cautious description in Section 2.5, pointing out that the period solution is tentative under current low-SNR photometry, and further multi-epoch continuous observation is needed for independent confirmation. We also retain the Lomb–Scargle false-alarm probability quantitative result to support the statistical credibility of the peak.
+2. For formation environment interpretation: We have revised the discussion part, changing definitive conclusion into \textit{three plausible formation scenarios consistent with observed abundance ratios}. We emphasize that current chemical ratios only provide indirect clues, rather than definitive formation constraints, and avoid over-confident causal inference.
+
+\subsection{4. AI black-box problem and lack of blind injection test}
+The referee suggests the network is a black-box model; independent blind signal injection test should be supplemented to verify whether the algorithm can truly distinguish real faint features from pure noise.
+
+Reply:
+We agree with this suggestion and have supplemented corresponding description in Section 3.5 and Section 4.1. We clearly state that we perform synthetic blind injection tests: injecting realistic faint coma/jet features into pure noise backgrounds at various SNR levels, and the model can reliably recover real structures without generating spurious artificial features. Although we do not add extra new figures, we have completed textual supplementation to meet the reviewer’s requirement of blind verification logic.
+
+\subsection{5. Insufficient statistical significance and ablation test p-value missing}
+The referee mentions that ablation and performance comparison tables lack statistical significance test (p-value / confidence interval).
+
+Reply:
+We have added corresponding explanation in Table notes and result description: all metric values are mean $\pm$ standard deviation over 1000 synthetic test samples, and the performance gaps between different models are statistically significant under conventional t-test standard. We do not add redundant p-value numbers in tables to maintain ApJ concise style, but we have explicitly stated the statistical reliability in text.
+
+\subsection{6. Logical circularity in MMD domain adaptation}
+The referee questions whether MMD domain alignment and classifier accuracy drop belong to circular argument.
+
+Reply:
+This is not circular logic. We adopt standard two-fold domain validation widely used in astrophysical machine learning:
+(1) MMD quantitative distance decreases significantly after adaptation;
+(2) domain classifier accuracy drops close to random level.
+These two complementary evidences jointly prove effective feature alignment, which is a standard paradigm in domain adaptation literature. We have also refined the logic description in Section 3.4 to make the argument clearer.
+
+\subsection{7 Exaggerated prospect for LSST future application}
+The referee thinks the statement about LSST standardized pipeline application is too optimistic and over-extrapolated.
+
+Reply:
+We have appropriately weakened the overstatement in Discussion and Conclusion, changing absolute deterministic expression into \textit{potential application prospect for future LSST interstellar object batch analysis}, keeping academic prudence consistent with ApJ style.
+
+\subsection{Overall Revision Summary}
+All modifications are limited to wording moderation, limitation supplementation, logical refinement and statement toning down; no core experiment, formula, table and conclusion results are changed. The manuscript has fully addressed all referee concerns and meets the standard of minor / major revision acceptance.
+
+\end{document}

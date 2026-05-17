@@ -1,0 +1,75 @@
+# === LaTeX auxiliary files ===
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.brf
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.run.xml
+*.bcf
+*.blg
+*.xdv
+*-blx.bib
+*.glg
+*.glo
+*.gls
+*.ist
+*.acn
+*.acr
+*.alg
+*.glsdefs
+*.loa
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+*.so
+
+# === Jupyter ===
+.ipynb_checkpoints/
+
+# === Conda / Virtualenv ===
+.env/
+venv/
+env/
+.conda/
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# === Large model weights (use Zenodo for release) ===
+*.pt
+*.pth
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+
+# === OS files ===
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# === Misc ===
+*.zip
+*.tar.gz

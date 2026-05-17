@@ -1,0 +1,185 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2cm}
+\usepackage{enumitem}
+\usepackage{ctex}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\title{A-Level 物理U3十年考点全总结（2015--2025）}
+\author{物理备考整理}
+\date{}
+\begin{document}
+\maketitle
+\section{试卷基本信息}
+\begin{itemize}
+    \item 试卷代码：\textbf{WPH13/01}
+    \item 考试时长：1小时20分钟，总分40分
+    \item 题型结构：共2道大题，纯实验题型
+    \begin{enumerate}
+        \item 第一题：基础测量+不确定度分析+实验设计（20--22分）
+        \item 第二题：数据处理+图像作图+斜率截距求解+实验结论（18--20分）
+    \end{enumerate}
+    \item 知识来源：全部实验内容依托AS阶段\textbf{U1力学与材料}、\textbf{U2波动与电路}知识点
+\end{itemize}
+
+\section{一、常用测量仪器与精度}
+\subsection{1.长度测量仪器}
+\begin{table}[h!]
+\centering
+\begin{tabular}{ccc}
+\toprule
+仪器名称 & 分度精度 & 绝对不确定度 \\
+\midrule
+米尺 & \SI{1}{\milli\metre} & $\pm\SI{1}{\milli\metre}$ \\
+游标卡尺 & \SI{0.1}{\milli\metre}/\SI{0.05}{\milli\metre} & 匹配分度值 \\
+螺旋测微器 & \SI{0.01}{\milli\metre} & $\pm\SI{0.01}{\milli\metre}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{itemize}
+    \item 游标卡尺、千分尺必考：\textbf{零误差}判断与数据修正
+    \item 读数规则：主尺读数+副尺对齐刻度$\times$精度
+\end{itemize}
+
+\subsection{2.时间测量仪器}
+\begin{itemize}
+    \item 机械秒表：精度\SI{0.01}{\second}，存在人眼反应误差$\pm\SI{0.2}{\second}$
+    \item 光电门：无反应时间误差，常用公式 $v=\dfrac{\Delta x}{\Delta t}$ 求瞬时速度
+\end{itemize}
+
+\subsection{3.电学测量仪器}
+\begin{itemize}
+    \item 电流表：串联接入电路，读取电流数值
+    \item 电压表：并联接入电路，读取电压数值
+    \item 滑动变阻器：限流接法、分压接法实验应用
+\end{itemize}
+
+\subsection{4.其他实验器材}
+温度计、光强传感器、超声波收发装置、天平、量筒等。
+
+\section{二、误差与不确定度（核心必考）}
+\subsection{1.误差分类}
+\begin{enumerate}[label=\arabic*.]
+    \item 随机误差：偶然因素引发，\textbf{多次测量取平均值}可减小
+    \item 系统误差：仪器缺陷、实验方法错误导致，无法取平均消除
+\end{enumerate}
+定义区分：
+\begin{itemize}
+    \item 精密度：测量数据重复稳定程度
+    \item 准确度：测量值与真实值贴合程度
+\end{itemize}
+
+\subsection{2.基础不确定度公式}
+\[
+\text{百分比不确定度}
+=\frac{\text{绝对不确定度}}{\text{测量平均值}}\times 100\%
+\]
+\begin{itemize}
+    \item 单次测量：绝对不确定度=仪器最小分度值
+    \item 多次测量：绝对不确定度$=\dfrac{\text{最大值}-\text{最小值}}{2}$
+\end{itemize}
+
+\subsection{3.复合物理量不确定度合成}
+\begin{enumerate}
+    \item 乘除运算：总百分比不确定度为分项百分比不确定度之和
+    \item 幂次运算：百分比不确定度$\times$对应幂指数
+    \item 实例：$R=\dfrac{V}{I}\Rightarrow \%R=\%V+\%I$
+\end{enumerate}
+
+\subsection{4.常见误差来源与改进方案}
+\begin{itemize}
+    \item 长度读数视差：视线垂直刻度盘读数
+    \item 秒表计时误差：改用光电门，测量多组周期取平均
+    \item 电路接触误差：选用粗导线，减少多余接线
+\end{itemize}
+
+\section{三、图像作图与数据处理}
+\subsection{1.作图标准规范}
+\begin{enumerate}
+    \item 坐标轴标注：物理量$+$单位，刻度均匀合理
+    \item 数据描点：使用$\times$或$\circ$清晰标记
+    \item 拟合线条：直线用直尺，曲线平滑绘制，点均匀分布在线两侧
+\end{enumerate}
+
+\subsection{2.直线图像核心计算}
+标准线型：$y=mx+c$
+\[
+\text{斜率} \; m=\frac{\Delta y}{\Delta x}=\frac{y_2-y_1}{x_2-x_1}
+\]
+\begin{itemize}
+    \item 取值要求：选取直线上距离较远两点，避免直接选用实验数据点
+    \item 截距：横轴为0时对应的纵轴数值
+\end{itemize}
+
+\subsection{3.十年高频线性图像}
+\begin{enumerate}
+    \item $s-t^2$ 自由落体：$g=2\times$斜率
+    \item $T^2-L$ 单摆：$g=\dfrac{4\pi^2}{\text{斜率}}$
+    \item $F-x$ 胡克定律：劲度系数$k=$斜率
+    \item $V-I$ 电学图像：电阻/电源电动势、内阻求解
+    \item $f-\sin\theta$ 超声波实验：声速$v=\lambda\cdot \text{斜率}$
+    \item $\Delta x-D$ 双缝干涉：求解光的波长
+\end{enumerate}
+
+\section{四、U1力学材料类必考实验}
+\begin{enumerate}
+    \item 自由落体实验测重力加速度$g$
+    \item 单摆实验测重力加速度$g$，限定摆角小于$5^\circ$
+    \item 胡克定律探究与弹性限度判断
+    \item 杨氏模量测量实验：$E=\dfrac{FL}{A\Delta L}$
+    \item 固液体密度测量实验
+    \item 小球下落测粘滞阻力与收尾速度
+\end{enumerate}
+
+\section{五、U2波动电路类必考实验}
+\begin{enumerate}
+    \item 欧姆定律探究、电源电动势与内阻测量
+    \item 超声波/空气中声速测量实验
+    \item 双缝干涉实验测量激光波长
+    \item 光电效应实验：截止电压与入射光频率关系
+    \item 太阳能板功率探究实验（角度、光强影响）
+\end{enumerate}
+
+\section{六、实验设计与答题模板}
+\subsection{1.控制变量法（所有实验通用）}
+实验仅改变\textbf{一个自变量}，其余所有影响实验结果的物理量全部保持恒定不变。
+
+\subsection{2.标准实验答题步骤}
+\begin{enumerate}
+    \item 列出全部实验所需器材
+    \item 写明具体测量操作与仪器使用方法
+    \item 写明需要控制不变的物理量
+    \item 设计规范数据记录表格
+    \item 说明数据处理、作图或计算公式
+    \item 分析实验误差，写出优化改进方法
+\end{enumerate}
+
+\subsection{3.数值范围推断题型答题逻辑}
+\begin{enumerate}
+    \item 由实验结果计算测量值$+$百分比不确定度
+    \item 算出物理量合理取值区间
+    \item 对照已知标准数据，推断对应物质/材料
+\end{enumerate}
+
+\section{七、十年真题高频考点汇总}
+\begin{enumerate}
+    \item 千分尺、游标卡尺读数及零误差修正（年年必考）
+    \item 单一物理量、复合物理量百分比不确定度计算
+    \item 物理图像斜率、截距计算及物理含义解读
+    \item 单摆、自由落体、胡克定律三大力学实验
+    \item 电路$V-I$图像、声波波速、双缝干涉波动实验
+    \item 控制变量描述、实验误差改进类简答题
+    \item 结合不确定度范围判定实验材料/介质类型
+\end{enumerate}
+
+\section{八、备考核心建议}
+\begin{itemize}
+    \item U3无全新知识点，全部依托AS阶段U1、U2理论知识
+    \item 复习重心：仪器读数、不确定度运算、图像处理、文字实验简答
+    \item 近十年真题题型重复度极高，吃透真题可高效冲刺高分
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,196 @@
+\documentclass[12pt]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{enumitem}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{hyperref}
+
+\title{编号34论文优化建议（完整版）}
+\author{匿名审稿人}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{总体评价}
+
+编号34论文相比33版有明显进步。以下重点从“修改空间”角度进行评审，分为已改进项、仍存在的技术问题和可选的润色建议三大类。
+
+\section{一、已改进的问题（无需再改）}
+
+\subsection{1. 明确标识为方法学论文 ✅}
+
+论文从一开始就不厌其烦地强调“it is not a measurement paper”，所有性能指标均在已知ground truth的合成数据上评估，2I/Borisov验证明确标注为“feasibility demonstration rather than statistical validation”（第2页摘要、第5页Section 1.4、第19页Section 4.6.2）。学术诚信层面已无问题。
+
+\subsection{2. 占位符已替换 ✅}
+
+Data Availability中明确给出了真实GitHub链接\url{https://github.com/chenzhilei-lab/Atlas}，Zenodo标注为“DOI to be registered upon acceptance”（第26页），这是审稿阶段的标准做法。投稿时若需替换，用审稿人可访问的匿名链接代替即可。
+
+\subsection{3. 应力测试套件已提供完整描述 ✅}
+
+第5–7页的Section 2.2详细描述了五个应力测试场景：Starfield Hell（银道面背景）、Optically Thick Core（光学厚内彗发）、Ultra-Low SNR（SNR≤1）、Missing Spectroscopy（缺失光谱模态）、Out-of-Distribution Composition（极端化学组成），每个场景的构造方法和预期失效模式均清楚说明。
+
+\subsection{4. 人类vs机器盲测已加入 ✅}
+
+第18页Table 6报告了5名行星科学研究人员在SNR<2条件下的表现：人类专家TPR仅31\%（FPR 28\%），而本框架达78\%（FPR 3\%）。这是非常有说服力的实证，论证了自动化方法的必要性。
+
+\subsection{5. 代理验证（Hale-Bopp）已加入 ✅}
+
+第18页Section 4.4使用C/1995 O1（Hale-Bopp）作为太阳系极端彗星的代理验证，Qd精度15\%，CO/H2O落在文献范围内（0.18±0.05 vs 文献0.10–0.25），部分弥合了太阳系训练分布与星际目标域之间的域差距。
+
+\section{二、仍需优化的技术问题}
+
+\subsection{问题1：OOD检测器的具体性能数据缺失（严重程度：中等）}
+
+\textbf{问题}：第12页Section 3.6.2说Stress Tests 1–4全部正确分类为ID（within-distribution），但未给出任何数值——TPR是多少？误报率是多少？第5个应力测试（CO/H2O=5.0）的召回率94\%明确给出，但没有说2I/Borisov作为真实目标时OOD检测器如何分类（ID还是OOD？）。
+
+\textbf{建议}：补充一个简短的OOD检测器性能表，包含：
+\begin{itemize}
+    \item 各应力测试场景下的ID/OOD分类准确率（Stress Test 1–4的TPR；Stress Test 5的OOD召回率）；
+    \item 真实2I/Borisov测试时的OOD标志状态（应判为ID，因其CO/H2O≈1.73在训练范围内，这是检验正确性的关键）；
+    \item 假阳性率（5th percentile阈值对应5\%，可接受）。
+\end{itemize}
+\textbf{修改位置}：Section 3.6.2末尾或Section 4.2.5之后补充上述数值。
+
+\subsection{问题2：观察策略优化的前瞻性验证缺失（严重程度：中等）}
+
+\textbf{问题}：第13页Table 2给出了三类发现场景下的最优观测策略和预期不确定性，这是paper的亮点。但目前完全基于合成数据的forward simulation验证，没有通过独立案例检验。
+
+\textbf{建议}：
+\begin{itemize}
+    \item 增加一个“retrospective test”章节：选一颗已有完备观测数据的真实彗星（如2I/Borisov或其观测窗口），模拟其“discovery circumstances”（亮度m、r\_h范围），运行Table 2的策略推荐逻辑，并与实际发表的观测策略（来自Clements 2021）对比，看框架推荐的策略是否与实际采用的策略一致。若不完全一致，可分析差异原因（如平台可用性限制）。
+    \item 如果目前没有时间补充验证，至少在论文中明确定位为“proposed method”而非“validated decision tool”。
+\end{itemize}
+\textbf{修改位置}：Section 3.7.3末尾增加该验证，或Section 5讨论中标注为“待验证”。
+
+\subsection{问题3：OOD检测器架构叙述有误（严重程度：轻微）}
+
+\textbf{问题}：第11页Section 3.6.1说“fit a Gaussian Mixture Model (GMM) with K components to the latent representations z = Enc\_φ(x) of the synthetic training set”。问题是，PINN的encoder来自哪个网络？架构表（Table 1）中PINN的编码器并未单独列出。
+
+\textbf{建议}：明确说明：
+\begin{itemize}
+    \item OOD检测器用的latent features来自PINN编码器的中间层（具体层号或维度）；
+    \item 并说明该编码器是PINN的一部分（由PINN训练后固定，还是独立训练？）；
+    \item GMM的输入维度（128？256？512？）；
+    \item K=10由BIC决定可以，但建议说明对应的PCA降维信息（如果高维空间太稀疏，GMM效果可能不佳）。
+\end{itemize}
+
+\subsection{问题4：等式17的LaTeX排版错误（严重程度：轻微）}
+
+第12页等式（17）：
+\[
+\log p_{\mathrm{ID}}(\mathrm{Enc}_{\phi}(\mathbf{x}_{\mathrm{nd}\phi}))
+\]
+\textit{注意：} \(x_{\mathrm{nd}\phi}\) 明显是拼写错误，应为 \(\mathbf{x}_{\mathrm{new}}\)。
+
+\textbf{修改}：
+\[
+\log p_{\mathrm{ID}}(\mathrm{Enc}_{\phi}(\mathbf{x}_{\mathrm{new}}))
+\]
+
+\subsection{问题5：6次比较的t检验Bonferroni校正计算需澄清（严重程度：轻微）}
+
+第15页Table 4标题：“paired t-test with Holm-Bonferroni correction for 6 comparisons”。
+
+6次比较意味着6对方法之间的假设检验。但Table 4中有7种方法（Median Filter、Wavelet、NLM、DnCNN、Jiang et al.、U-Net、Our Method），两两组合数量是C(7,2)=21，不是6。
+
+\textbf{理解与建议}：
+\begin{itemize}
+    \item 如果只比较“Our Method vs each baseline”（1个test vs 6个baselines），那确实是6次比较。如果是这样，Table标题应更明确地写：“paired t-test of Our Method vs each baseline, with Holm-Bonferroni correction for 6 comparisons”。
+    \item 建议在caption中澄清“6 comparisons”是指“Our Method against each of the 6 baseline methods”，而非所有方法之间的两两比较。
+\end{itemize}
+
+\subsection{问题6：GitHub链接在peer review阶段的匿名审稿问题（严重程度：中等，需投稿前处理）}
+
+虽然链接真实，但审稿人看到的是您的个人/实验室GitHub账号（chenzhilei-lab），这存在身份泄露风险，部分期刊（包括ApJ）对此有严格要求。
+
+\textbf{解决方案（投稿阶段）}：
+\begin{enumerate}
+    \item \textbf{选项A（推荐）}：在GitHub仓库中创建临时private repo，通过Settings生成匿名审稿链接（例如\url{https://github.com/chenzhilei-lab/Atlas/tree/review-2026}或其他token方式）。更新论文中的链接为匿名链接。
+    \item \textbf{选项B}：使用Google Drive或Dropbox创建加密压缩包共享链接，论文中写明“For peer review only: [temporary link with expiry date]”。
+    \item \textbf{Zenodo}：保持现状“DOI to be registered upon acceptance”即可，审稿阶段不需要提供真正的DOI。
+\end{enumerate}
+\textbf{DO NOT}：在投稿版本中直接使用个人GitHub账号链接，违反双盲审稿原则（除非期刊明确允许单盲，仍需确认ApJ政策）。
+
+\section{三、可选润色建议（接受后可提高可读性，非必须）}
+
+\subsection{1. 表2和表7中Afρ方法注释“N/A”含义可扩展}
+
+表7中Afρ方法在SNR<1时标注“N/A”，表2在Faint对象的光谱列为“no spectroscopy; >±50\% unconstrained”。
+
+\textbf{建议}：增加脚注解释“unconstrained”的具体含义——例如“CO/H2O uncertainty exceeds 50\%，即气体丰度估计的信息含量低于噪声水平，不建议报告具体数值”。
+
+\subsection{2. 人类vs机器盲测的统计显著性和参与者代表性}
+
+Table 6中人类TPR=31\%（标准差±12\%，N=5）。参与者来自单一机构，可能不能代表跨机构专业团体的综合水平。
+
+\textbf{建议}：
+\begin{itemize}
+    \item 在文本中标注此项局限性，并指出未来需扩大参与者数量；
+    \item 或增加Fleiss’ κ（参与者间一致性）统计，说明低置信度。
+\end{itemize}
+
+\subsection{3. Section 4.6.3“Missing Validation”的积极表达}
+
+\textbf{原文}承认“critical validation step remains unperformed”，这虽然诚实，但可能给审稿人留下负面印象。
+
+\textbf{建议}：改为“While the synthetic-to-synthetic MMD reduction is well quantified, the synthetic-to-real MMD calculation remains statistically underpowered due to the single-object sample (N=1). This is a limitation of the current interstellar comet population, not of the methodology. We explicitly outline a planned validation protocol (Eq. 13 applied to a multi-object sample) to be executed when LSST or other surveys discover additional interstellar comets.” 这样既承认局限，又提出解决路径。
+
+\section{四、分步修改清单（按优先级排序）}
+
+\subsection{必须完成（拒稿风险项）}
+
+\begin{tabular}{|c|l|p{8cm}|}
+\hline
+优先级 & 项目 & 修改内容 \\
+\hline
+1 & \textbf{匿名审稿访问} & 将GitHub链接替换为匿名可访问链接（或临时云盘共享链接），投稿前务必处理。当前版本审稿人能看到作者身份，违反双盲要求。 \\
+\hline
+2 & \textbf{LaTeX排版错误} & 等式（17）中的 \(\mathbf{x}_{\mathrm{nd}\phi}\) 改为 \(\mathbf{x}_{\mathrm{new}}\)。 \\
+\hline
+\end{tabular}
+
+\subsection{强烈建议（小修改后接收）}
+
+\begin{tabular}{|c|l|p{8cm}|}
+\hline
+优先级 & 项目 & 修改内容 \\
+\hline
+3 & \textbf{OOD检测器性能数据} & 补充5个应力测试的ID/OOD分类准确率表格，说明2I/Borisov测试时的OOD状态。 \\
+\hline
+4 & \textbf{Table 4统计澄清} & 在caption中明确“6 comparisons”含义（Our Method vs each of 6 baselines）。 \\
+\hline
+\end{tabular}
+
+\subsection{可选但推荐（提高论文质量）}
+
+\begin{tabular}{|c|l|p{8cm}|}
+\hline
+优先级 & 项目 & 修改内容 \\
+\hline
+5 & \textbf{观察策略优化的回溯验证} & 增加2I/Borisov的retrospective case study，验证Table 2推荐的策略是否与实际观测一致；或明确标注为“proposed”（待后续验证）。 \\
+\hline
+6 & \textbf{OOD检测器架构细化} & 明确latent features来源（PINN编码器的具体层）、维度、PCA降维（如有）。 \\
+\hline
+7 & \textbf{人类盲测局限性说明} & 补充参与者N=5、单一机构的局限性，并建议后续扩大参与者规模。 \\
+\hline
+8 & \textbf{Section 4.6.3措辞优化} & 将消极表达改为积极表达，说明N=1限制来自样本量不足而非方法缺陷，并提出未来验证方案。 \\
+\hline
+\end{tabular}
+
+\section{五、综合结论}
+
+编号34论文已解决之前版本的大部分问题，包括占位符、应力测试、人类盲测、代理验证等，\textbf{目前状态已达到ApJ投稿标准}，无重大学术道德问题。但有两个事项必须在投稿前处理：
+
+\begin{enumerate}
+    \item \textbf{匿名审稿访问}：当前GitHub链接直接暴露作者身份，违反双盲审稿原则。必须改用匿名链接或临时共享链接。
+    \item \textbf{LaTeX排版错误}：等式（17）的拼写错误必须修正。
+\end{enumerate}
+
+OOD检测器性能数据建议补充（但不是拒稿级别的缺陷）。若完成上述修订，论文可被ApJ接收。
+
+\end{document}
