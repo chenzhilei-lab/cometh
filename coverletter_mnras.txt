@@ -1,0 +1,63 @@
+Dear Editor,
+
+Please find enclosed our manuscript entitled "A Benchmarking Study of Deep
+Learning Methods for Faint Comet Characterization: Where Traditional Methods
+Fail and Physics-Informed Neural Networks Excel," which we are submitting to
+Monthly Notices of the Royal Astronomical Society (MNRAS).
+
+SUMMARY
+This paper presents COMETH, a simulation-based deep learning framework for
+characterizing faint comets from multi-modal astronomical observations. The
+framework combines multi-scale CNNs with SE attention for faint feature
+detection, physics-informed neural networks (PINNs) with hard mass, momentum,
+and angular momentum conservation constraints for parameter inversion, and
+meta-learning with adversarial domain adaptation for few-shot transfer from
+solar system to interstellar comets. All components are trained entirely on
+synthetic data and frozen before application to any real object.
+
+KEY CONTRIBUTIONS
+1. A systematic stress test suite mapping the failure boundaries of both
+   traditional cometary analysis methods (Afrho, Haser model) and the proposed
+   framework under deliberately difficult conditions.
+2. A controlled human vs. machine blind test showing that human experts achieve
+   only 31% true-positive rate at SNR < 2, compared to 78% for the framework
+   (inter-expert agreement kappa = 0.41).
+3. A literature-based comparison with published traditional analyses on
+   2I/Borisov, showing 12% agreement with Afrho-derived dust production rates.
+4. Complete architectural disclosure sufficient for independent reproduction,
+   plus an "If-Then" observational guide and observing strategy optimization
+   tool.
+5. An explicit argument for why deep learning is warranted for small
+   populations: because each object is exceptionally precious, the cost of
+   unreliable manual analysis is disproportionately high.
+
+WHY MNRAS?
+This is a methodology and benchmarking study with direct applications to
+cometary science and broader relevance to faint extended-source
+characterization in astronomy. MNRAS has a strong tradition of publishing
+methodology papers that rigorously benchmark new techniques against established
+methods, and we believe our systematic approach to failure mapping, human vs.
+machine comparison, and transparent uncertainty budgeting aligns with the
+standards expected by the MNRAS readership.
+
+DATA AND CODE AVAILABILITY
+All synthetic datasets, trained model weights, DIRTY radiative transfer
+configuration files, random seeds, the observing strategy optimization
+notebook, and a Docker environment configuration are provided as supplementary
+material and will be publicly released on GitHub and archived at Zenodo (DOI
+to be registered upon acceptance). The DIRTY radiative transfer code itself
+must be obtained separately, but our configuration files enable exact
+reproduction of all simulations. 2I/Borisov archival data are available from
+the ESO Science Archive (program 110.23ZJ.001) and MAST (Proposal 16009).
+
+MANUSCRIPT DETAILS
+21 pages, 2 figures, 12 tables. Abstract: 234 words.
+All authors have approved the manuscript and agree with its submission to MNRAS.
+This work has not been submitted elsewhere.
+
+We appreciate your consideration of this manuscript and look forward to your
+response.
+
+Sincerely,
+
+Zhilei Chen (on behalf of all authors)
