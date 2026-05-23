@@ -1,86 +1,56 @@
-# Session Log — 2026-05-24 (Planned)
+# Session Log — 2026-05-24
 
-## Phase 1: GitHub Repository Setup
+## Phase 1: V12 Review & Critical Fixes (morning)
 
-### Task: Create public code repository for COMETH
+### Issues from v12-2fix.docx (29 items, 8 unfixed)
+- Angular momentum → energy-limited jet collimation (physical accuracy)
+- Momentum equation dimensional error: removed algebraic form, kept ODE solver
+- Hard/soft constraint architecture: clarified as two-level (soft penalties + hard transforms)
+- SNR gain → PSNR-based detection-image-quality gain (throughout)
+- 201/209 measurement counts unified with raw/filtered distinction
+- Human CI method documented (Clopper-Pearson exact binomial)
+- Q_dust formula corrected: 0.004-0.09 → 7-300 kg/s
+- 3I/ATLAS §4.6.5 deleted; §1.1 clarification added
+- Carbon footprint uncertainty added (±20 kg CO2)
+- Keywords, β values, DOI verified as correct
 
-**Current state:**
-- Paper (V8) contains placeholder URLs:
-  - `https://github.com/cometh-framework/cometh` (does not exist)
-  - `https://anonymous.4open.science/r/cometh-review` (does not exist)
+### V12 → V13 → V14
+- V13: All major fixes from v12-2fix applied
+- V14: 3 A&C reviewer minor issues fixed + terminology sweep
 
-**Steps:**
+## Phase 2: A&C Reviewer Perspective Audit (afternoon)
 
-1. **Create GitHub repository**
-   - Go to https://github.com and sign in (or create account)
-   - Create new repository: `cometh-framework/cometh` (or any name)
-   - Set to Public (for A&C review) or Private (with anonymous review link)
+### Reviewer feedback on V14
+1. Gradient continuity at min() in Eq.16: Added technical note explaining subgradient behavior, PyTorch autograd implementation, and AdaptiveConstraintManager safeguards
+2. Software comparison incomplete: Added Tycho Tracker + DIRTY to comparison table
+3. Minor fixes: 201/209 consistency, Human CI method
 
-2. **Upload files to repository:**
-   ```
-   Atlas-supplementary/
-   ├── src/                    (CNN, PINN, OOD, MAML, constraints, optimizer)
-   ├── configs/                (hyperparams.yaml, dirty_params.yaml)
-   ├── data_generation/        (generate_synthetic_data.py)
-   ├── weights/                (README.md only; weights via Zenodo)
-   ├── notebooks/              (demo_workflow.ipynb)
-   ├── Dockerfile
-   ├── environment.yml
-   ├── requirements.txt
-   └── README.md
-   ```
+### Final V14
+- 26 pages, 0 errors, 0 undefined references
+- Anonymous code: https://anonymous.4open.science/r/cometh-F185
+- Zenodo DOI: placeholder (embargoed until acceptance)
+- Double-blind: author info withheld
 
-3. **Create anonymous reviewer access (if using private repo):**
-   - Go to https://anonymous.4open.science
-   - Create a reviewable link that grants read access without revealing owner identity
-   - This is standard for double-blind review
+## Files Created/Modified Today
 
-4. **Replace placeholder URLs in V8 paper:**
-   - Find: `https://github.com/cometh-framework/cometh`
-   - Replace with actual GitHub URL
-   - Find: `https://anonymous.4open.science/r/cometh-review`
-   - Replace with actual 4open.science URL
+| File | Action |
+|------|--------|
+| main_methodology_v12.tex/.pdf | Archival (26pp) |
+| main_methodology_v13.tex/.pdf | Archival (25pp) |
+| main_methodology_v14.tex/.pdf | Current (26pp) |
+| coverletter.txt | A&C submission cover letter |
+| session_log_2026-05-24.md | This file |
+| references.bib | +tychotracker reference |
+| v12.2_v13_comparison.pdf | Review comparison document |
 
-5. **Zenodo DOI (if time permits):**
-   - Upload code + weights snapshot to https://zenodo.org
-   - Obtain embargoed DOI (accessible to reviewers, public after acceptance)
-   - Replace `10.5281/zenodo.XXXXXXX` with actual DOI
+## Key Decisions
+- arXiv preprint: NOT submitted (no institutional mentor endorsement)
+- Double-blind: Author info withheld from manuscript
+- Anonymous code: 4open.science mirror of chenzhilei-lab/cometh
+- N=1 honesty: All claims explicitly qualified as feasibility demonstration
+- 3I/ATLAS: No COMETH inference performed; real observations cited as motivation only
 
-### After GitHub is ready:
-- Update V8 paper with real URLs
-- Re-compile → V9
-- Submit to A&C with Cover Letter mentioning code availability
-
----
-
-## Phase 2: arXiv Preprint Submission
-
-### arXiv-ready files prepared in `arxiv_submission/`:
-```
-arxiv_submission/
-├── main_arxiv.tex          (arXiv-ready, bbl inline, 25 pages)
-├── fig4_training.png       (training curves)
-├── fig8_borisov.png        (2I/Borisov same-data comparison)
-└── README.md               (submission notes)
-```
-
-### arXiv submission steps:
-1. Go to https://arxiv.org/user/register
-   - Register with institutional email (.edu or .ac.cn)
-   - Institutional affiliation required for first submission
-2. Go to https://arxiv.org/submit
-3. Click "Start New Submission"
-4. Choose category: **astro-ph.IM** (Instrumentation and Methods)
-5. Upload `main_arxiv.tex` as main file
-6. arXiv will auto-detect `fig4_training.png` and `fig8_borisov.png`
-7. Fill in:
-   - Title: "COMETH: A Physics-Constrained Multimodal Fusion Framework for Faint Comet Characterization"
-   - Authors: Zhilei Chen
-   - Abstract: (copy from paper)
-   - Comments: "25 pages, 2 figures. Code available at [GitHub URL]. Submitted to Astronomy & Computing."
-8. Submit → announcement within 24-48 hours → permanent arXiv ID (e.g., arXiv:2605.XXXXX)
-
-### After arXiv is live:
-- Add arXiv ID to the paper
-- Add arXiv ID to the GitHub README
-- Mention arXiv preprint in the A&C cover letter
+## Remaining
+- Journal submission: A&C Editorial Manager (user to complete)
+- Model weights: Zenodo after acceptance
+- DIRTY code: Must be obtained separately from Gordon et al.
