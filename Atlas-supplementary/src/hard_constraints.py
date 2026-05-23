@@ -194,3 +194,112 @@ class AngularMomentumConservation(nn.Module):
 
         theta_jet = 2 * torch.asin(sin_theta)
         return theta_jet
+
+
+class AdaptiveConstraintManager(nn.Module):
+    """
+    Adaptive constraint switching for non-steady-state events (§3.4.4).
+
+    When the OOD detector flags a non-steady-state condition (e.g., outburst,
+    fragmentation), the hard mass conservation constraint is automatically
+    relaxed to a soft penalty term. This prevents the 35--40% Q_d
+    underestimation observed in Stress Test 6 during transient events.
+
+    The transient weight gamma_transient is order(s) of magnitude smaller
+    than the steady-state gamma_cons, allowing the PINN to capture
+    non-equilibrium dynamics while maintaining physical regularization
+    during quiescent periods.
+
+    Recovery to hard constraints occurs automatically when consecutive
+    epochs return to the in-distribution regime.
+    """
+
+    def __init__(self, gamma_cons: float = 1.0, gamma_transient: float = 0.05,
+                 recovery_epochs: int = 3):
+        """
+        Args:
+            gamma_cons: Constraint weight during steady-state (hard).
+            gamma_transient: Constraint weight during transient events (soft).
+            recovery_epochs: Consecutive in-distribution epochs required
+                             before restoring hard constraints.
+        """
+        super().__init__()
+        self.gamma_cons = gamma_cons
+        self.gamma_transient = gamma_transient
+        self.recovery_epochs = recovery_epochs
+        self._consecutive_id_epochs = 0
+        self._in_transient = False
+
+    def forward(self, ood_flag: torch.Tensor,
+                ood_type: str | None = None) -> Tuple[float, dict]:
+        """
+        Determine the active constraint weight based on OOD status.
+
+        Args:
+            ood_flag: Boolean tensor, True if OOD detected (shape (B,) or scalar).
+            ood_type: Optional OOD classification label
+                      ('fragmentation', 'outburst', 'alien_chemistry', etc.).
+
+        Returns:
+            gamma: Active constraint weight (gamma_cons or gamma_transient).
+            metadata: Dict with keys:
+                'mode': 'hard' | 'soft' | 'recovering'
+                'in_transient': bool
+                'recovery_progress': float (0-1, fraction of recovery epochs done)
+        """
+        is_ood = bool(ood_flag.any()) if ood_flag.numel() > 1 else bool(ood_flag.item())
+
+        # Only switch to soft constraints for dynamics-related OOD types
+        transient_types = {'fragmentation', 'outburst', 'non_steady_state'}
+        is_transient_ood = is_ood and (ood_type in transient_types if ood_type else False)
+
+        if is_transient_ood and not self._in_transient:
+            self._in_transient = True
+            self._consecutive_id_epochs = 0
+        elif not is_ood and self._in_transient:
+            self._consecutive_id_epochs += 1
+            if self._consecutive_id_epochs >= self.recovery_epochs:
+                self._in_transient = False
+                self._consecutive_id_epochs = 0
+        elif is_ood and self._in_transient and not is_transient_ood:
+            # Alien chemistry OOD during transient → stay in soft but don't reset recovery
+            pass
+
+        if self._in_transient:
+            gamma = self.gamma_transient
+            mode = 'soft'
+        else:
+            gamma = self.gamma_cons
+            mode = 'hard'
+
+        recovery_progress = (self._consecutive_id_epochs / self.recovery_epochs
+                             if self._in_transient else 1.0)
+
+        return gamma, {
+            'mode': mode,
+            'in_transient': self._in_transient,
+            'recovery_progress': recovery_progress,
+            'gamma_value': gamma,
+        }
+
+    def reset(self):
+        """Reset internal state (e.g., at start of a new comet analysis)."""
+        self._consecutive_id_epochs = 0
+        self._in_transient = False
+
+    def apply_constraint(self, loss_physics: torch.Tensor,
+                         gamma: float) -> torch.Tensor:
+        """
+        Apply the active constraint weight to the physics loss term.
+
+        During steady-state: loss = gamma_cons * loss_physics (hard constraint)
+        During transient:   loss = gamma_transient * loss_physics (soft penalty)
+
+        Args:
+            loss_physics: Physics consistency loss (scalar tensor).
+            gamma: Active constraint weight from forward().
+
+        Returns:
+            Weighted physics loss.
+        """
+        return gamma * loss_physics
