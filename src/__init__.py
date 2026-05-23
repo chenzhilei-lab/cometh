@@ -13,4 +13,5 @@ from .ood_detector import OODDetector, compute_ood_metrics
 from .domain_adapt import MAMLAdapter, compute_mmd
 from .obs_optimizer import ObservingStrategyOptimizer
 from .hard_constraints import (MassConservation, MomentumConservation,
-                                AngularMomentumConservation)
+                                AngularMomentumConservation,
+                                AdaptiveConstraintManager)
