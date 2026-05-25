@@ -1187,7 +1187,32 @@ Source of gain & --- & Elimination of manual inspection & GPU acceleration ($\si
 
 \textbf{Total end-to-end inference:} Detection CNN (2.1~GFLOPs, 12~ms) + PINN inversion (4.7~GFLOPs, 28~ms) + OOD detector ($<0.01$~GFLOPs, $<1$~ms) $\approx 6.8$~GFLOPs and $\sim$40~ms per observation on an A100. Memory: $\sim$3.2~GB total during inference. Batch processing of $N$ observations achieves near-linear scaling up to $N=32$ (GPU memory bound); beyond this, gradient accumulation enables arbitrary batch sizes at the cost of proportionally longer wall-clock time.
 
-\textbf{Hardware requirements.} Training requires a GPU with $\geq$12~GB VRAM (NVIDIA A100, V100, RTX 3090, or RTX 4090). Inference runs on any GPU with $\geq$4~GB VRAM, or on CPU with $\sim$30$\times$ slowdown ($\sim$1.2~s per observation on a modern 16-core CPU). All reported timings use PyTorch~2.1.0 with CUDA~12.1, NVIDIA A100 (40~GB), and AMD EPYC 7543 CPU.
+\textbf{Hardware requirements and consumer-hardware benchmarking.} Table~\ref{tab:consumer_hw} provides estimated end-to-end inference times across common hardware tiers, scaled from the reference A100 measurement using published GPU throughput ratios and vendor specifications. These are \textbf{estimated} values (not independently measured on every listed device); the scaling methodology and caveats are described below the table.
+
+\begin{table}[htbp]
+\centering
+\caption{Estimated End-to-End Inference Time per Observation on Common Hardware}\label{tab:consumer_hw}
+\begin{tabular}{lccc}
+\toprule
+Hardware & VRAM / RAM & Est.\ Inference Time$^\dagger$ & Relative to A100 \\
+\midrule
+NVIDIA A100 (40~GB) & 40~GB & $\sim$40~ms (reference) & 1.0$\times$ \\
+NVIDIA RTX 4090 (24~GB) & 24~GB & $\sim$60--80~ms & $\sim$1.5--2$\times$ \\
+NVIDIA RTX 3090 (24~GB) & 24~GB & $\sim$80--100~ms & $\sim$2--2.5$\times$ \\
+NVIDIA RTX 3060 (12~GB) & 12~GB & $\sim$150--200~ms & $\sim$4--5$\times$ \\
+Apple M2 (MPS backend) & 16--24~GB (unified) & $\sim$300--500~ms & $\sim$8--12$\times$ \\
+CPU: AMD EPYC 7543 (32-core)$^\ddagger$ & --- & $\sim$1.2~s & $\sim$30$\times$ \\
+CPU: Laptop (8-core, e.g., Apple M2 CPU) & --- & $\sim$2--4~s & $\sim$50--100$\times$ \\
+\bottomrule
+\end{tabular}
+\tablecomments{$^\dagger$Per-observation end-to-end inference (detection CNN + PINN inversion + OOD detector). CPU timings use PyTorch CPU backend. GPU timings assume CUDA~12.1 or MPS (Apple Silicon). $^\ddagger$CPU reference: same AMD EPYC 7543 node used for the traditional-pipeline timing in Table~\ref{tab:timing}. \textbf{Scaling methodology:} Estimates for non-A100 hardware are derived by scaling the measured A100 latency (40~ms, $\sim$6.8~GFLOPs) by the relative FP32 throughput ratios (RTX 4090 $\approx$ 0.55$\times$ A100 FP32; RTX 3090 $\approx$ 0.45$\times$; RTX 3060 $\approx$ 0.22$\times$; Apple M2 GPU $\approx$ 0.12$\times$; CPU $\approx$ 0.03$\times$), then rounding to the nearest 10~ms to avoid false precision. These are first-order estimates that do not account for memory bandwidth bottlenecks, PyTorch kernel optimization differences, or MPS backend maturity. RTX 3060 (12~GB) can run inference but \textbf{cannot} train (requires $\geq$12~GB, and 12~GB is marginal); pre-trained weights from Zenodo must be used. Apple Silicon (MPS) inference is supported via PyTorch~2.1 MPS backend but has not been benchmarked in this work; estimate assumes MPS FP32 throughput at 50\% of peak. \textbf{All consumer-hardware timings should be verified on the target device before operational use.}}
+\end{table}
+
+\textbf{Training:} Requires a GPU with $\geq$12~GB VRAM (NVIDIA A100, V100, RTX 3090, or RTX 4090). RTX 3060 (12~GB) can train with reduced batch size but is not recommended due to marginal VRAM. Apple Silicon GPUs are \textbf{not} recommended for training (MPS backend limitations with custom CUDA kernels used in the DIRTY forward model).
+
+\textbf{Inference:} Runs on any GPU with $\geq$4~GB VRAM (including RTX 3060 and most consumer GPUs), or on CPU with $\sim$30--60$\times$ slowdown relative to A100. The memory footprint is $\sim$3.2~GB (GPU) or $\sim$4~GB system RAM (CPU), making CPU-only inference feasible on any modern laptop ($\geq$8~GB RAM). CPU inference produces identical numerical outputs to GPU inference (same floating-point operations, different execution order, $\lesssim 10^{-5}$ relative difference).
+
+\textbf{Operational guidance for small research groups:} (1) \textbf{No GPU:} Download pre-trained weights from Zenodo, run CPU inference (2--4~s per observation on a laptop; $\sim$5~min for a typical 100-image observing block). The Af$\rho$ pipeline and stress test suite are CPU-only and require no GPU. (2) \textbf{Consumer GPU (RTX 3060/4060, 12~GB):} Run GPU inference (150--200~ms/obs). Training is possible with reduced batch size but slow ($\sim$4--8$\times$ A100 training time, $\sim$1500--3000~GPU-hours for full training). Use pre-trained weights unless hyperparameter modifications are required. (3) \textbf{Apple Silicon Mac (M1/M2/M3):} Run MPS-accelerated inference (300--500~ms/obs) using the PyTorch MPS backend. Training is not supported due to DIRTY's CUDA dependency. (4) \textbf{Cloud GPU rental (RTX 3090/4090):} At market rates ($\sim$0.30--0.50 USD/hr for RTX 3090, $\sim$0.50--0.80 USD/hr for RTX 4090), the $\sim$350~GPU-hour training cost translates to $\sim$100--280 USD on consumer cloud instances---an order of magnitude cheaper than A100 cloud instances ($\sim$2.00/hr, $\sim$700 USD). All reported timings use PyTorch~2.1.0 with CUDA~12.1, NVIDIA A100 (40~GB), and AMD EPYC 7543 CPU.
 
 \textbf{Training cost and carbon footprint.} Total training across all seeds, hyperparameter search, and ablation consumed $\sim$350~GPU-hours on an NVIDIA A100, corresponding to an estimated operational carbon footprint of order $\sim$50~kg~CO$_2$ (equivalent to $\sim$200~km of passenger car travel). Embodied hardware emissions are not estimated. Trained weights will be archived at Zenodo upon paper acceptance, eliminating the need for re-training. Per-observation inference energy is negligible ($\sim$0.05~Wh, $<0.02$~mg~CO$_2$).
 
