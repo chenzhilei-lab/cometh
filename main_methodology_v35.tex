@@ -409,43 +409,34 @@ We implement three physical conservation laws as deterministic, non-trainable tr
 
 Algorithm~\ref{alg:hard_constraints} presents the complete forward pass, showing how the three hard constraints are embedded as deterministic transforms between the network's latent predictions and the radiative transfer integration. The key design principle is that \textit{the network never directly predicts physical quantities}---it predicts unconstrained latents, and the physics layer (zero trainable parameters) maps them to physically consistent fields. Loss gradients flow through the deterministic transforms via standard autograd (PyTorch), enabling end-to-end training without constraint-violation penalty terms.
 
-\begin{figure}[htbp]
+\begin{figure*}[htbp]
 \centering
-\framebox[\columnwidth]{
-\begin{minipage}{0.92\columnwidth}
-\small
-\textbf{Algorithm:} PINN Forward Pass with Hard Physical Constraints \\[3pt]
-\textbf{Input:} Image $\mathbf{x} \in \mathbb{R}^{H \times W}$, spectrum $\mathbf{s}$ (optional) \\
-\textbf{Output:} $\{Q_d, \text{CO/H}_2\text{O}, \alpha, \theta_{\rm jet}, v_d(r)\}$ with guaranteed physical consistency \\[3pt]
-\rule{\linewidth}{0.4pt}
+\framebox[\textwidth-2cm]{
+\begin{minipage}{0.94\textwidth}
+\footnotesize
+\textbf{Algorithm:} PINN Forward Pass with Hard Physical Constraints \\[2pt]
+\textbf{Input:} Image $\mathbf{x}$, spectrum $\mathbf{s}$ (optional) \hspace{2em} \textbf{Output:} $\{Q_d$, CO/H$_2$O, $\alpha$, $\theta_{\rm jet}$, $v_d(r)\}$ \\[2pt]
+\rule{\linewidth}{0.3pt}
 \begin{enumerate}
-    \item[\textbf{1.}] \textbf{Encode:} $\mathbf{z} \leftarrow \text{Enc}_\phi(\mathbf{x}, \mathbf{s})$ \hfill $\triangleright$ 256-dim latent features \\
-    \hspace{1.2em}(4 residual blocks, GroupNorm, SiLU; Table~\ref{tab:pinn_arch})
-    \item[\textbf{2.}] \textbf{Predict unconstrained latents:} \hfill $\triangleright$ MLP head, all $\tilde{\cdot} \in \mathbb{R}$ \\
-    \hspace{1.2em}$\tilde{Q}_d, \tilde{v}_d, \tilde{Q}_g, \tilde{\alpha}, \tilde{\theta}_{\rm jet}, \tilde{T} \leftarrow \text{MLP}_\psi(\mathbf{z})$
-    \item[\textbf{3.}] \textbf{Hard Mass Conservation (Eq.~\ref{eq:hard_mass}):} \hfill $\triangleright$ zero trainable params \\
-    \hspace{1.2em}$Q_d \leftarrow \text{softplus}(\tilde{Q}_d)$ \hfill $\triangleright$ positivity guarantee \\
-    \hspace{1.2em}$v_d \leftarrow \text{softplus}(\tilde{v}_d)$ \\
-    \hspace{1.2em}$n_d(r) \leftarrow Q_d \,/\, (4\pi r^2 v_d)$ \hfill $\triangleright$ $r^{-2}$ profile by construction
-    \item[\textbf{4.}] \textbf{Hard Jet Collimation (Eq.~\ref{eq:hard_angular}):} \hfill $\triangleright$ zero trainable params \\
-    \hspace{1.2em}$P_{\rm sub} \leftarrow \text{ClausiusClapeyron}(\tilde{T})$ \hfill $\triangleright$ sublimation pressure \\
-    \hspace{1.2em}$x \leftarrow (\dot{m}_g v_g) \,/\, (4\pi r_n^2 P_{\rm sub})$ \\
-    \hspace{1.2em}$\theta_{\rm jet} \leftarrow 2\arcsin(\min(1, \sqrt{x}))$ \hfill $\triangleright$ energy-limited cap
-    \item[\textbf{5.}] \textbf{Momentum Conservation (Eq.~\ref{eq:dust_gas_ode}):} \hfill $\triangleright$ differentiable ODE \\
-    \hspace{1.2em}$v_d(r) \leftarrow \text{RK4}\bigl(\frac{dv_d}{dr} = f(v_d, \rho_g(r), a),\; r \in [r_n, r_{\rm max}]\bigr)$ \\
-    \hspace{1.2em}(100 radial steps; IC: $v_d(r_n)=0$; $<1\%$ of inference FLOPs)
-    \item[\textbf{6.}] \textbf{Radiative Transfer Integration:} \hfill $\triangleright$ differentiable forward model \\
-    \hspace{1.2em}$I_\lambda^{\rm pred} \leftarrow \int n_d(r)\, \sigma_{\rm sca}(\lambda, a)\, \Phi(\theta)\, dr \;+\; \text{gas emission}$
-    \item[\textbf{7.}] \textbf{Loss (Eq.~\ref{eq:pinn_loss}):} \hfill $\triangleright$ \textbf{no} $\mathcal{L}_{\rm cons}$ term \\
-    \hspace{1.2em}$\mathcal{L} \leftarrow \mathcal{L}_{\rm data}(I_\lambda^{\rm pred}, I_\lambda^{\rm obs}) + \gamma_1 \mathcal{L}_{\rm PDE} + \gamma_2 \mathcal{L}_{\rm BC}$
+    \setlength{\itemsep}{0pt}
+    \item[\textbf{1.}] \textbf{Encode:} $\mathbf{z} \leftarrow \text{Enc}_\phi(\mathbf{x}, \mathbf{s})$ \hfill $\triangleright$ 256-dim, 4 residual blocks (Table~\ref{tab:pinn_arch})
+    \item[\textbf{2.}] \textbf{Predict unconstrained latents:} $\tilde{Q}_d, \tilde{v}_d, \tilde{Q}_g, \tilde{\alpha}, \tilde{\theta}_{\rm jet}, \tilde{T} \leftarrow \text{MLP}_\psi(\mathbf{z})$ \hfill $\triangleright$ all $\tilde{\cdot}\in\mathbb{R}$
+    \item[\textbf{3.}] \textbf{Hard Mass Conservation} (Eq.~\ref{eq:hard_mass}, \textbf{zero trainable params}): \\
+    \hspace{1.2em}$Q_d \leftarrow \text{softplus}(\tilde{Q}_d)$, \; $v_d \leftarrow \text{softplus}(\tilde{v}_d)$, \; $n_d(r) \leftarrow Q_d/(4\pi r^2 v_d)$ \hfill $\triangleright$ $r^{-2}$ profile guaranteed
+    \item[\textbf{4.}] \textbf{Hard Jet Collimation} (Eq.~\ref{eq:hard_angular}, \textbf{zero trainable params}): \\
+    \hspace{1.2em}$P_{\rm sub} \leftarrow \text{ClausiusClapeyron}(\tilde{T})$, \; $x \leftarrow \dot{m}_g v_g / (4\pi r_n^2 P_{\rm sub})$, \; $\theta_{\rm jet} \leftarrow 2\arcsin(\min(1, \sqrt{x}))$
+    \item[\textbf{5.}] \textbf{Momentum Conservation} (ODE, Eq.~\ref{eq:dust_gas_ode}): \\
+    \hspace{1.2em}$v_d(r) \leftarrow \text{RK4}(dv_d/dr = f(v_d, \rho_g(r), a),\; r \in [r_n, r_{\rm max}])$ \hfill $\triangleright$ 100 steps, IC: $v_d(r_n){=}0$
+    \item[\textbf{6.}] \textbf{Radiative Transfer:} $I_\lambda^{\rm pred} \leftarrow \int n_d(r)\, \sigma_{\rm sca}(\lambda, a)\, \Phi(\theta)\, dr + \text{gas emission}$
+    \item[\textbf{7.}] \textbf{Loss} (Eq.~\ref{eq:pinn_loss}, \textbf{no} $\mathcal{L}_{\rm cons}$): $\mathcal{L} \leftarrow \mathcal{L}_{\rm data} + \gamma_1 \mathcal{L}_{\rm PDE} + \gamma_2 \mathcal{L}_{\rm BC}$
     \item[\textbf{8.}] \textbf{Backprop:} $\nabla_{\phi,\psi}\,\mathcal{L}$ via autograd through steps 3--6
 \end{enumerate}
-\rule{\linewidth}{0.4pt}
-\textbf{Design invariant:} Any latent values $(\tilde{Q}_d, \tilde{v}_d, \tilde{Q}_g, \tilde{\alpha}, \tilde{\theta}_{\rm jet}, \tilde{T})$ produce fields $(n_d(r), \theta_{\rm jet}, v_d(r))$ that \textit{automatically} satisfy mass, momentum, and jet-collimation conservation---regardless of data quality, optimization state, or SNR. No constraint-violation penalty term is needed because violation is architecturally impossible. The AdaptiveConstraintManager (\texttt{src/hard\_constraints.py}) can dynamically relax step~3 (mass) and step~5 (momentum) from hard to soft constraints when the OOD detector flags non-steady-state conditions (Stress Test~6; \S\ref{sec:ood}).
+\rule{\linewidth}{0.3pt}
+\textbf{Design invariant:} Any latent values $(\tilde{Q}_d, \tilde{v}_d, \tilde{Q}_g, \tilde{\alpha}, \tilde{\theta}_{\rm jet}, \tilde{T})$ produce fields $(n_d(r), \theta_{\rm jet}, v_d(r))$ that \textit{automatically} satisfy mass, momentum, and jet-collimation conservation---regardless of data quality, optimization state, or SNR. The AdaptiveConstraintManager (\texttt{src/hard\_constraints.py}) relaxes steps~3 and~5 from hard to soft when the OOD detector flags non-steady-state conditions (Stress Test~6; \S\ref{sec:ood}).
 \end{minipage}
 }
-\caption{PINN forward pass with hard physical constraints embedded as deterministic, non-trainable transforms. The network predicts unconstrained latent parameters (step~2); the physics layer (steps~3--5, zero trainable parameters) enforces conservation laws by construction. Gradients flow end-to-end via standard autograd. No constraint-violation penalty term appears in the loss (step~7).}\label{alg:hard_constraints}
-\end{figure}
+\caption{PINN forward pass with hard physical constraints embedded as deterministic, non-trainable transforms. Steps~3--5 (zero trainable parameters) enforce conservation laws by construction; gradients flow end-to-end via standard autograd. No constraint-violation penalty term appears in the loss (step~7).}\label{alg:hard_constraints}
+\end{figure*}
 
 \textbf{Critical limitation --- steady-state assumption:} All three hard constraints (mass, momentum, jet collimation) assume steady-state outflow. This assumption is valid for quiescent comets on timescales longer than the outflow crossing time $\tau_{\rm cross}$, but it becomes a \textit{liability} during non-steady-state events (outbursts, fragmentation), as demonstrated in Stress Test~6 (\S\ref{sec:fail_gallery}, Failure Mode 5b), where the hard mass constraint causes a 35--40\% underestimation of $Q_d$ during the first $\sim$36~hours post-event. The AdaptiveConstraintManager (\S\ref{sec:ood}, \S\ref{sec:limitations}) mitigates this by switching to soft constraints when the OOD detector flags non-steady-state conditions, but the hard constraints' superiority claims in this section apply exclusively to steady-state regimes. This limitation is not a flaw of the hard-constraint architecture---it is a direct consequence of embedding a physical law (steady-state continuity) that is itself conditionally valid.
 
@@ -1301,6 +1292,9 @@ This forecast is \textbf{testable only when combined with independent compositio
 
 Table~\ref{tab:key_numbers} provides a one-page summary of the framework's core performance metrics, intended as a quick reference for readers evaluating whether \textsc{Cometh} is applicable to their use case.
 
+\textbf{Interpretive warning:} All values in Table~\ref{tab:key_numbers} are evaluated on synthetic benchmarks with known ground truth. They describe \textit{protocol performance on synthetic data}, not measurement accuracy on real comets. The table is a quick-lookup summary of \S\ref{sec:results}--\S\ref{sec:fail_gallery}; each row's ``Applicable Condition'' defines the synthetic-data regime in which the stated performance was measured. No value in this table constitutes a validated measurement claim on any real astronomical object.
+
+\vspace{4pt}
 \begin{table*}
 \centering
 \caption{\textsc{Cometh} at a Glance: Key Performance Indicators}\label{tab:key_numbers}
@@ -1320,7 +1314,7 @@ Detection floor & SNR~$\sim 0.75$ & Feature recovery TPR $>50\%$ \\
 Parameter estimation floor & SNR~$\sim 3$ & $Q_d$ error $<20\%$ \\
 \bottomrule
 \end{tabular}
-\tablecomments{All metrics evaluated on synthetic benchmarks with known ground truth unless otherwise noted. ``Applicable Condition'' specifies the regime in which the stated performance is expected. Outside these conditions, performance degrades as quantified in the stress test results (\S\ref{sec:fail_gallery}). $^\ddagger$False-negative cases are the most dangerous failure mode: the OOD flag is not raised, no warning is given, and the PINN output is catastrophically wrong (CO/H$_2$O $\approx 2.08$, CI [1.78, 2.38], vs.\ true value 5.0, $>10\sigma$). The boundary proximity alert (\S\ref{sec:ood}) catches 28/30 false negatives, reducing residual uncaught risk to $\sim$0.4\%. $^\S$Speedup values are hardware-dependent. The $\sim$100$\times$ wall-clock figure compares GPU-DL (A100) against CPU-Traditional (AMD EPYC 7543) with manual inspection; it conflates GPU acceleration, workflow automation, and manual-step elimination. The hardware-independent algorithmic comparison is CPU-DL vs.\ CPU-Traditional pure-compute ($\sim$1$\times$, i.e., near-parity). See Table~\ref{tab:timing} for the full three-way decomposition.}
+\tablecomments{\textbf{All metrics evaluated on synthetic benchmarks with known ground truth. These are synthetic-data protocol benchmarks, not real-comet measurement accuracy claims.} ``Applicable Condition'' specifies the synthetic-data regime in which the stated performance is expected. Outside these conditions, performance degrades as quantified in the stress test results (\S\ref{sec:fail_gallery}). $^\ddagger$False-negative cases are the most dangerous failure mode: the OOD flag is not raised, no warning is given, and the PINN output is catastrophically wrong (CO/H$_2$O $\approx 2.08$, CI [1.78, 2.38], vs.\ true value 5.0, $>10\sigma$). The boundary proximity alert (\S\ref{sec:ood}) catches 28/30 false negatives, reducing residual uncaught risk to $\sim$0.4\%. $^\S$Speedup values are hardware-dependent. The $\sim$100$\times$ wall-clock figure compares GPU-DL (A100) against CPU-Traditional (AMD EPYC 7543) with manual inspection; it conflates GPU acceleration, workflow automation, and manual-step elimination. The hardware-independent algorithmic comparison is CPU-DL vs.\ CPU-Traditional pure-compute ($\sim$1$\times$, i.e., near-parity). See Table~\ref{tab:timing} for the full three-way decomposition.}
 \end{table*}
 
 
@@ -1409,7 +1403,7 @@ We propose \textsc{Cometh}, a physics-constrained deep learning methodology and 
 
 \begin{enumerate}
     \item \textbf{A synthetic benchmark protocol:} Six stress tests mapping quantitative failure boundaries for both traditional methods and the proposed framework across extreme observing conditions (\S\ref{sec:stress}--\S\ref{sec:fail_gallery}). A forward-simulation exercise identifies hypothetical error modes that traditional pipelines could produce on extreme-composition comets.
-    \item \textbf{A methodology proposal:} Physics-constrained multimodal fusion integrating hard mass, momentum, and energy-limited jet collimation constraints; cross-modal attention learning modality interactions from data; and an OOD detector. On synthetic benchmarks, the multi-scale CNN achieves $2.8\times$ PSNR-based detection-image-quality gain, the hard-constraint PINN reduces $Q_d$ error by 20--30\% relative to soft constraints, and the OOD detector achieves 94\% detection rate on extreme-composition test cases. All performance figures are synthetic-benchmark-only.
+    \item \textbf{A methodology proposal:} Physics-constrained multimodal fusion integrating hard mass, momentum, and energy-limited jet collimation constraints; cross-modal attention learning modality interactions from data; and an OOD detector. On synthetic benchmarks \textbf{exclusively} (known ground truth, no real-comet measurement claim), the multi-scale CNN achieves $2.8\times$ PSNR-based detection-image-quality gain over traditional baselines, the hard-constraint PINN reduces $Q_d$ error by 20--30\% relative to soft constraints, and the OOD detector achieves 94\% detection rate on extreme-composition test cases. \textbf{None of these figures should be cited as real-comet measurement accuracy.} All performance figures are synthetic-benchmark-only; the sole real-data comparison is the $N=1$ post-hoc consistency check on 2I/Borisov, which is not a statistical validation.
     \item \textbf{End-to-end pipeline execution on archival data:} A reproducible Af$\rho$ aperture photometry pipeline was applied to 231 HST/WFC3 and VLT/FORS2 images of 2I/Borisov (201 filtered measurements, 11 epochs, cross-instrument ratio 1.03), establishing a traditional-method baseline. Preliminary COMETH PINN outputs (frozen weights pending release; \S\ref{sec:data_availability}) were compared against published literature values as a qualitative pipeline integration test; this is not a statistical validation.
     \item \textbf{Community validation roadmap}\label{sec:roadmap}: The following steps, which require community resources beyond a single group, constitute the path from protocol proposal to validated methodology: (i) same-data COMETH PINN vs.\ Af$\rho$ $Q_d$ comparison on the identical 231 images upon weight release; (ii) $N \geq 5$ real interstellar comets with multi-modal data (LSST-era) for MMD-based synthetic-to-real gap closure; (iii) non-steady-state adaptive constraint validation on real outburst data (e.g., archival observations of fragmenting solar-system comets); (iv) non-spherical grain forward modeling (T-matrix/DDA) to reduce the $\sim$8\% systematic bias.
 \end{enumerate}
