@@ -55,7 +55,7 @@ Interstellar comets represent the most extreme currently accessible instance of 
 
 The first confirmed interstellar comet, 2I/Borisov (discovered 2019), displayed vigorous cometary activity with a visible coma and dust tail, CN, C$_2$, and CO emission, and unusually high polarization consistent with pristine dust \citep{guzik19,jewitt19,fitzsimmons19,bodewits20,bagnulo21}. The detection of gaseous atomic nickel in its cold coma \citep{guzik21} pointed to non-thermal release mechanisms still not fully understood.
 
-The recently discovered 3I/ATLAS (C/2025 N1) has been extensively characterized by the community---over 85 peer-reviewed papers as of mid-2026---spanning nine distinct observational dimensions. Table~\ref{tab:3i_atlas_obs} organizes these by research dimension, observational platform, key numerical constraints, and the corresponding \textsc{Cometh} module that each observation is intended to inform. Critically, the CO$_2$/H$_2$O ratio of $7.6 \pm 0.3$ measured by JWST/NIRSpec \citep{cordiner25} confirms that extreme volatile enrichment occurs in interstellar comets---motivating, in general, the ``Alien Chemistry'' stress test (CO/H$_2$O~$=5.0$, far outside the PINN training range of CO/H$_2$O $\in [0.01, 2.0]$; \S\ref{sec:stress}, Test~5) that probes composition space far beyond the solar-system distribution. \textbf{No \textsc{Cometh} inference has been performed on real 3I/ATLAS data; all ``3I/ATLAS'' results in this paper are synthetic case studies.} The real 3I/ATLAS observations serve as motivation for the extreme-parameter stress tests, not as validation targets.
+The recently discovered 3I/ATLAS (C/2025 N1) has been extensively characterized by the community---over 85 peer-reviewed papers as of mid-2026---spanning nine distinct observational dimensions. Table~\ref{tab:3i_atlas_obs} organizes these by research dimension, observational platform, key numerical constraints, and the corresponding \textsc{Cometh} module that each observation is intended to inform. The CO$_2$/H$_2$O ratio of $7.6 \pm 0.3$ measured by JWST/NIRSpec \citep{cordiner25} motivates the ``Alien Chemistry'' stress test (\S\ref{sec:stress}, Test~5). \textbf{No \textsc{Cometh} inference has been performed on real 3I/ATLAS data; all ``3I/ATLAS'' results are synthetic case studies.}
 
 Table~\ref{tab:3i_atlas_gaps} catalogues additional observational dimensions---polarimetry, thermal infrared, optical photometric monitoring, dynamical modeling, and others---for which published 3I/ATLAS data are expected but not yet available at the time of writing. These are listed as a community resource for future \textsc{Cometh} validation once the data become public.
 
@@ -68,7 +68,7 @@ With exactly two such objects known---and only one (2I/Borisov) with the full mu
 \toprule
 Research Dimension & Reference & Platform / Instrument & Key Constraint & \textsc{Cometh} Module & Observational Significance \\
 \midrule
-NIR spectroscopy & \citet{cordiner25} & JWST/NIRSpec (0.6--5.3\,$\mu$m) & CO$_2$/H$_2$O $= 7.6 \pm 0.3$ & Cross-modal attn.\ (spectral branch) & Extreme CO$_2$ enrichment; motivates general concern about non-solar volatile ratios (cf.\ CO/H$_2$O~$=5.0$ in Stress Test~5) \\
+NIR spectroscopy & \citet{cordiner25} & JWST/NIRSpec (0.6--5.3\,$\mu$m) & CO$_2$/H$_2$O $= 7.6 \pm 0.3$ & Cross-modal attn.\ (spectral branch) & Motivates Stress Test~5 (CO/H$_2$O~$=5.0$ boundary) \\
 Ice detection & \citet{yang25} & Gemini/IRTF (2--5\,$\mu$m) & H$_2$O, CO$_2$, CO ice abundances & Spectral feature encoder & Ice-grain link; coma chemistry \\
 H coma mapping & \citet{combi26} & SOHO/SWAN (Lyman-$\alpha$) & H atom production rate $Q$(H) & PINN gas mass conservation & Global gas budget \\
 CO$_2$ imaging & \citet{lisse26} & SPHEREx (2.5--5\,$\mu$m) & CO$_2$ spatial distribution & Multi-modal spatial-spectral fusion & Extended CO$_2$ coma morphology \\
@@ -79,7 +79,7 @@ Antitail / dynamics & \citet{keto26} & Ground-based imaging & Antitail geometry,
 Nucleus constraints & \citet{jewitt25} & HST broadband imaging & Nucleus radius $R_n$, albedo $p_v$ & Point/extended source separation & Activity vs.\ nucleus discrimination \\
 \bottomrule
 \end{tabular}
-\tablecomments{All listed references are published or in press as of mid-2026. The CO$_2$/H$_2$O~$=7.6\pm0.3$ from JWST/NIRSpec is the single most constraining datum for this paper's stress-test design: it confirms that 3I/ATLAS has a composition more extreme than any solar system comet, justifying the CO/H$_2$O~$=5.0$ boundary in Stress Test~5. \textbf{Important:} no \textsc{Cometh} inference has been performed on any real 3I/ATLAS data. The ``Cometh Module'' column indicates intended future application only.}
+\tablecomments{All listed references are published or in press as of mid-2026. The CO$_2$/H$_2$O~$=7.6\pm0.3$ from JWST/NIRSpec motivates the CO/H$_2$O~$=5.0$ boundary in Stress Test~5 (see \S\ref{sec:stress}). \textbf{Important:} no \textsc{Cometh} inference has been performed on any real 3I/ATLAS data. The ``Cometh Module'' column indicates intended future application only.}
 \end{table*}
 
 \begin{table*}
