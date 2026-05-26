@@ -1259,16 +1259,16 @@ The ``Hypothetical Error Modes'' (\S\ref{sec:fail_gallery}, Failure Mode 6) is n
 
 This forecast is \textbf{testable only when combined with independent compositional constraints} (e.g., JWST/NIRSpec spectroscopy). If JWST measures CO/H$_2$O $> 2$ and the framework flags OOD while traditional methods report CO/H$_2$O $< 0.1$, the traditional method's calibration failure is confirmed. Without such independent data, agreement or disagreement between methods alone cannot adjudicate accuracy: agreement does not prove both are correct (they could share a common systematic bias), disagreement with OOD flag does not prove the framework is correct (the PINN saturates at boundaries and cannot extrapolate), and disagreement without OOD flag is the most dangerous scenario---it signals either a framework false negative or a genuine physical anomaly, and the two cannot be distinguished without independent measurements. This exercise therefore generates falsifiable predictions only when anchored to external compositional constraints; in their absence, it serves as a community hypothesis for future testing rather than a diagnostic tool.
 
-\subsection{\texorpdfstring{\textsc{Cometh}}{COMETH} at a Glance: Key Performance Indicators}
+\subsection{\texorpdfstring{\textsc{Cometh}}{COMETH} at a Glance: Synthetic Benchmark Summary}
 
-Table~\ref{tab:key_numbers} provides a one-page summary of the framework's core performance metrics, intended as a quick reference for readers evaluating whether \textsc{Cometh} is applicable to their use case.
+Table~\ref{tab:key_numbers} provides a one-page summary of synthetic benchmark results, intended as a quick reference for readers evaluating the protocol's operating envelope. \textbf{These are synthetic-data benchmarks, not real-comet measurement claims.}
 
 \textbf{Interpretive warning:} All values in Table~\ref{tab:key_numbers} are evaluated on synthetic benchmarks with known ground truth. They describe \textit{protocol performance on synthetic data}, not measurement accuracy on real comets. The table is a quick-lookup summary of \S\ref{sec:results}--\S\ref{sec:fail_gallery}; each row's ``Applicable Condition'' defines the synthetic-data regime in which the stated performance was measured. No value in this table constitutes a validated measurement claim on any real astronomical object.
 
 \vspace{4pt}
 \begin{table*}
 \centering
-\caption{\textsc{Cometh} at a Glance: Key Performance Indicators (Synthetic Benchmarks Only)}\label{tab:key_numbers}
+\caption{\textsc{Cometh} at a Glance: Synthetic Benchmark Summary (Synthetic Benchmarks Only)}\label{tab:key_numbers}
 \begin{tabular}{lcc}
 \toprule
 Parameter & Value & Applicable Condition \\
