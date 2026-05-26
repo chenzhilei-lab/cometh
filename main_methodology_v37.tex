@@ -886,14 +886,12 @@ Variant & PSNR (dB) & $\Delta$PSNR & SSIM & LPIPS & Flux Err. (\%) \\
 Full model & $\mathbf{31.6 \pm 0.8}$ & --- & $\mathbf{0.91 \pm 0.02}$ & $\mathbf{0.05 \pm 0.01}$ & $\mathbf{0.7 \pm 0.2}$ \\
 $-$ SE blocks & $30.3 \pm 0.9$ & $-1.3$ & $0.88 \pm 0.02$ & $0.08 \pm 0.01$ & $0.8 \pm 0.3$ \\
 $-$ Multi-kernel & $30.7 \pm 0.8$ & $-0.9$ & $0.89 \pm 0.02$ & $0.07 \pm 0.01$ & $0.7 \pm 0.2$ \\
-$3\times3$ only & $30.7 \pm 0.8$ & $-0.9$ & $0.88 \pm 0.02$ & $0.07 \pm 0.01$ & $0.8 \pm 0.3$ \\
-$7\times7$ only & $30.9 \pm 0.8$ & $-0.7$ & $0.89 \pm 0.02$ & $0.06 \pm 0.01$ & $0.7 \pm 0.2$ \\
 $-$ Skip connections & $30.6 \pm 0.9$ & $-1.0$ & $0.87 \pm 0.03$ & $0.09 \pm 0.01$ & $1.1 \pm 0.4$ \\
 $-$ $\mathcal{L}_{\text{flux}}$ & $31.4 \pm 0.8$ & $-0.2$ & $0.90 \pm 0.02$ & $0.05 \pm 0.01$ & $4.2 \pm 0.8$ \\
-$-$ SE $-$ Multi-kernel & $29.2 \pm 1.0$ & $-2.4$ & $0.85 \pm 0.03$ & $0.11 \pm 0.02$ & $1.3 \pm 0.5$ \\
+$-$ SE $-$ Multi-kernel$^\ddagger$ & $29.2 \pm 1.0$ & $-2.4$ & $0.85 \pm 0.03$ & $0.11 \pm 0.02$ & $1.3 \pm 0.5$ \\
 \bottomrule
 \end{tabular}
-\tablecomments{1000-image synthetic test set at SNR~$=2$. All rows are detection CNN ablations evaluated with image-quality metrics (PSNR/SSIM/LPIPS). The PINN hard-constraint ablation is reported separately in \S\ref{sec:pinn} and Table~\ref{tab:pin_perf}, using physical parameter metrics (MAPE on $Q_d$) appropriate for the inversion module. All $\Delta$PSNR $\geq 0.7$~dB are significant at $p < 0.01$ (paired $t$-test, Holm--Bonferroni correction for 7 comparisons).}
+\tablecomments{1000-image synthetic test set at SNR~$=2$. Single-kernel variants ($3{\times}3$/$7{\times}7$ only) are in Appendix~\ref{app:ablation_extras}. $^\ddagger$Combined removal; included for completeness. The PINN hard-constraint ablation is in \S\ref{sec:pinn}. All $\Delta$PSNR $\geq 0.7$~dB are significant at $p < 0.01$ (paired $t$-test, Holm--Bonferroni correction).}
 \end{table*}
 
 \subsubsection{Cross-Component and Multimodal Ablation}\label{sec:cross_ablation}
@@ -1570,6 +1568,25 @@ CPU: Laptop (8-core) & --- & $\sim$2--4~s & $\sim$50--100$\times$ \\
 \bottomrule
 \end{tabular}
 \tablecomments{$^\dagger$Per-observation end-to-end inference. \textbf{Scaling methodology:} Estimates scale the measured A100 latency by FP32 throughput ratios (RTX 4090 $\approx$ 0.55$\times$; RTX 3090 $\approx$ 0.45$\times$; RTX 3060 $\approx$ 0.22$\times$; Apple M2 GPU $\approx$ 0.12$\times$; CPU $\approx$ 0.03$\times$). These are first-order estimates that do not account for memory bandwidth, kernel optimization differences, or MPS backend maturity. RTX 3060 (12~GB) can run inference but cannot train (VRAM marginal). \textbf{Not independently benchmarked; for reference only.}}
+\end{table}
+
+\subsection{Ablation: Single-Kernel Variants}\label{app:ablation_extras}
+
+Table~\ref{tab:ablation_kernels} provides the single-kernel ablation variants referenced from \S\ref{sec:ablation}.
+
+\begin{table}[htbp]
+\centering
+\caption{Single-Kernel CNN Variants --- Ablation Supplement (Synthetic Benchmarks Only)}\label{tab:ablation_kernels}
+\begin{tabular}{lccccc}
+\toprule
+Variant & PSNR (dB) & $\Delta$PSNR & SSIM & LPIPS & Flux Err. (\%) \\
+\midrule
+Full model (multi-kernel) & $\mathbf{31.6 \pm 0.8}$ & --- & $\mathbf{0.91 \pm 0.02}$ & $\mathbf{0.05 \pm 0.01}$ & $\mathbf{0.7 \pm 0.2}$ \\
+$3\times3$ only & $30.7 \pm 0.8$ & $-0.9$ & $0.88 \pm 0.02$ & $0.07 \pm 0.01$ & $0.8 \pm 0.3$ \\
+$7\times7$ only & $30.9 \pm 0.8$ & $-0.7$ & $0.89 \pm 0.02$ & $0.06 \pm 0.01$ & $0.7 \pm 0.2$ \\
+\bottomrule
+\end{tabular}
+\tablecomments{Same 1000-image synthetic test set at SNR~$=2$ as Table~\ref{tab:ablation}. Single kernels underperform the multi-kernel design; neither individually matches the full model.}
 \end{table}
 
 \end{document}
