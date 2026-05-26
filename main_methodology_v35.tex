@@ -1301,6 +1301,24 @@ Regime boundaries are jointly defined by three axes: SNR, background stellar den
 
 This map is a core deliverable of the benchmarking study: it tells future users \textit{exactly when they can trust the method's outputs and when they cannot}.
 
+Table~\ref{tab:traffic_light} distills the six stress tests (\S\ref{sec:stress}) and the Fail Gallery (\S\ref{sec:fail_gallery}) into a compact operational reference. Each regime entry summarizes the synthetic-benchmark findings for that parameter space; all performance figures are synthetic-only.
+
+\begin{table}[htbp]
+\centering
+\caption{Operational Regime Reference --- Six Stress Tests Synthesized into a Traffic-Light Decision Guide (Synthetic Benchmarks Only)}\label{tab:traffic_light}
+\begin{tabular}{lcccll}
+\toprule
+Regime & SNR & CO/H$_2$O & Best Method & Expected Error ($Q_d$) & Relevant Stress Tests \\
+\midrule
+\textbf{Green} & $>5$ & $[0.01, 2.0]$ & Traditional ($Af\rho$ + Haser) or COMETH & $<10\%$ (both); \textbf{COMETH has NO advantage} & Tests 1--4 confirm traditional methods adequate \\
+\textbf{Yellow} & $2$--$5$ & $[0.01, 2.0]$ & \textbf{COMETH} (PINN + OOD) & $\sim$8--16\% (COMETH); 10--30\% (traditional) & Tests 1--4 show traditional degradation; Tests 5--6 probe COMETH boundaries \\
+\textbf{Red} & $<2$ & any & \textbf{None reliable} & $>30\%$ (all methods) & Test~3 (detection floor SNR~$\sim$0.75); Test~5 (OOD extrapolation failure) \\
+\textbf{Red} & any & $>2.0$ (OOD) & \textbf{None reliable}; use OOD limit format & Catastrophic ($>10\sigma$ for CO/H$_2$O~$=5.0$) & Test~5 (``precise but wrong''); OOD flag + boundary proximity alert \\
+\bottomrule
+\end{tabular}
+\tablecomments{All performance figures are synthetic-benchmark-only. Regime boundaries defined jointly by SNR, background stellar density ($\rho_\star$), and composition (CO/H$_2$O). The Red regime for OOD composition applies \textit{regardless of SNR}---an object with SNR~$>5$ but CO/H$_2$O $\gg 2$ belongs in the Red regime. For non-steady-state events (outbursts, fragmentation), see Test~6. The detection floor (TPR $>50\%$) is SNR~$\sim$0.75; the parameter estimation floor ($Q_d$ error $<20\%$) is SNR~$\sim$3. See \S\ref{sec:failure_map} for full regime definitions and caveats.}
+\end{table}
+
 \textbf{Caveat on real-data validation boundaries:} The Green/Yellow/Red regime boundaries are calibrated on synthetic benchmarks with known ground truth and confirmed on exactly $N=1$ real interstellar comet (2I/Borisov). Their applicability to future interstellar comets with compositions or morphologies substantially different from 2I/Borisov has not been demonstrated. In particular: (i) the Green regime requires CO/H$_2$O within the training range [0.01, 2.0] and dust properties consistent with the DIRTY Mie-grain forward model---objects with non-solar compositions may enter the Yellow or Red regime at higher SNR; (ii) the Red regime boundary (SNR~$<2$) is a \textit{lower bound} on when even the proposed methodology becomes unreliable---objects with more extreme properties may enter the Red regime at SNR well above 2; (iii) the Yellow regime (SNR~$2$--$5$) is where the proposed methodology provides the greatest practical benefit on synthetic benchmarks, but the magnitude of this benefit on real objects with $N=1$ validation remains provisional. The training range CO/H$_2$O $\in [0.01, 2.0]$ is a design choice based on the known solar system comet distribution and the single measured interstellar value (2I/Borisov CO/H$_2$O $\sim 1.5$), not a physical upper bound. It can and should be extended as future interstellar comet discoveries expand the known composition range. These boundaries should be refined as the interstellar comet sample grows.
 
 \subsection{The Cost of Methodological Complacency: A Cautionary Forecast}
