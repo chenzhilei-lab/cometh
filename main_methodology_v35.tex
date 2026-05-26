@@ -1037,7 +1037,7 @@ Bayesian PINN coverage probabilities on synthetic test data: 68\% CI contains tr
 
 After adversarial domain adaptation, domain classifier accuracy drops from 89\% to 52\% (chance = 50\%), and MMD decreases from 0.47 to 0.12. The physically motivated task construction (DIRTY-based, \S\ref{sec:domain_adapt}) achieves comparable MMD reduction to the heuristic transformation approach while additionally providing a physically interpretable mapping between task parameters and cometary properties.
 
-\subsubsection{Single-Object Literature Check: 2I/Borisov (Type~A Evidence)}\label{sec:borisov_check}
+\subsubsection{2I/Borisov Literature Comparison (Type~A)}\label{sec:borisov_check}
 
 \textbf{Important caveat:} This subsection reports a post-hoc comparison against \textit{published literature values} (Type~A evidence; see \S\ref{sec:borisov_evidence_types} for the distinction from same-data re-analysis). A qualitative sanity check using preliminary PINN outputs (frozen weights pending release; \S\ref{sec:data_availability}) applied to archival 2I/Borisov data yields $\sim$12\% MAD vs.\ published literature values across 5 overlapping epochs, with 4/5 epochs falling within the 95\% CI. \textbf{This is not a same-data re-analysis}---the comparison values in Table~\ref{tab:traditional_comparison} are from independent research groups' published analyses, not from re-running a standardized pipeline on the identical raw images. \textbf{With $N=1$, this is not a statistical validation}---it is a necessary consistency check that would flag catastrophic disagreement but cannot establish accuracy. The detailed comparison is available in the public repository.
 
@@ -1079,7 +1079,7 @@ The two preceding subsections (\S\ref{sec:borisov_check}--\S\ref{sec:traditional
 
 \noindent\textbf{Neither type constitutes statistical validation} of \textsc{Cometh} on real interstellar comets ($N=1$). Type~A provides a weak necessary condition (catastrophic disagreement would be flagged); Type~B provides a controlled traditional-method baseline for future same-data COMETH PINN comparison. Both are reported transparently as feasibility demonstrations, not as calibrated accuracy claims.
 
-\subsubsection{Same-Data Direct Comparison: $Af\rho$ on Identical 2I/Borisov Images (Type~B Evidence)}\label{sec:same_data}
+\subsubsection{Af$\rho$ Same-Data Analysis (Type~B)}\label{sec:same_data}
 
 To address one of the key concerns raised during review---that the traditional-method comparison in Table~\ref{tab:traditional_comparison} compares against \textit{published} values rather than against a re-analysis of the same raw data---we have implemented a full $Af\rho$ aperture photometry pipeline (\texttt{afrho\_pipeline.py}, \texttt{merge\_results.py}) and applied it to the identical calibrated 2I/Borisov images processed by the \textsc{Cometh} framework. Table~\ref{tab:same_data} presents the results.
 
