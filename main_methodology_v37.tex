@@ -928,30 +928,7 @@ Attention consistency loss ($\mathcal{L}_{\rm attn}$) & FPR $3.0\% \to 2.1\%$ on
 
 \textbf{Detection-to-Inversion error propagation:} The detection CNN's image-quality improvements feed downstream to the PINN, but the relationship is non-linear. We measured this by running the PINN on outputs from three detection CNN variants (Full model: 31.6~dB; $-$SE blocks: 30.3~dB; $-$SE$-$Multi-kernel: 29.2~dB). The PINN $Q_d$ MAPE degrades from 7.8\% (full model) to 9.1\% ($-$SE blocks, $+1.3$~dB PSNR loss) to 11.6\% ($-$SE$-$Multi-kernel, $+2.4$~dB PSNR loss). The relationship is sub-linear: a 2.4~dB detection PSNR loss translates to a $\sim$3.8 percentage-point $Q_d$ MAPE increase. This confirms that detection quality matters for downstream physical parameter accuracy, and that the full detection CNN's $\sim$31.6~dB PSNR represents a meaningful threshold for reliable PINN inversion ($<10\%$ $Q_d$ error on synthetic benchmarks). All error-propagation measurements are on synthetic data.
 
-\textbf{Computational contribution decomposition:} Table~\ref{tab:flops_contribution} decomposes the end-to-end FLOPs budget by component, providing a hardware-independent measure of each module's computational cost relative to its performance contribution.
-
-\begin{table}[htbp]
-\centering
-\caption{Per-Component FLOPs and Memory Budget (Measured on NVIDIA A100)}\label{tab:flops_contribution}
-\begin{tabular}{lccc}
-\toprule
-Component & GFLOPs & \% of Total & GPU Memory (GB) \\
-\midrule
-\textbf{Detection CNN (forward)} & 2.1 & 31\% & 1.1 \\
-\midrule
-\textbf{PINN inversion (total)} & \textbf{4.7} & \textbf{69\%} & \textbf{2.1} \\
-\hspace{1em}MLP evaluation ($M=10^4$ points) & 4.0 & 59\% & 1.6 \\
-\hspace{1em}Cross-modal attention$^\dagger$ & 0.3 & 4\% & $<0.01$ \\
-\hspace{1em}ODE solver (RK4, 100 steps) & 0.3 & 4\% & 0.2 \\
-\hspace{1em}Hard-constraint transforms & 0.4 & 6\% & 0.3 \\
-\midrule
-\textbf{OOD detector (GMM scoring)} & $<0.01$ & $<1\%$ & $<0.01$ \\
-\midrule
-\textbf{Total end-to-end} & \textbf{6.8} & \textbf{100\%} & \textbf{3.2} \\
-\bottomrule
-\end{tabular}
-\tablecomments{All FLOPs measured on NVIDIA A100 (40~GB) with PyTorch~2.1.0, CUDA~12.1, batch size 1, input $256\times256\times1$ image + 1024-channel spectrum. Memory figures are inference-only; training memory is $\sim 3\times$ higher due to activations and gradients. Cross-modal attention ($^\dagger$), ODE solver, and hard-constraint transforms are sub-components of the PINN inversion; their GFLOPs are included in the PINN total (4.7). Percentages may not sum exactly to 100\% due to rounding. $^\dagger$Cross-modal attention is implemented within the PINN forward pass (\S\ref{sec:fusion}).}
-\end{table}
+\textbf{Computational budget:} End-to-end inference totals 6.8~GFLOPs and $\sim$40~ms per observation on an NVIDIA A100, with a memory footprint of $\sim$3.2~GB (inference-only). The detection CNN and PINN account for 31\% and 69\% of FLOPs respectively. A per-component decomposition is in Appendix~\ref{app:flops}.
 
 
 \subsection{Fail Gallery}\label{sec:fail_gallery}
@@ -1595,5 +1572,32 @@ Seed Value & Library / Module & Controlled Operation & Configuration File Key \\
 \end{table}
 
 \textbf{Verification protocol.} A reviewer can verify exact reproducibility by: (1) cloning the repository; (2) running \texttt{python data\_generation/generate\_synthetic\_data.py} to regenerate the synthetic datasets (seeds ensure identical train/val/test splits); (3) running \texttt{python train\_cometh.py --seed 42} (see \texttt{Atlas-supplementary/train\_cometh.py}); (4) comparing the output metrics against Tables~\ref{tab:detection_metrics}--\ref{tab:pin_perf}. With identical seeds and hardware (NVIDIA A100, CUDA~12.1, PyTorch~2.1.0), all reported metrics should reproduce to within floating-point precision ($<10^{-5}$ relative difference). The complete environment is captured in \texttt{Dockerfile} and \texttt{requirements.txt}.
+
+\subsection{Per-Component FLOPs and Memory Budget}\label{app:flops}
+
+Table~\ref{tab:flops_contribution} provides the per-component FLOPs and memory decomposition referenced in \S\ref{sec:cross_ablation}.
+
+\begin{table}[htbp]
+\centering
+\caption{Per-Component FLOPs and Memory Budget (Measured on NVIDIA A100)}\label{tab:flops_contribution}
+\begin{tabular}{lccc}
+\toprule
+Component & GFLOPs & \% of Total & GPU Memory (GB) \\
+\midrule
+\textbf{Detection CNN (forward)} & 2.1 & 31\% & 1.1 \\
+\midrule
+\textbf{PINN inversion (total)} & \textbf{4.7} & \textbf{69\%} & \textbf{2.1} \\
+\hspace{1em}MLP evaluation ($M=10^4$ points) & 4.0 & 59\% & 1.6 \\
+\hspace{1em}Cross-modal attention$^\dagger$ & 0.3 & 4\% & $<0.01$ \\
+\hspace{1em}ODE solver (RK4, 100 steps) & 0.3 & 4\% & 0.2 \\
+\hspace{1em}Hard-constraint transforms & 0.4 & 6\% & 0.3 \\
+\midrule
+\textbf{OOD detector (GMM scoring)} & $<0.01$ & $<1\%$ & $<0.01$ \\
+\midrule
+\textbf{Total end-to-end} & \textbf{6.8} & \textbf{100\%} & \textbf{3.2} \\
+\bottomrule
+\end{tabular}
+\tablecomments{All FLOPs measured on NVIDIA A100 (40~GB) with PyTorch~2.1.0, CUDA~12.1, batch size 1, input $256\times256\times1$ image + 1024-channel spectrum. Memory figures are inference-only. Cross-modal attention ($^\dagger$), ODE solver, and hard-constraint transforms are sub-components of the PINN inversion; their GFLOPs are included in the PINN total (4.7). Percentages may not sum exactly to 100\% due to rounding.}
+\end{table}
 
 \end{document}
