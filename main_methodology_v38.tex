@@ -57,7 +57,7 @@ The first confirmed interstellar comet, 2I/Borisov (discovered 2019), displayed 
 
 The recently discovered 3I/ATLAS (C/2025 N1) has been extensively characterized by the community---over 85 peer-reviewed papers as of mid-2026---spanning nine distinct observational dimensions. Table~\ref{tab:3i_atlas_obs} organizes these by research dimension, observational platform, key numerical constraints, and the corresponding \textsc{Cometh} module that each observation is intended to inform. The CO$_2$/H$_2$O ratio of $7.6 \pm 0.3$ measured by JWST/NIRSpec \citep{cordiner25} establishes that extreme volatile enrichment occurs in interstellar comets---providing general plausibility, though not direct validation, for the CO/H$_2$O~$=5.0$ boundary tested in the ``Alien Chemistry'' stress test (\S\ref{sec:stress}, Test~5; see \S\ref{sec:stress} for the CO vs.\ CO$_2$ distinction). \textbf{No \textsc{Cometh} inference has been performed on real 3I/ATLAS data; all ``3I/ATLAS'' results are synthetic case studies.}
 
-Table~\ref{tab:3i_atlas_gaps} catalogues additional observational dimensions---polarimetry, thermal infrared, optical photometric monitoring, dynamical modeling, and others---for which published 3I/ATLAS data are expected but not yet available at the time of writing. These are listed as a community resource for future \textsc{Cometh} validation once the data become public.
+Additional observational dimensions expected but not yet publicly available (polarimetry, thermal infrared, dynamics) are noted in Appendix~\ref{app:3i_gaps}.
 
 With exactly two such objects known---and only one (2I/Borisov) with the full multi-modal data required by the proposed methodology---the observational foundation for interstellar comet science remains thin, underscoring the need for methods that maximize information extraction from whatever data are available.
 
@@ -82,25 +82,6 @@ Nucleus constraints & \citet{jewitt25} & HST broadband imaging & Nucleus radius 
 \tablecomments{All listed references are published or in press as of mid-2026. The CO$_2$/H$_2$O~$=7.6\pm0.3$ establishes general plausibility for the CO/H$_2$O~$=5.0$ boundary in Stress Test~5; CO and CO$_2$ are chemically distinct (see \S\ref{sec:stress}). \textbf{Important:} no \textsc{Cometh} inference has been performed on any real 3I/ATLAS data. The ``Cometh Module'' column indicates intended future application only.}
 \end{table*}
 
-\begin{table*}
-\centering
-\caption{Anticipated 3I/ATLAS Observational Dimensions --- Community Resource for Future Validation}\label{tab:3i_atlas_gaps}
-\begin{tabular}{p{2.5cm}p{3.2cm}p{3.0cm}p{3.0cm}p{2.0cm}}
-\toprule
-Research Category & Expected Platform & Typical Diagnostic & COMETH Relevance & Status \\
-\midrule
-Optical photometric monitoring & Ground network (LT, TRAPPIST, etc.) & $Af\rho$ evolution, lightcurve, outburst index & Detection CNN training distribution anchor & Not yet public \\
-Polarimetry & VLT/FORS2, others & $P$ (degree), $\theta$ (angle), scattering phase function & Dust grain composition / shape constraint & Not yet public \\
-Thermal IR dust & JWST/MIRI, Spitzer/NEOWISE & Dust temperature $T_d$, silicate feature, excess emission & Radiative transfer PINN boundary condition & Not yet public \\
-Optical--NIR full-band spectra & VLT/X-shooter, Keck/NIRES & Gas composition, dust continuum, reflectance gradient & Cross-modal fusion benchmark & Not yet public \\
-Radio continuum / survey & VLA, AMI, ATCA & Synchrotron/thermal emission, OH maser & Non-thermal process OOD flag & Not yet public \\
-Dynamics \& non-gravitational effects & Numerical simulation, N-body & Non-gravitational parameters $A_1$, $A_2$, orbit back-tracing & Jet collimation constraint input & Not yet public \\
-Meteoroid / dust trail & Meteor monitoring network, models & Mass-loss history, meteoroid size distribution & Dust production rate $Q_d$ verification & Not yet public \\
-Astrobiology / chemical models & Theory & Pristine material, isotopic anomaly, formation environment & Synthetic data generation boundary & Not yet public \\
-\bottomrule
-\end{tabular}
-\tablecomments{These dimensions are expected to have 3I/ATLAS observational data based on the precedent of 2I/Borisov campaigns and the extensive 3I/ATLAS observational effort ($>$85 papers). At the time of writing, published data for these categories are not yet available in the refereed literature. This table serves as a community checklist for the community: as data become public, each row can be populated with specific references and used to extend \textsc{Cometh} validation. All categories marked ``Not yet public'' should be updated before citing this table in future work.}
-\end{table*}
 
 \subsection{Why Traditional Single-Modality Methods Break Down}
 
@@ -1455,6 +1436,30 @@ Early stopping (all) & Training & Discrete & $\{20, 50, 100\}$ epochs & 50 & Gri
 \end{table*}
 
 \textbf{Validation of hyperparameter stability.} Figure~\ref{fig:training_curves} in the main text shows training and validation loss curves across all five random seeds. The narrow $\pm 1\sigma$ bands indicate that final performance is insensitive to the specific seed, confirming that the selected hyperparameters produce stable convergence. The largest seed-to-seed variation occurs in the CNN edge loss ($\pm 12\%$), reflecting the inherent stochasticity of edge detection at low SNR; all other loss components vary by $<5\%$ across seeds.
+
+\section{Anticipated 3I/ATLAS Observational Dimensions}\label{app:3i_gaps}
+
+Table~\ref{tab:3i_atlas_gaps} lists observational dimensions for which published 3I/ATLAS data are expected but not yet available. \textbf{No \textsc{Cometh} inference has been performed on any 3I/ATLAS data.}
+
+\begin{table}[htbp]
+\centering
+\caption{Anticipated 3I/ATLAS Observational Dimensions --- Community Resource for Future Validation}\label{tab:3i_atlas_gaps}
+\begin{tabular}{p{2.5cm}p{3.2cm}p{3.0cm}p{3.0cm}p{2.0cm}}
+\toprule
+Research Category & Expected Platform & Typical Diagnostic & COMETH Relevance & Status \\
+\midrule
+Optical photometric monitoring & Ground network & $Af\rho$ evolution, lightcurve & Detection CNN anchor & Not yet public \\
+Polarimetry & VLT/FORS2, others & $P$, $\theta$, phase function & Grain composition constraint & Not yet public \\
+Thermal IR dust & JWST/MIRI & $T_d$, silicate feature & PINN boundary condition & Not yet public \\
+Optical--NIR spectra & VLT/X-shooter & Gas, dust continuum & Fusion benchmark & Not yet public \\
+Radio continuum & VLA, AMI, ATCA & Synchrotron emission & OOD flag & Not yet public \\
+Dynamics & N-body simulation & $A_1$, $A_2$, orbit & Jet collimation input & Not yet public \\
+Meteoroid / dust trail & Meteor networks & Mass-loss history & $Q_d$ verification & Not yet public \\
+Astrobiology / models & Theory & Isotopic anomaly & Synthetic boundary & Not yet public \\
+\bottomrule
+\end{tabular}
+\tablecomments{Expected based on 2I/Borisov precedent and 3I/ATLAS observational effort ($>$85 papers). Published data not yet available. All categories marked ``Not yet public'' should be updated before citing. \textbf{This table is a community checklist, not a validation claim.}}
+\end{table}
 
 \section{Synthetic--Real Data Fidelity Assessment}\label{app:synthetic_real}
 
