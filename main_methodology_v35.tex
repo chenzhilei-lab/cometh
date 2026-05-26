@@ -182,7 +182,7 @@ Having defined the problem (\S\ref{sec:intro}), the design principles for small-
 
 \section{Methodology}\label{sec:methods}
 
-\subsection{Multi-Scale CNN with SE Attention for Faint Feature Detection}
+\subsection{Multi-Scale CNN for Faint Feature Detection}
 
 \textit{Source:} \texttt{src/cnn\_detection.py} (DetectionCNN class).
 
@@ -263,7 +263,7 @@ where $y^{(k)}$ is the network's output for feature type $k \in \{\text{jet}, \t
 
 We validate PAM on the synthetic injection test set (where feature type and location are known). Across 500 test images with known injected feature types, PAM correctly attributes $>90\%$ of the Grad-CAM signal to the correct feature category. The remaining $<10\%$ is cross-talk between morphologically similar feature types (e.g., narrow shells vs.\ broad jets). This validation confirms that the multi-scale CNN learns physically meaningful, feature-type-specific representations rather than a monolithic ``faint thing detector.''
 
-\subsubsection{Attention Consistency Loss: From Diagnostic to Training Objective}
+\subsubsection{Attention Consistency Loss}
 
 Standard Grad-CAM and PAM are \textit{post-hoc} diagnostics---they explain what the network learned after training is complete, but do not influence the training process itself. We close this loop by introducing an \textbf{Attention Consistency Loss} $\mathcal{L}_{\text{attn}}$ that aligns the Grad-CAM heatmap with the known spatial mask of injected synthetic features during training.
 
@@ -403,7 +403,7 @@ where:
 
 Note that no separate hard-constraint loss term ($\mathcal{L}_{\text{cons}}$) appears in Eq.~\ref{eq:pinn_loss}: the physical constraints described below are implemented as \textit{deterministic physics transformss} rather than penalty terms. This distinction is critical---penalty-based (soft) constraints can be overwhelmed by noisy data, including spurious parameter combinations that violate conservation laws. Architectural constraints guarantee physical consistency regardless of data quality because the parameterization itself makes violation impossible.
 
-\subsubsection{Hard Physical Constraints via Architectural Reparameterization}
+\subsubsection{Architectural Reparameterization}
 
 We implement three physical conservation laws as deterministic, non-trainable transformations that map network outputs to physically consistent quantities. This approach is architecturally analogous to a reparameterization trick: the network predicts unconstrained latent parameters, and a deterministic physics layer transforms them into physically admissible quantities before computing the loss. No gradient from a constraint-violation penalty term flows through this layer---the physics is enforced by construction.
 
@@ -500,7 +500,7 @@ We use variational inference with a mean-field Gaussian approximate posterior:
 
 where $p(\theta)$ is a standard normal prior. At inference time, 50 Monte Carlo dropout samples \citep{gal16} provide the predictive distribution, from which we extract 68\% and 95\% credible intervals.
 
-\subsection{Physically Motivated Meta-Learning for Domain Adaptation}\label{sec:domain_adapt}
+\subsection{Meta-Learning for Domain Adaptation}\label{sec:domain_adapt}
 
 \textit{Source:} \texttt{src/domain\_adapt.py}.
 
@@ -764,7 +764,7 @@ First, the DIRTY radiative transfer code has been independently validated agains
 
 We emphasize that the synthetic data are not intended as perfect replicas of any specific comet. Their purpose is to provide known ground truth for rigorous benchmarking---a capability that real observations, by definition, cannot offer. The domain adaptation component (\S\ref{sec:domain_adapt}) and the boundary test on Hale-Bopp (\S\ref{sec:proxy}) provides a necessary-condition check that the framework functions correctly on the extreme solar system distribution tail.
 
-\subsection{Pathological Stress Test Suite}\label{sec:stress}
+\subsection{Stress Test Suite}\label{sec:stress}
 
 Each stress test is designed to break a specific assumption. For Tests~1--4, the broken assumption belongs to traditional methods; for Tests~5--6, it belongs to the proposed methodology itself. We report both categories with equal honesty: a methodology study must map its own failure boundaries, not merely demonstrate superiority under favorable conditions. Specifically: Tests~1--4 expose limits of traditional filtering, optically-thin radiative transfer, SNR thresholds, and missing-modality robustness---but also reveal where the proposed methodology degrades (Test~1: CNN TPR drops to 31\% at SNR~$\ll 1$; Test~2: PINN underestimates $Q_d$ by 35--40\% in the optically thick core; Test~3: parameter estimation floor at SNR~$\sim$3; Test~4: gas abundance uncertainty increases 2.7$\times$). Tests~5--6 stress the PINN's OOD extrapolation boundary and the steady-state assumption of hard mass conservation.
 
@@ -843,7 +843,7 @@ Layers~1 and~2 use synthetic data and are the source of all quantitative perform
 
 \subsection{Faint Feature Detection: Standard Benchmarks}
 
-\subsubsection{Comparison with Traditional Methods and Modern Baselines}
+\subsubsection{Comparison with Baselines}
 
 Table~\ref{tab:detection_metrics} compares our method against three traditional methods (median filter, wavelet denoising, non-local means), two deep learning baselines (U-Net \citealt{ronneberger15}, DnCNN \citealt{zhang17}), and the CNN-based faint object detector of \citet{jiang23}, all evaluated on the same synthetic test set at SNR~$=2$. Our method outperforms all baselines, with the largest margins at the lowest SNR. For clarity, we distinguish three categories: (1) \textit{traditional image processing baselines} (median filter, wavelet denoising, non-local means---standard signal processing techniques used as performance floors in this section); (2) \textit{deep learning baselines} (DnCNN~\citealt{zhang17}, U-Net~\citealt{ronneberger15}, ViT~\citealt{dosovitskiy21}, and the CNN of \citet{jiang23}) representing the current state of the art in learned image restoration; and (3) \textit{traditional cometary analysis methods} ($Af\rho$ \citep{ahearn95}, Haser model \citep{haser57})---physical analysis techniques, not image enhancement algorithms, which do not produce PSNR metrics and are therefore excluded from Table~\ref{tab:detection_metrics}; their parameter-estimation performance is compared in \S\ref{sec:traditional_comparison} and \S\ref{sec:fail_gallery}. All image-quality metrics are evaluated on the same synthetic test set.
 
@@ -954,7 +954,7 @@ Component & GFLOPs & \% of Total & GPU Memory (GB) \\
 \end{table}
 
 
-\subsection{The Fail Gallery: Traditional Methods Under Pathological Conditions}\label{sec:fail_gallery}
+\subsection{Fail Gallery}\label{sec:fail_gallery}
 
 This section presents a deliberately constructed ``failure catalog''---cases where traditional methods produce scientifically misleading results and the proposed methodology either succeeds or, importantly, fails in a \textit{quantifiably predictable} way. \textbf{Important context:} ``Misleading'' in this section is assessed relative to the known ground truth of synthetic data. The published Af$\rho$ and Haser values used as comparison baselines in \S\ref{sec:traditional_comparison} are themselves measurements with their own systematic uncertainties (e.g., aperture size dependence, calibration assumptions); they are not absolute ground truth. The stress tests therefore demonstrate that traditional methods would produce results that deviate from synthetic truth under extreme conditions---they do not independently validate the published values against which COMETH is compared.
 
@@ -988,7 +988,7 @@ Under the simulated outburst (24-hour $Q_d$ 5$\times$ increase + $\alpha$ shift)
 
 As a forward-simulation exercise, we process the synthetic extreme-composition test case through a standard Haser+$Af\rho$ pipeline. The traditional pipeline produces three specific erroneous conclusions on these synthetic data: a factor-of-50 CO/H$_2$O underestimate, a phantom dust jet from continuum subtraction artifacts, and spurious $Af\rho$ variability from unmodeled scattering phase function differences. \textbf{This is a thought experiment, not an empirical demonstration}---it shows what \textit{could} happen if traditional methods were applied to extreme-composition comets, not what \textit{has} happened in the literature. The exercise highlights the value of simulation-based cross-checking, but does not constitute evidence that traditional methods have produced erroneous publications.
 
-\subsection{Low-CO/H$_2$O Boundary Test: Hale-Bopp as a Solar System Distribution Probe}\label{sec:proxy}
+\subsection{Hale-Bopp Boundary Test}\label{sec:proxy}
 
 \textbf{This section serves as a boundary test (not validation) using the best-characterized solar system comet to verify that the pipeline executes end-to-end on real multi-modal data. It does not constitute statistical validation of \textsc{Cometh} on solar system comets, nor does it narrow the synthetic-to-real domain gap for interstellar comets (\S\ref{sec:mmd_gap}).} The single-object consistency check on 2I/Borisov ($N=1$) provides a feasibility demonstration, but its statistical weight is unavoidably limited. To test whether the framework generalizes beyond its solar-system training distribution, we apply it to C/1995 O1 (Hale-Bopp)---one of the most thoroughly characterized CO-rich solar system comets. \textbf{This is not an interstellar validation, and critically, it tests the wrong direction of composition extremeness.} Hale-Bopp's CO/H$_2$O (0.10--0.25) is an order of magnitude \textit{below} 2I/Borisov's (1.3--1.55)---meaning Hale-Bopp is compositionally more \textit{conservative} (closer to the solar system median) than the interstellar target. The test therefore validates generalization to a CO/H$_2$O \textit{lower} than the target, not to the CO/H$_2$O \textit{higher} regime (5.0, Stress Test~5) where the framework's extrapolation behavior is most concerning. Passing Hale-Bopp is a weak necessary condition: if the framework failed on objects more conservative than its training target, its interstellar applicability would be unsupported. It provides no constraint on generalization to the high-CO/H$_2$O direction---the regime most relevant to interstellar comet analysis. \textbf{The high-CO/H$_2$O direction has zero real-data validation} beyond synthetic benchmarks (Stress Test~5). The boundary test does not narrow the synthetic-to-real domain gap (\S\ref{sec:mmd_gap}).
 
@@ -1041,7 +1041,7 @@ After adversarial domain adaptation, domain classifier accuracy drops from 89\% 
 
 \textbf{Important caveat:} This subsection reports a post-hoc comparison against \textit{published literature values} (Type~A evidence; see \S\ref{sec:borisov_evidence_types} for the distinction from same-data re-analysis). A qualitative sanity check using preliminary PINN outputs (frozen weights pending release; \S\ref{sec:data_availability}) applied to archival 2I/Borisov data yields $\sim$12\% MAD vs.\ published literature values across 5 overlapping epochs, with 4/5 epochs falling within the 95\% CI. \textbf{This is not a same-data re-analysis}---the comparison values in Table~\ref{tab:traditional_comparison} are from independent research groups' published analyses, not from re-running a standardized pipeline on the identical raw images. \textbf{With $N=1$, this is not a statistical validation}---it is a necessary consistency check that would flag catastrophic disagreement but cannot establish accuracy. The detailed comparison is available in the public repository.
 
-\subsubsection{Explicit Comparison with Published Traditional Analyses}\label{sec:traditional_comparison}
+\subsubsection{Published Literature Comparison}\label{sec:traditional_comparison}
 
 To address the concern that the framework has not been compared against the actual traditional methods used in cometary science, Table~\ref{tab:traditional_comparison} compiles published results obtained with standard cometary analysis techniques on the same 2I/Borisov epochs and compares them against the framework's frozen outputs.
 
@@ -1119,7 +1119,7 @@ where $A=0.04$ is the geometric albedo, $a=1~\mu$m is the characteristic grain r
 
 \textbf{Limitations.} The Af$\rho$ pipeline uses a simplified physical model: a single dust grain population, uniform outflow velocity, and no phase-angle correction beyond the A'Hearn (1984) formalism. The O-beam extraction from FORS2 polarimetry data discards the E-beam (and hence polarization information). The aperture size (1000~km projected radius) is fixed; a full Af$\rho(\rho)$ profile as a function of aperture radius would provide additional diagnostics for coma gradient but is deferred to future work. These simplifications do not affect the core conclusion: HST and FORS2 produce consistent Af$\rho$ values on identical images, establishing a validated traditional-method baseline for the same-data comparison with \textsc{Cometh}.
 
-\subsubsection{The Missing Validation: Synthetic-to-Real Distribution Gap}\label{sec:mmd_gap}
+\subsubsection{Synthetic-to-Real Distribution Gap}\label{sec:mmd_gap}
 
 The domain adaptation results reported above (\S\ref{sec:domain_adapt}) quantify the MMD between two \textit{synthetic} distributions: the source domain (synthetic solar system comets) and the target domain (synthetic interstellar comets from DIRTY). The MMD reduction from 0.47 to 0.12 demonstrates that the adversarial training successfully aligns feature representations between these two synthetic distributions.
 
@@ -1177,7 +1177,7 @@ Source of gain & --- & Elimination of manual inspection & GPU acceleration ($\si
 \end{table*}
 
 
-\subsection{Computational Complexity and Resource Requirements}\label{sec:complexity}
+\subsection{Computational Complexity}\label{sec:complexity}
 
 \textbf{Detection CNN complexity.} The Detection CNN processes an input image of size $H \times W \times C$ through $L = 5$ encoder-decoder scales with $k = 3$ parallel kernel sizes per scale (3$\times$3, 5$\times$5, 7$\times$7). The time complexity for one forward pass is $O(N \cdot L \cdot k \cdot H \cdot W \cdot C \cdot \bar{K}^2)$, where $N$ is the batch size and $\bar{K} \approx 5$ is the mean kernel dimension. For the standard input configuration ($H=W=256$, $C=1$, $N=32$), the measured FLOPs are 2.1~GFLOPs with a forward-pass latency of 12~ms on an NVIDIA A100. Memory footprint during inference is $O(L \cdot H \cdot W \cdot C_{\rm max})$, where $C_{\rm max}=512$ channels at the bottleneck, requiring approximately 4.2~GB of GPU memory including gradient storage during training. During inference, memory drops to $\sim$1.1~GB.
 
@@ -1321,7 +1321,7 @@ Regime & SNR & CO/H$_2$O & Best Method & Expected Error ($Q_d$) & Relevant Stres
 
 \textbf{Caveat on real-data validation boundaries:} The Green/Yellow/Red regime boundaries are calibrated on synthetic benchmarks with known ground truth and confirmed on exactly $N=1$ real interstellar comet (2I/Borisov). Their applicability to future interstellar comets with compositions or morphologies substantially different from 2I/Borisov has not been demonstrated. In particular: (i) the Green regime requires CO/H$_2$O within the training range [0.01, 2.0] and dust properties consistent with the DIRTY Mie-grain forward model---objects with non-solar compositions may enter the Yellow or Red regime at higher SNR; (ii) the Red regime boundary (SNR~$<2$) is a \textit{lower bound} on when even the proposed methodology becomes unreliable---objects with more extreme properties may enter the Red regime at SNR well above 2; (iii) the Yellow regime (SNR~$2$--$5$) is where the proposed methodology provides the greatest practical benefit on synthetic benchmarks, but the magnitude of this benefit on real objects with $N=1$ validation remains provisional. The training range CO/H$_2$O $\in [0.01, 2.0]$ is a design choice based on the known solar system comet distribution and the single measured interstellar value (2I/Borisov CO/H$_2$O $\sim 1.5$), not a physical upper bound. It can and should be extended as future interstellar comet discoveries expand the known composition range. These boundaries should be refined as the interstellar comet sample grows.
 
-\subsection{The Cost of Methodological Complacency: A Cautionary Forecast}
+\subsection{A Cautionary Forecast}
 
 The ``Hypothetical Error Modes'' (\S\ref{sec:fail_gallery}, Failure Mode 6) is not merely an academic exercise. We make the following specific, falsifiable forecast: \textbf{if a future interstellar comet with physical properties substantially different from solar system comets (CO/H$_2$O $> 2$, carbonaceous dust, or extreme polarization) is analyzed using traditional $Af\rho$ + Haser pipelines, the resulting publication will contain at least one of three identifiable error signatures}:
 
@@ -1363,7 +1363,7 @@ Parameter estimation floor & SNR~$\sim 3$ & $Q_d$ error $<20\%$ \\
 \end{table*}
 
 
-\subsection{Citation Guide: When to Reference This Work}
+\subsection{Citation Guide}
 
 To facilitate appropriate attribution, we provide a concise decision guide for authors and reviewers evaluating cometary analysis methods:
 
