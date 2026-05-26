@@ -1128,17 +1128,7 @@ Source of gain & --- & Elimination of manual inspection & GPU acceleration ($\si
 
 \textbf{Hardware requirements.} Training requires a GPU with $\geq$12~GB VRAM (NVIDIA A100, V100, RTX 3090, or RTX 4090). Inference runs on any GPU with $\geq$4~GB VRAM, or on CPU ($\sim$30--60$\times$ slower than A100; $\sim$1.2--4~s per observation). Memory footprint is $\sim$3.2~GB (GPU) or $\sim$4~GB RAM (CPU). Consumer GPU inference (e.g., RTX 3060) is estimated at 4--5$\times$ slower than A100; Appendix~\ref{app:consumer_hw} provides detailed estimates across common hardware tiers (\textbf{not independently benchmarked; for reference only}).
 
-\textbf{Training cost and carbon footprint.}
-
-\begin{itemize}
-    \item \textbf{Training cost (developer):} $\sim$350~GPU-hours on an NVIDIA A100, estimated operational carbon footprint $\sim$50~kg~CO$_2$. Embodied hardware emissions are not estimated. Trained weights will be archived at Zenodo upon acceptance.
-    \item \textbf{Inference cost (user):} $\sim$0.05~Wh per observation, $<0.02$~mg~CO$_2$. Inference runs on consumer GPUs or CPU (Appendix~\ref{app:consumer_hw}).
-    \item \textbf{Reproduction cost (community):} Re-running full training with fixed seeds incurs $\sim$50~kg~CO$_2$ per group. If $K$ groups independently verify through re-training, total community carbon cost is $\sim 50K$~kg~CO$_2$.
-\end{itemize}
-
-We provide pre-trained weights so that reproducibility can be checked via inference comparison without mandatory re-training. Groups that require hyperparameter modifications or full end-to-end verification should weigh the $\sim$50~kg~CO$_2$ per-group cost against the scientific benefit. The six-test stress suite and Af$\rho$ pipeline are reusable without GPU training.
-
-\textbf{Cost-benefit context.} The $\sim$50~kg~CO$_2$ developer cost is substantial for a methodology targeting $N=2$ known objects. This ratio improves if LSST increases the interstellar comet population ($N \gg 10$) or if the framework is applied to faint solar system comets ($N \gg 100$). The carbon investment is the developer's one-time cost; community-wide adoption with verification would multiply it. Users should default to pre-trained weights for inference and re-train only when necessary.
+\textbf{Training cost.} Total training consumed $\sim$350~GPU-hours on an NVIDIA A100 ($\sim$50~kg~CO$_2$); pre-trained weights are provided at Zenodo upon acceptance to avoid re-training. The six-test stress suite and Af$\rho$ pipeline are reusable without GPU training.
 
 \subsection{Software Architecture and API Design}\label{sec:api}
 
