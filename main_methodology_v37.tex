@@ -1374,13 +1374,13 @@ The dominant systematic, quantified via Mie vs.\ T-matrix comparison across 500 
 
 \subsection{Explicit Non-Claims}\label{sec:non_claims}
 
-To prevent misinterpretation, we list claims that this paper \textit{does not} make:
+This paper does \textit{not} claim:
 
 \begin{enumerate}
-    \item \textbf{Not a measurement paper:} No physical parameters of any real comet are measured. All ``outputs'' on 2I/Borisov are consistency checks against published values.
-    \item \textbf{Not a validated tool:} The framework is proposed, not deployed. The calibrated uncertainties are valid only within the synthetic-data operating envelope (CO/H$_2$O $\in [0.01, 2.0]$, spherical Mie grains, optically thin coma, Haser steady-state). Extrapolation beyond this envelope---particularly for compositions like CO/H$_2$O~$=5.0$---produces catastrophic failures (Stress Test~5) that the OOD detector catches in 94\% of cases but misses in $\sim$0.4\%. The observing strategy optimizer (\S\ref{sec:obsopt}) is a forward-simulation concept whose recommendations have not been validated against real ToO program outcomes.
-    \item \textbf{Not interstellar-validated:} Domain adaptation reduces MMD between two \textit{synthetic} distributions. The MMD between synthetic target domain and real interstellar features is unmeasured and requires $N \geq 5$ objects for estimation (\S\ref{sec:mmd_gap}).
-    \item \textbf{Not uncertainty-calibrated on real data:} Bayesian 95\% CI coverage is validated on synthetic test data (94\% coverage). On 2I/Borisov, 4/5 epochs contain the literature value in the 95\% CI. A binomial test cannot reject the hypothesis of correct calibration ($p=0.23$), but with $N=5$, even a perfectly calibrated framework would produce 4/5 coverage by random chance with probability 0.20---meaning this check has negligible statistical power to distinguish calibrated from uncalibrated uncertainty. This is $N=5$ epochs on $N=1$ object---statistically uninformative about real-data calibration.
+    \item \textbf{Measurement:} No physical parameters of any real comet are measured. All 2I/Borisov comparisons are consistency checks against published values.
+    \item \textbf{Validated tool:} The framework is proposed, not deployed. Extrapolation beyond CO/H$_2$O $\in [0.01, 2.0]$ produces catastrophic failures (Stress Test~5). The OOD detector is a synthetic-data concept demonstration, not an operational safeguard.
+    \item \textbf{Interstellar-validated:} Domain adaptation reduces MMD between two \textit{synthetic} distributions only. Real-interstellar MMD requires $N \geq 5$ objects (\S\ref{sec:mmd_gap}).
+    \item \textbf{Real-data uncertainty calibration:} Bayesian CI coverage is validated on synthetic data only. The 2I/Borisov 4/5 coverage check is statistically uninformative ($N=5$ epochs on one object).
 \end{enumerate}
 
 % --- Bridge: Discussion → Conclusions ---
