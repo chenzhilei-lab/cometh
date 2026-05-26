@@ -1392,7 +1392,28 @@ The following estimates are empirically constrained by the benchmark and stress 
     \item $\delta_{\rm domain} \sim 5$--7\%: Standard deviation of the domain adaptation residual (1$\sigma$, same units as $\sigma_{\rm stat}$ and $\sigma_{\rm sys}$), estimated as $\sqrt{\text{MAD}^2 - \sigma_{\rm stat}^2 - \sigma_{\rm sys}^2}$ from the 2I/Borisov comparison. \textbf{Provisional---based on $N=1$; the domain adaptation error variance across the interstellar comet population is unknown.}
 \end{itemize}
 
-The quadrature sum yields $\sigma_{\rm total} \sim 10\%$ (dust) and $\sim 8\%$ (gas). For dust parameters, the combined uncertainty of $\sim$10\% is consistent with the observed 12\% MAD on 2I/Borisov (\S\ref{sec:traditional_comparison})---the MAD falls within the systematic error budget but does not validate accuracy (see circular consistency discussion in \S\ref{sec:traditional_comparison}). This confirms that the 12\% MAD is fully accounted for by the framework's documented systematic uncertainty budget rather than indicating genuine physical accuracy. The dominant systematic ($\sigma_{\rm sys}$, spherical grains) is irreducible under the current forward model and represents the highest-priority target for future improvement.
+The quadrature sum yields $\sigma_{\rm total} \sim 10\%$ (dust) and $\sim 8\%$ (gas). Table~\ref{tab:uncertainty_budget} consolidates the budget in a single reference table.
+
+\begin{table}[htbp]
+\centering
+\caption{Uncertainty Budget --- Consolidated Error Sources by Parameter (Synthetic Benchmarks + $N=1$ Provisional)}\label{tab:uncertainty_budget}
+\begin{tabular}{lccc}
+\toprule
+Source & $\sigma(Q_d)$ & $\sigma$(CO/H$_2$O) & Notes \\
+\midrule
+Statistical ($\sigma_{\rm stat}$) & $\sim$3\% & $\sim$5\% & MC dropout, synthetic test set \\
+Systematic ($\sigma_{\rm sys}$) & $\sim$8\% & $<1\%$ & Spherical Mie grains (dominant); Table~\ref{tab:grain_sensitivity} \\
+Domain adaptation ($\delta_{\rm domain}$) & $\sim$5--7\% & $\sim$5--7\% & Provisional; $N=1$ (2I/Borisov) \\
+\midrule
+\textbf{Total (quadrature)} & \textbf{$\sim$10\%} & \textbf{$\sim$8\%} & $\sigma_{\rm total} = \sqrt{\sigma_{\rm stat}^2 + \sigma_{\rm sys}^2 + \delta_{\rm domain}^2}$ \\
+\midrule
+Observed MAD (2I/Borisov) & 12\% & N/A$^\dagger$ & Literature comparison only (Table~\ref{tab:traditional_comparison}) \\
+\bottomrule
+\end{tabular}
+\tablecomments{All values are 1$\sigma$ standard deviations expressed as percentages of the estimated parameter value. The quadrature sum assumes independent error sources. $\sigma_{\rm sys}$ for CO/H$_2$O is negligible because gas-phase abundance ratios are insensitive to grain shape (Table~\ref{tab:grain_sensitivity}: CO/H$_2$O $\Delta = +0.02 \pm 0.04$). $\delta_{\rm domain}$ is provisional---based on $N=1$ (2I/Borisov); its variance across the interstellar comet population is unknown. $^\dagger$CO/H$_2$O MAD against literature is not computed because published CO/H$_2$O values are obtained via UV fluorescence spectroscopy, not $Af\rho$; the comparison in Table~\ref{tab:traditional_comparison} reports qualitative consistency (``consistent''), not a quantitative MAD. The 12\% MAD on $Q_d$ falls within the $\sim$10\% total budget---this is a necessary consistency condition (the MAD is not statistically distinguishable from the budget) but does \textit{not} validate accuracy. See \S\ref{sec:traditional_comparison} for the circular-consistency caveat.}
+\end{table}
+
+For dust parameters, the combined uncertainty of $\sim$10\% is consistent with the observed 12\% MAD on 2I/Borisov (\S\ref{sec:traditional_comparison})---the MAD falls within the systematic error budget but does not validate accuracy (see circular consistency discussion in \S\ref{sec:traditional_comparison}). This confirms that the 12\% MAD is fully accounted for by the framework's documented systematic uncertainty budget rather than indicating genuine physical accuracy. The dominant systematic ($\sigma_{\rm sys}$, spherical grains) is irreducible under the current forward model and represents the highest-priority target for future improvement.
 
 Table~\ref{tab:grain_sensitivity} quantifies the impact of the spherical grain assumption on key derived parameters, based on a systematic comparison between Mie-theory (spherical) and T-matrix (aggregate) forward models across 500 matched-parameter synthetic test cases.
 
