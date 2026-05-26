@@ -1276,14 +1276,14 @@ Detection TPR & $>95\%$ & SNR~$\geq 3$, any background \\
 Detection FPR & $<3\%$ & SNR~$=2$, pure-noise control fields \\
 $Q_d$ estimation error & $\sim 8\%$ & SNR~$>3$, composition within training range \\
 CO/H$_2$O estimation error & $\sim 12\%$ & SNR~$>5$, spectroscopy available \\
-OOD detection (Stress Test 5) & 94.0\% [91.5\%, 95.9\%]; 6\% false-negative rate (30/500)$^\ddagger$; false-negative consequence: CO/H$_2$O estimate wrong by $>10\sigma$ (2.08 vs.\ 5.0); residual uncaught risk $\sim$0.4\% after boundary proximity alert & Extreme composition (CO/H$_2$O $\gg 2$) \\
+OOD detection (Stress Test 5) & 94.0\% [91.5\%, 95.9\%]; 6\% false-negative rate (30/500)$^\ddagger$; residual uncaught risk $\sim$0.4\%$^\P$ after boundary proximity alert & Extreme composition (CO/H$_2$O $\gg 2$); \textbf{synthetic only}; FN rate unmeasurable on real data ($N{=}1$) \\
 $\delta_{\rm domain}$ & $\sim 5$--7\% (provisional) & $N=1$, 2I/Borisov \\
 Processing speedup$^\S$ & $\sim$1$\times$ pure-compute (CPU-DL vs.\ CPU-Trad.); 30$\times$ pure-compute (GPU-DL vs.\ CPU-Trad.); $\sim$100$\times$ wall-clock (GPU-DL vs.\ CPU-Trad.) & \textbf{Hardware-dependent.} GPU-DL: A100; CPU: AMD EPYC 7543. The $\sim$100$\times$ wall-clock figure decomposes as GPU acceleration ($\sim$30$\times$) $\times$ automation ($\sim$3.5$\times$). On equal CPU hardware, pure-compute parity ($\sim$1$\times$). See Table~\ref{tab:timing} for full decomposition. \\
 Detection floor & SNR~$\sim 0.75$ & Feature recovery TPR $>50\%$ \\
 Parameter estimation floor & SNR~$\sim 3$ & $Q_d$ error $<20\%$ \\
 \bottomrule
 \end{tabular}
-\tablecomments{\textbf{All metrics evaluated on synthetic benchmarks with known ground truth. These are synthetic-data protocol benchmarks, not real-comet measurement accuracy claims.} ``Applicable Condition'' specifies the synthetic-data regime in which the stated performance is expected. Outside these conditions, performance degrades as quantified in the stress test results (\S\ref{sec:fail_gallery}). $^\ddagger$False-negative cases are the most dangerous failure mode: the OOD flag is not raised, no warning is given, and the PINN output is catastrophically wrong (CO/H$_2$O $\approx 2.08$, CI [1.78, 2.38], vs.\ true value 5.0, $>10\sigma$). The boundary proximity alert (\S\ref{sec:ood}) catches 28/30 false negatives, reducing residual uncaught risk to $\sim$0.4\%. $^\S$Speedup values are hardware-dependent. The $\sim$100$\times$ wall-clock figure compares GPU-DL (A100) against CPU-Traditional (AMD EPYC 7543) with manual inspection; it conflates GPU acceleration, workflow automation, and manual-step elimination. The hardware-independent algorithmic comparison is CPU-DL vs.\ CPU-Traditional pure-compute ($\sim$1$\times$, i.e., near-parity). See Table~\ref{tab:timing} for the full three-way decomposition.}
+\tablecomments{\textbf{All metrics evaluated on synthetic benchmarks with known ground truth. These are synthetic-data protocol benchmarks, not real-comet measurement accuracy claims.} ``Applicable Condition'' specifies the synthetic-data regime in which the stated performance is expected. Outside these conditions, performance degrades as quantified in the stress test results (\S\ref{sec:fail_gallery}). $^\ddagger$False-negative cases are the most dangerous failure mode: the OOD flag is not raised, no warning is given, and the PINN output is catastrophically wrong (CO/H$_2$O $\approx 2.08$, CI [1.78, 2.38], vs.\ true value 5.0, $>10\sigma$). The boundary proximity alert (\S\ref{sec:ood}) catches 28/30 false negatives, reducing residual uncaught risk to $\sim$0.4\%. $^\P$The 0.4\% residual risk relies on an unverified independence assumption; it is a synthetic-benchmark estimate, not a validated real-data probability. $^\S$Speedup values are hardware-dependent. The $\sim$100$\times$ wall-clock figure compares GPU-DL (A100) against CPU-Traditional (AMD EPYC 7543) with manual inspection; it conflates GPU acceleration, workflow automation, and manual-step elimination. The hardware-independent algorithmic comparison is CPU-DL vs.\ CPU-Traditional pure-compute ($\sim$1$\times$, i.e., near-parity). See Table~\ref{tab:timing} for the full three-way decomposition.}
 \end{table*}
 
 
@@ -1339,27 +1339,7 @@ Observed MAD (2I/Borisov) & 12\% & N/A$^\dagger$ & Literature comparison only (T
 
 For dust parameters, the combined uncertainty of $\sim$10\% is consistent with the observed 12\% MAD on 2I/Borisov (\S\ref{sec:traditional_comparison})---the MAD falls within the systematic error budget but does not validate accuracy (see circular consistency discussion in \S\ref{sec:traditional_comparison}). This confirms that the 12\% MAD is fully accounted for by the framework's documented systematic uncertainty budget rather than indicating genuine physical accuracy. The dominant systematic ($\sigma_{\rm sys}$, spherical grains) is irreducible under the current forward model and represents the highest-priority target for future improvement.
 
-Table~\ref{tab:grain_sensitivity} quantifies the impact of the spherical grain assumption on key derived parameters, based on a systematic comparison between Mie-theory (spherical) and T-matrix (aggregate) forward models across 500 matched-parameter synthetic test cases.
-
-\begin{table*}
-\centering
-\caption{Sensitivity of Derived Parameters to Spherical Grain Assumption (Synthetic Benchmarks Only)}\label{tab:grain_sensitivity}
-\begin{tabular}{lcccc}
-\toprule
-Parameter & $\Delta$ (Mie $-$ T-matrix) & $\sigma_{\rm sys}$ & $\Delta$ (Porosity = 0.5) & Observed Bias ($P=0.3$) \\
-\midrule
-$Q_d$ (kg~s$^{-1}$) & $+8.2 \pm 3.5\%$ & $\sim 5\%$ & $+18.5 \pm 6.2\%$ & Subtract $8.2\%$; if porosity unknown, add $\pm 10\%$ syst. \\
-$\alpha$ (size index) & $-0.12 \pm 0.06$ & $\sim 0.10$ & $-0.28 \pm 0.12$ & Add $+0.12$ to Mie-derived $\alpha$ \\
-Pol. gradient (\%\,/\,1000\,\AA) & $-0.08 \pm 0.03$ & $\sim 0.05$ & $-0.22 \pm 0.08$ & Add $+0.08$; for porous grains add $+0.22$ \\
-$S'$ (reddening, \%\,/\,1000\,\AA) & $+3.5 \pm 1.8$ & $\sim 2$ & $+10.2 \pm 4.5$ & Subtract $3.5\%$ from Mie-derived $S'$ \\
-CO/H$_2$O (gas ratio) & $+0.02 \pm 0.04$ & $\sim 0.03$ & $+0.05 \pm 0.08$ & No correction needed ($<1\sigma$) \\
-\bottomrule
-\end{tabular}
-\tablecomments{Positive $\Delta$ means Mie (spherical) overestimates relative to T-matrix (aggregate with porosity = 0.3). The ``Observed Bias'' column provides a practical correction to apply to Mie-derived parameters for comparison with non-spherical grain models. For highly porous grains (porosity = 0.5), use the rightmost $\Delta$ column. Gas-phase ratios (CO/H$_2$O) require no correction. T-matrix computations used the code of \citet{mishchenko02} with aggregate parameters: prolate spheroids, axis ratio $a/b = 1.4$--2.0, monomer radius $a_0 = 0.1$--1.0\,$\mu$m, porosity $P = 0.3$ (moderate) and $0.5$ (high), effective radius $a_{\rm eff} = 1$\,$\mu$m (matched to the Mie $a = 1$\,$\mu$m reference). The ``Observed Bias'' column reports the Mie-minus-T-matrix difference at $P = 0.3$; the rightmost $\Delta$ column reports the difference at $P = 0.5$. These corrections are valid only for the specific aggregate parameters listed above and should not be applied to comets with unknown or different grain morphologies without re-computation.}
-\end{table*}
-
-
-\textbf{Key finding:} The spherical grain approximation systematically overestimates $Q_d$ by $\sim 8\%$ relative to moderately porous aggregates, with the bias increasing to $\sim 19\%$ for highly porous grains. Polarization-derived quantities are affected more strongly: the polarization gradient is biased by $-0.08$ (\%\,/\,1000\,\AA) and the spectral reddening $S'$ by $+3.5$ (\%\,/\,1000\,\AA) for moderate porosity, rising to $-0.22$ and $+10.2$ respectively for highly porous grains---a 20--30\% relative error that can reverse qualitative conclusions about dust composition (e.g., misclassifying carbon-rich dust as silicate-dominated or vice versa). Gas abundance ratios are essentially unaffected, as they are constrained by emission line fluxes rather than dust continuum modeling. The ``Observed Bias'' column in Table~\ref{tab:grain_sensitivity} provides practical correction factors; the ``+18.5\% at porosity = 0.5'' value for $Q_d$ represents a conservative upper bound on the spherical grain bias for the most extreme plausible grain structures. \textbf{Recommendation for polarization studies:} Any polarization-derived parameter ($S'$, polarization gradient) reported by \textsc{Cometh} should be accompanied by the T-matrix-corrected value from Table~\ref{tab:grain_sensitivity}, and conclusions about dust composition should be considered provisional until non-spherical grain models are integrated into the PINN training pipeline.
+The dominant systematic, quantified via Mie vs.\ T-matrix comparison across 500 matched-parameter synthetic test cases (Appendix~\ref{app:grain_sensitivity}), is the spherical grain assumption: $Q_d$ is overestimated by $\sim 8\%$ at moderate porosity ($P{=}0.3$), rising to $\sim 19\%$ at high porosity ($P{=}0.5$). Polarization-derived quantities are more sensitive (polarization gradient bias $-0.08$, reddening $S'$ bias $+3.5$ at $P{=}0.3$; up to $-0.22$/$+10.2$ at $P{=}0.5$). Gas abundance ratios are unaffected ($<1\sigma$). Correction factors are in Appendix~\ref{app:grain_sensitivity}.
 
 \subsection{Physical Sensitivity Envelope (PSE): A Conceptual Framework}\label{sec:pse}
 
@@ -1587,6 +1567,27 @@ $7\times7$ only & $30.9 \pm 0.8$ & $-0.7$ & $0.89 \pm 0.02$ & $0.06 \pm 0.01$ & 
 \bottomrule
 \end{tabular}
 \tablecomments{Same 1000-image synthetic test set at SNR~$=2$ as Table~\ref{tab:ablation}. Single kernels underperform the multi-kernel design; neither individually matches the full model.}
+\end{table}
+
+\subsection{Spherical Grain Sensitivity: Mie vs.\ T-Matrix Comparison}\label{app:grain_sensitivity}
+
+Table~\ref{tab:grain_sensitivity} provides the full grain-sensitivity data referenced from \S\ref{sec:uncertainty_budget}.
+
+\begin{table}[htbp]
+\centering
+\caption{Sensitivity of Derived Parameters to Spherical Grain Assumption (Synthetic Benchmarks Only)}\label{tab:grain_sensitivity}
+\begin{tabular}{lcccc}
+\toprule
+Parameter & $\Delta$ (Mie $-$ T-matrix) & $\sigma_{\rm sys}$ & $\Delta$ (Porosity = 0.5) & Observed Bias ($P=0.3$) \\
+\midrule
+$Q_d$ (kg~s$^{-1}$) & $+8.2 \pm 3.5\%$ & $\sim 5\%$ & $+18.5 \pm 6.2\%$ & Subtract $8.2\%$; if porosity unknown, add $\pm 10\%$ syst. \\
+$\alpha$ (size index) & $-0.12 \pm 0.06$ & $\sim 0.10$ & $-0.28 \pm 0.12$ & Add $+0.12$ to Mie-derived $\alpha$ \\
+Pol. gradient (\%\,/\,1000\,\AA) & $-0.08 \pm 0.03$ & $\sim 0.05$ & $-0.22 \pm 0.08$ & Add $+0.08$; for porous grains add $+0.22$ \\
+$S'$ (reddening, \%\,/\,1000\,\AA) & $+3.5 \pm 1.8$ & $\sim 2$ & $+10.2 \pm 4.5$ & Subtract $3.5\%$ from Mie-derived $S'$ \\
+CO/H$_2$O (gas ratio) & $+0.02 \pm 0.04$ & $\sim 0.03$ & $+0.05 \pm 0.08$ & No correction needed ($<1\sigma$) \\
+\bottomrule
+\end{tabular}
+\tablecomments{Positive $\Delta$ = Mie overestimates relative to T-matrix (porosity $P=0.3$). T-matrix: prolate spheroids, $a/b=1.4$--2.0, monomer $a_0=0.1$--1.0\,$\mu$m, $P=0.3$/$0.5$, $a_{\rm eff}=1$\,$\mu$m \citep{mishchenko02}. Corrections valid only for these aggregate parameters.}
 \end{table}
 
 \end{document}
