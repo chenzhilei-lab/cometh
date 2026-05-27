@@ -57,13 +57,16 @@ env/
 *~
 .DS_Store
 
-# === Large model weights (use Zenodo for release) ===
+# === Model weights ===
 *.pt
 *.pth
 *.pkl
 *.pickle
 *.h5
 *.hdf5
+
+# === Generated data ===
+data/sample_input/*.pt
 
 # === OS files ===
 Thumbs.db
