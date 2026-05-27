@@ -30,8 +30,9 @@ while true; do
         [[ -z "$line" || "$line" == \#* ]] && continue
 
         # Parse: [TIMESTAMP] CMD_ID | command
-        cmd_id=$(echo "$line" | sed -n 's/.*\] \([^|]*\) |.*/\1/p' | xargs)
-        cmd=$(echo "$line" | sed -n 's/.*| //p')
+        body="${line#*\] }"
+        cmd_id="${body%% | *}"
+        cmd="${body#* | }"
 
         if [ -z "$cmd_id" ] || [ -z "$cmd" ]; then
             continue
