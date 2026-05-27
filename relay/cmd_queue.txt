@@ -3,5 +3,4 @@
 # CMD_ID must be unique (never reused) — server skips already-executed IDs.
 # Lines starting with # are ignored.
 
-# === Initial check (first relay test) ===
-# [2026-05-27 21:00] TEST01 | echo "RELAY_OK"; nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader
+[2026-05-27 21:00] CHK01 | echo "RELAY_OK"; nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader; echo "---TRAIN---"; tail -5 /root/sj-tmp/cometh/train_cnn.log; echo "---PROC---"; ps aux | grep "python.*train" | grep -v grep
