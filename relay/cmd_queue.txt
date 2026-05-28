@@ -12,3 +12,5 @@
 [2026-05-28 12:01] BDPY02 | pip3 install bypy -q 2>&1 && echo "INSTALL_OK" || echo "INSTALL_FAIL"
 
 [2026-05-28 12:02] BDPY03 | bypy info 2>&1 | head -20
+
+[2026-05-28 22:00] CHK03 | echo "===GPU==="; nvidia-smi --query-gpu=name,memory.used,utilization.gpu --format=csv,noheader; echo "===TRAIN_LOG_TAIL==="; tail -20 /root/sj-tmp/cometh/train_cnn.log 2>/dev/null || echo "LOG_NOT_FOUND"; echo "===WEIGHTS==="; ls -lh /root/sj-tmp/cometh/weights/ 2>/dev/null || echo "NO_WEIGHTS"; echo "===PROC==="; ps aux | grep -E "python.*train|server_poll" | grep -v grep; echo "===RELAY_STATUS==="; ps aux | grep server_poll | grep -v grep || echo "RELAY_NOT_RUNNING"
