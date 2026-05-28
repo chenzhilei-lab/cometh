@@ -13,4 +13,6 @@
 
 [2026-05-28 12:02] BDPY03 | bypy info 2>&1 | head -20
 
-[2026-05-28 22:00] CHK03 | echo "RLY_OK"; date; ls -lh /root/sj-tmp/cometh/weights/; echo "---"; ls -lh /root/sj-tmp/cometh/*.py 2>/dev/null; echo "---"; pip3 list 2>/dev/null | grep -i bypy || echo "NO_BYPY"
+[2026-05-28 22:00] CHK03 | echo "RLY_OK"; date; ls -lh /root/sj-tmp/cometh/weights/; echo "---GIT---"; cd /root/sj-tmp/cometh-relay && git config user.email && git remote -v; echo "---BYPY---"; pip3 list 2>/dev/null | grep -i bypy || echo "NO_BYPY"
+
+[2026-05-28 22:10] TRANS01 | curl -m 600 --upload-file /root/sj-tmp/cometh/weights/cnn_detector.pt https://transfer.sh/cnn_detector.pt 2>&1
