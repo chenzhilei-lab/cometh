@@ -6,3 +6,9 @@
 [2026-05-27 21:00] CHK01 | echo "RELAY_OK"; nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader; echo "---TRAIN---"; tail -5 /root/sj-tmp/cometh/train_cnn.log; echo "---PROC---"; ps aux | grep "python.*train" | grep -v grep
 
 [2026-05-27 21:01] CHK02 | echo "FIX_OK"; nvidia-smi; echo "===TRAIN==="; tail -10 /root/sj-tmp/cometh/train_cnn.log; echo "===PROC==="; ps aux | grep "python.*train" | grep -v grep
+
+[2026-05-28 12:00] BDPY01 | echo "===GPU==="; nvidia-smi --query-gpu=name,memory.used,utilization.gpu --format=csv,noheader; echo "===TRAIN_LOG==="; tail -5 /root/sj-tmp/cometh/train_cnn.log; echo "===FILES==="; ls -lh /root/sj-tmp/cometh/data/synthetic/seed_42/; echo "===WEIGHTS==="; ls -lh /root/sj-tmp/cometh/weights/ 2>/dev/null; echo "===PIP==="; pip3 list 2>/dev/null | grep -i bypy || echo "bypy not installed"
+
+[2026-05-28 12:01] BDPY02 | pip3 install bypy -q 2>&1 && echo "INSTALL_OK" || echo "INSTALL_FAIL"
+
+[2026-05-28 12:02] BDPY03 | bypy info 2>&1 | head -20
