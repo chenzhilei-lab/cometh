@@ -95,14 +95,14 @@
 ## 本地 4060 Ti 环境状态
 - C 盘清理后: 400MB → 2.7GB（仍然不够）
 - CUDA: False（页面文件太小）
-- 解决方案: 虚拟内存从 C 盘移到 D 盘
-  1. `sysdm.cpl ,3` → 高级 → 性能设置 → 高级 → 虚拟内存 → 更改
-  2. C 盘: 无分页文件
-  3. D 盘: 初始 4096MB, 最大 8192MB
-  4. **需要重启生效**
+- 解决方案: 虚拟内存移到 D 盘
+  - `wmic pagefileset create name="D:\pagefile.sys"` → 创建成功
+  - `wmic pagefileset set InitialSize=4096,MaximumSize=8192` → 更新成功
+  - C 盘本无 pagefile.sys, 无需删除
+  - **已重启, 待验证**
 
 ## 下一步
-1. 重启本地电脑 → 虚拟内存生效 → 验证 CUDA
-2. 下载服务器上的两个 .pt 权重文件
+1. 重启本地电脑 → 验证 CUDA: `D:\python\python39\python.exe -c "import torch; print('CUDA:', torch.cuda.is_available())"`
+2. 下载服务器权重文件 (cnn_detector.pt + cnn_detector_ep100_final.pt, 各307MB)
 3. 4060 Ti 跑 DIRTY 数据生成
 4. 3090 跑缩减版 PINN
