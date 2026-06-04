@@ -1,0 +1,120 @@
+COMETH License — Dual License Model
+=====================================
+
+Copyright (c) 2026 Zhilei Chen
+
+This software is made available under a dual license model.
+Please read the terms below carefully before using COMETH.
+
+───────────────────────────────────────────────────────────────
+
+PART A — ACADEMIC & NON-COMMERCIAL USE (MIT License)
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+1. The above copyright notice and this permission notice shall be
+   included in all copies or substantial portions of the Software.
+
+2. Use is limited to the following purposes ("Non-Commercial Use"):
+   (a) Academic research at degree-granting institutions
+   (b) Teaching and classroom instruction
+   (c) Personal, non-revenue-generating hobbyist projects
+   (d) Peer review and reproducibility verification of published
+       research results
+   (e) Non-profit institutional use (e.g., public observatories,
+       government research laboratories conducting publicly-funded
+       basic research)
+
+3. "Non-Commercial Use" specifically excludes:
+   (a) Any use where the Software is integrated into a paid product
+       or service
+   (b) Use by for-profit entities for internal operational purposes
+       (e.g., satellite operations, industrial inspection)
+   (c) Use as part of a consulting engagement where the consultant
+       receives compensation
+   (d) Software-as-a-Service (SaaS) deployments that charge end users
+   (e) Any use generating direct or indirect revenue from the
+       Software's output
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+───────────────────────────────────────────────────────────────
+
+PART B — COMMERCIAL USE
+
+For any use of the Software that falls outside the scope of
+Non-Commercial Use as defined in Part A, a separate commercial license
+agreement is required.
+
+Commercial license benefits include:
+  - Best-trained model weights (DIRTY 30k-sample, 113-epoch RTX 3090)
+  - Docker full-stack deployment image
+  - Priority email support (response within 2 business days)
+  - Custom training on your observational data
+  - CSST-adapted modules (available post-2027)
+  - Private deployment assistance
+  - Indemnification (subject to agreement terms)
+
+Pricing is tailored to the scope of use. Typical arrangements:
+  - Single-seat academic-commercial hybrid: ¥3,000–8,000/year
+  - Small team (≤5 users): ¥15,000–30,000/year
+  - Institutional / enterprise: custom quote
+  - Perpetual source-code license: custom quote
+
+To obtain a commercial license, contact:
+  Email: cometh@proton.me
+  Subject: COMETH Commercial License Inquiry
+
+Please include:
+  (1) Your name and affiliation
+  (2) Brief description of intended use
+  (3) Number of users / deployment scale
+  (4) Budget range or expected license type
+
+───────────────────────────────────────────────────────────────
+
+PART C — CONTRIBUTIONS
+
+Any contributions you make to this repository (pull requests, patches,
+issues with code suggestions) are accepted under the same dual license
+terms. By submitting a contribution, you agree that your contribution
+may be distributed under both the MIT (Non-Commercial) and Commercial
+license terms at the copyright holder's discretion.
+
+───────────────────────────────────────────────────────────────
+
+PART D — CLARIFICATIONS
+
+Q: I am a PhD student at a university. Do I need a commercial license?
+A: No. Academic research is Non-Commercial Use.
+
+Q: I work at a national observatory. We use COMETH to process public
+   telescope data for published research. Do I need a commercial license?
+A: No, if the research is publicly funded and results are published.
+   Yes, if you use it to provide paid data-processing services to third
+   parties.
+
+Q: I want to include COMETH in my company's satellite image analysis
+   pipeline. Do I need a commercial license?
+A: Yes. Internal operational use by a for-profit entity requires a
+   commercial license.
+
+Q: Can I try COMETH before buying a commercial license?
+A: Yes. The demo notebook and open-source code are fully functional for
+   evaluation. Contact us for a 30-day commercial evaluation license.
+
+Q: I'm not sure if my use case is commercial or non-commercial.
+A: Email cometh@proton.me with a brief description. We'll clarify
+   within 2 business days.

@@ -1,0 +1,22 @@
+# Git
+.git
+.gitignore
+
+# Python cache
+__pycache__
+*.pyc
+*.pyo
+*.egg-info
+
+# Large data (mounted at runtime)
+data/synthetic
+*.npz
+*.tar.gz
+*.zip
+
+# Development
+.env
+.vscode
+.idea
+*.swp
+*.swo

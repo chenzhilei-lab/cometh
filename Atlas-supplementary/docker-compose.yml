@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  cometh:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cometh:latest
+    container_name: cometh
+    ports:
+      - "8888:8888"
+    volumes:
+      # Mount data directory for custom input files
+      - ./data:/app/data
+      # Mount weights directory to persist downloaded weights
+      - ./weights:/app/weights
+      # Mount results directory for output
+      - ./results:/app/results
+      # Mount notebooks for local editing
+      - ./notebooks:/app/notebooks
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - JUPYTER_TOKEN=
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    stdin_open: true
+    tty: true
+    restart: unless-stopped

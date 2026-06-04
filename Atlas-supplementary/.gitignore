@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# PyTorch
+*.pth
+
+# Weights (large files, on Zenodo)
+weights/*.pt
+weights/*.pkl
+
+# Generated data
+data/synthetic/
+*.npz
+
+# Docker
+.env
+
+# Jupyter
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Results
+results/
+*.log
+
+# Archive
+*.zip
+*.tar.gz
