@@ -1,0 +1,185 @@
+{
+  "spectra": [
+    {
+      "Teff": 1000,
+      "logg": 2.5,
+      "category": "planetary",
+      "F210M_synth": -60.8,
+      "F360M_synth": -59.88,
+      "F210M_F360M": -0.92
+    },
+    {
+      "Teff": 1000,
+      "logg": 3.0,
+      "category": "planetary",
+      "F210M_synth": -60.784,
+      "F360M_synth": -59.809,
+      "F210M_F360M": -0.976
+    },
+    {
+      "Teff": 1000,
+      "logg": 3.5,
+      "category": "planetary",
+      "F210M_synth": -60.768,
+      "F360M_synth": -59.784,
+      "F210M_F360M": -0.984
+    },
+    {
+      "Teff": 1000,
+      "logg": 4.0,
+      "category": "planetary",
+      "F210M_synth": -60.761,
+      "F360M_synth": -59.859,
+      "F210M_F360M": -0.902
+    },
+    {
+      "Teff": 1000,
+      "logg": 4.5,
+      "category": "brown_dwarf",
+      "F210M_synth": -60.667,
+      "F360M_synth": -59.945,
+      "F210M_F360M": -0.722
+    },
+    {
+      "Teff": 1000,
+      "logg": 5.0,
+      "category": "brown_dwarf",
+      "F210M_synth": -60.523,
+      "F360M_synth": -60.087,
+      "F210M_F360M": -0.436
+    },
+    {
+      "Teff": 1000,
+      "logg": 5.5,
+      "category": "stellar",
+      "F210M_synth": -60.323,
+      "F360M_synth": -60.271,
+      "F210M_F360M": -0.052
+    },
+    {
+      "Teff": 1100,
+      "logg": 2.5,
+      "category": "planetary",
+      "F210M_synth": -61.305,
+      "F360M_synth": -60.621,
+      "F210M_F360M": -0.683
+    },
+    {
+      "Teff": 1100,
+      "logg": 3.0,
+      "category": "planetary",
+      "F210M_synth": -61.252,
+      "F360M_synth": -60.423,
+      "F210M_F360M": -0.829
+    },
+    {
+      "Teff": 1100,
+      "logg": 3.5,
+      "category": "planetary",
+      "F210M_synth": -61.209,
+      "F360M_synth": -60.315,
+      "F210M_F360M": -0.894
+    },
+    {
+      "Teff": 1100,
+      "logg": 4.0,
+      "category": "planetary",
+      "F210M_synth": -61.195,
+      "F360M_synth": -60.308,
+      "F210M_F360M": -0.887
+    },
+    {
+      "Teff": 1100,
+      "logg": 4.5,
+      "category": "brown_dwarf",
+      "F210M_synth": -61.134,
+      "F360M_synth": -60.339,
+      "F210M_F360M": -0.795
+    },
+    {
+      "Teff": 1100,
+      "logg": 5.0,
+      "category": "brown_dwarf",
+      "F210M_synth": -61.052,
+      "F360M_synth": -60.453,
+      "F210M_F360M": -0.599
+    },
+    {
+      "Teff": 1100,
+      "logg": 5.5,
+      "category": "stellar",
+      "F210M_synth": -60.896,
+      "F360M_synth": -60.59,
+      "F210M_F360M": -0.306
+    },
+    {
+      "Teff": 900,
+      "logg": 2.5,
+      "category": "planetary",
+      "F210M_synth": -60.288,
+      "F360M_synth": -59.173,
+      "F210M_F360M": -1.115
+    },
+    {
+      "Teff": 900,
+      "logg": 3.0,
+      "category": "planetary",
+      "F210M_synth": -60.301,
+      "F360M_synth": -59.201,
+      "F210M_F360M": -1.1
+    },
+    {
+      "Teff": 900,
+      "logg": 3.5,
+      "category": "planetary",
+      "F210M_synth": -60.261,
+      "F360M_synth": -59.256,
+      "F210M_F360M": -1.005
+    },
+    {
+      "Teff": 900,
+      "logg": 4.0,
+      "category": "planetary",
+      "F210M_synth": -60.21,
+      "F360M_synth": -59.382,
+      "F210M_F360M": -0.828
+    },
+    {
+      "Teff": 900,
+      "logg": 4.5,
+      "category": "brown_dwarf",
+      "F210M_synth": -60.08,
+      "F360M_synth": -59.539,
+      "F210M_F360M": -0.541
+    },
+    {
+      "Teff": 900,
+      "logg": 5.0,
+      "category": "brown_dwarf",
+      "F210M_synth": -59.897,
+      "F360M_synth": -59.723,
+      "F210M_F360M": -0.174
+    },
+    {
+      "Teff": 900,
+      "logg": 5.5,
+      "category": "stellar",
+      "F210M_synth": -59.679,
+      "F360M_synth": -59.936,
+      "F210M_F360M": 0.257
+    }
+  ],
+  "planetary_range": [
+    -1.115,
+    -0.683
+  ],
+  "bd_range": [
+    -0.795,
+    -0.174
+  ],
+  "stellar_range": [
+    -0.306,
+    0.257
+  ],
+  "objective_threshold": -0.7390000000000001
+}

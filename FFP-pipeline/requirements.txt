@@ -1,0 +1,7 @@
+numpy==2.4.1
+scipy==1.17.1
+astropy==7.2.0
+photutils==3.0.0
+matplotlib==3.10.9
+astroquery==0.4.11
+Python 3.14 (Windows)

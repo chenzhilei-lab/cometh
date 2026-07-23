@@ -1,0 +1,10 @@
+{
+  "baseline": 14,
+  "dedup_only_mean": 15.0,
+  "dedup_only_std": 0.0,
+  "float_only_mean": 14.0,
+  "float_only_std": 0.0,
+  "both_mean": 15.0,
+  "both_std": 0.0,
+  "Ntrials": 20
+}

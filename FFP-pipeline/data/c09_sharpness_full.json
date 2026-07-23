@@ -1,0 +1,51 @@
+{
+  "F140M": {
+    "file": "jw01611002001_02101_00005_nrcb3_i2d.fits",
+    "separation_arcsec": 0.434,
+    "ra": 277.449973,
+    "dec": 1.231452,
+    "sharpness": 0.651,
+    "roundness1": 0.376,
+    "roundness2": 0.264,
+    "mag": 24.624,
+    "flux": 5.629,
+    "peak": 1.241,
+    "snr": 33.9
+  },
+  "F360M": {
+    "file": "jw01611002001_02101_00005_nrcblong_i2d.fits",
+    "separation_arcsec": 0.432,
+    "ra": 277.449974,
+    "dec": 1.231451,
+    "sharpness": 0.527,
+    "roundness1": 0.074,
+    "roundness2": 0.03,
+    "mag": 20.901,
+    "flux": 173.645,
+    "peak": 25.52,
+    "snr": 3622.0
+  },
+  "F480M": {
+    "file": "jw01611002001_02103_00005_nrcblong_i2d.fits",
+    "separation_arcsec": 0.43,
+    "ra": 277.449974,
+    "dec": 1.231451,
+    "sharpness": 0.47,
+    "roundness1": 0.006,
+    "roundness2": 0.059,
+    "mag": 21.015,
+    "flux": 156.306,
+    "peak": 17.394,
+    "snr": 2325.8
+  },
+  "F210M": {
+    "file": "jw01611002001_02103_00005_nrcb3_i2d.fits",
+    "sharpness": 0.455,
+    "roundness1": 0.024,
+    "roundness2": 0.142,
+    "mag": 23.35,
+    "mag_err": 0.073,
+    "snr": 15.0,
+    "note": "from existing dao_results.json"
+  }
+}

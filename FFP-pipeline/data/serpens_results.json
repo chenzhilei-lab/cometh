@@ -1,0 +1,21 @@
+{
+  "target": "Serpens Main",
+  "cluster": "serpens",
+  "filters": [
+    "F140M",
+    "F210M",
+    "F360M",
+    "F480M"
+  ],
+  "n_sources": {
+    "F140M": 4949,
+    "F210M": 9708,
+    "F360M": 6304,
+    "F480M": 6198
+  },
+  "n_matched": 1917,
+  "n_candidates": 31,
+  "n_background": 1886,
+  "fpr": 0.9838,
+  "purity": 0.0162
+}

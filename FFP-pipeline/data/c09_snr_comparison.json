@@ -1,0 +1,24 @@
+{
+  "description": "C09 signal-to-noise ratios from two methods",
+  "method_daofind": "DAOStarFinder PSF-fitting peak SNR (used for 5-sigma detection threshold in pipeline)",
+  "method_aperture": "Aperture photometry SNR (3-pixel radius, 8-12 pixel sky annulus; photometric quality metric)",
+  "note": "The pipeline 5-sigma detection threshold applies to DAOStarFinder peak SNR, not aperture SNR. A source can be detected by DAOStarFinder (peak SNR > 5) while having aperture SNR < 5.",
+  "bands": {
+    "F140M": {
+      "daofind_snr": 33.9,
+      "aperture_snr": 2.0
+    },
+    "F210M": {
+      "daofind_snr": 15.0,
+      "aperture_snr": 15.7
+    },
+    "F360M": {
+      "daofind_snr": 3622,
+      "aperture_snr": 13.3
+    },
+    "F480M": {
+      "daofind_snr": 2326,
+      "aperture_snr": 4.0
+    }
+  }
+}
